@@ -17,6 +17,9 @@ export class DocFolder {
     @OneToMany(type => DocPage, docPage => docPage.docFolder)
     docPages: DocPage[];
     
-    docFolders: DocFolder[];
+    @OneToMany(type => DocFolder, childDocFolder => childDocFolder.parentDocFolder)
+    childDocFolders: DocFolder[];
+
+    @ManyToOne(type => DocFolder, parentDocFolder => parentDocFolder.childDocFolders)
     parentDocFolder: DocFolder;
 }

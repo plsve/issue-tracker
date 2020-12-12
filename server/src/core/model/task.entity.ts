@@ -48,5 +48,9 @@ export class Task {
     @ManyToOne(type => Person, person => person.tasks)
     person: Person;
 
+    @OneToMany(type => Task, childTask => childTask.parentTask)
     childTasks: Task[];
+
+    @ManyToOne(type => Task, parentTask => parentTask.childTasks)
+    parentTask: Task;
 }
