@@ -25,4 +25,8 @@ export class PersonService {
   async save(person: Person): Promise<Person> {
       return await this.personRepository.save(person);
   }
+
+  async register(person: Person): Promise<Person> {
+    return await this.personRepository.save(person);
+}
 }
