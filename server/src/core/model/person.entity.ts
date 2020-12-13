@@ -23,7 +23,7 @@ export class Person {
     @Column()
     surname: string;
     
-    @Column()
+    @Column({nullable: true})
     photo: string;
 
     @ManyToMany(type => Project, project => project.persons)
