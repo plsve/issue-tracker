@@ -36,7 +36,7 @@ export class Task {
     @Column()
     hoursSpent: number;
 
-    @Column()
+    @Column({nullable: true})
     gitLink: string;
 
     @OneToMany(type => CommentPost, commentPost => commentPost.task)
