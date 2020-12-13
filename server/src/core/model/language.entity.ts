@@ -12,4 +12,8 @@ export class Language {
 
     @OneToMany(type => Preference, preference => preference.language)
     preferences: Preference;
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+      }
 }

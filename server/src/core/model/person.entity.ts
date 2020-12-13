@@ -41,8 +41,13 @@ export class Person {
     })
     permissions: Permission[]
 
-    @OneToOne(type => Preference, preference => preference.person, {nullable: false})
+    @OneToOne(type => Preference, preference => preference.person, {nullable: false, cascade: true})
     @JoinColumn()
     preference: Preference;
+
+    // TODO Ommit unwanted fields
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+      }
     
 }

@@ -16,4 +16,8 @@ export class Preference {
 
     @OneToOne(type => Person, person => person.preference)
     person: Person;
+    
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+      }
 }

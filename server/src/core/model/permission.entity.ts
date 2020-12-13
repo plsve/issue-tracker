@@ -9,4 +9,8 @@ export class Permission {
 
     @ManyToMany(type => Person, person => person.permissions)
     persons: Person[];
+    
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+      }
 }
