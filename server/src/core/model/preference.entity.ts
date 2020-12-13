@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Language } from "./language.entity";
 import { Person } from "./person.entity";
 
@@ -11,8 +11,7 @@ export class Preference {
     @Column()
     theme: string;
 
-    @OneToOne(type => Language, language => language.preference, {nullable: false})
-    @JoinColumn()
+    @ManyToOne(type => Language, language => language.preferences, {nullable: false})
     language: Language;
 
     @OneToOne(type => Person, person => person.preference)

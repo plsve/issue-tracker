@@ -1,4 +1,4 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Preference } from "./preference.entity";
 
 @Entity()
@@ -10,6 +10,6 @@ export class Language {
     @Column()
     name: string;
 
-    @OneToOne(type => Preference, preference => preference.language)
-    preference: Preference;
+    @OneToMany(type => Preference, preference => preference.language)
+    preferences: Preference;
 }
