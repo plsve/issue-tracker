@@ -6,14 +6,14 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: postgre_db
+      POSTGRES_USER: ${TYPEORM_USERNAME}
+      POSTGRES_PASSWORD: ${TYPEORM_PASSWORD}
+      POSTGRES_DB: ${TYPEORM_DATABASE}
     ports:
-      - 5432:5432
+      - ${TYPEORM_PORT}:5432
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - ${ADMINER_PORT}:8080
