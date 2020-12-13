@@ -39,7 +39,7 @@ import { TaskService } from './core/service/task.service';
         database: configService.get('TYPEORM_DATABASE'),
         entities: ["dist/**/*.entity{.ts,.js}"],
         synchronize: configService.get('TYPEORM_SYNCHRONIZE'),
-        migrationsRun: false,
+        migrationsRun: configService.get('TYPEORM_MIGRATIONS_RUN'),
         migrations: ["dist/core/migration/*.js"]
       }),
     }),
