@@ -1,4 +1,5 @@
-import { IsEmail, IsNotEmpty, IsString, Length } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, ValidateNested } from 'class-validator';
 import { PreferenceDTO } from './plain/preference.dto';
 
 export class RegisterPersonDTO {
@@ -19,14 +20,25 @@ export class RegisterPersonDTO {
     @IsString()
     surname: string;
     
+    @IsOptional()
+    @IsString()
     photo: string;
 
+    @IsOptional()
+    @IsInt({each: true})
     projectIds: number[];
 
+    @IsOptional()
+    @IsInt({each: true})
     taskIds: number[];
 
+    @IsOptional()
+    @IsString({each: true})
     permissionIds: string[];
 
+    @IsOptional()
+    @ValidateNested()
+    @Type(() => PreferenceDTO)
     preference: PreferenceDTO;
 
 }

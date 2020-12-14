@@ -1,13 +1,12 @@
-import { IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 
 export class PreferenceDTO {
-    id: number;
-
+    
+    @IsNotEmpty()
     @IsString()
     theme: string;
 
+    @IsNotEmpty()
     @IsString()
     languageId: number;
-
-    personId: number;
 }

@@ -3,7 +3,7 @@ import { Preference } from "./preference.entity";
 import { Project } from "./project.entity";
 import { Task } from "./task.entity";
 import { CommentPost } from "./comment-post.entity";
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
 export class Person {
@@ -11,7 +11,7 @@ export class Person {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique: true})
     username: string;
     
     @Column({select: false})
@@ -45,7 +45,6 @@ export class Person {
     @JoinColumn()
     preference: Preference;
 
-    // TODO Ommit unwanted fields
     constructor(values: Object = {}) {
         Object.assign(this, values);
       }

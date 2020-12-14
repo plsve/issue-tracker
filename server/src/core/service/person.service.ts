@@ -42,8 +42,11 @@ export class PersonService {
     return await this.personRepository.save(person);
   }
 
-  async register(registerPersonDTO: RegisterPersonDTO): Promise<Person> {
-    const person = new Person(registerPersonDTO);
+  async register(registerPersonDTO: RegisterPersonDTO): Promise<any> {
+
+    const { preference, projectIds, taskIds, permissionIds, ...partialPerson } = registerPersonDTO;
+    const person = new Person(partialPerson);
+
 
     // if projectIds are not null and not empty
     if (registerPersonDTO.projectIds?.length) {
@@ -56,12 +59,6 @@ export class PersonService {
 
     if (registerPersonDTO.permissionIds?.length) {
       person.permissions = await this.permissionRepository.findByIds(registerPersonDTO.permissionIds);
-      // person.permissions = registerPersonDTO.permissionIds.map(permId => {
-      //   return new Permission({
-      //     id: permId
-      //     // TODO add person?
-      //   })
-      // });
     } else {
       person.permissions = await this.permissionRepository.findByIds(['MANAGE_TASKS', 'MANAGE_DOCS']);
     }
@@ -78,6 +75,9 @@ export class PersonService {
       person.preference = newPreference;
     }
 
+    //TODO omit password
+    //TODO hash password
+    
     return await this.personRepository.save(person);
   }
 }

@@ -7,8 +7,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     transform: true, // transforms incoming Javascript objects to their DTO classes
     // disableErrorMessages: true,
-    // whitelist: true,
+    whitelist: true, // strips away unwanted DTO fields sent from client
+    forbidNonWhitelisted: true // throws error if unwanted DTO fields are sent from client
   }));
   await app.listen(3000);
+
 }
 bootstrap();
