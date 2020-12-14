@@ -1,5 +1,5 @@
 import { CommentPostDTO } from "./comment-post.dto";
-import { PersonDTO } from "./person.dto";
+import { UserDTO } from "./user.dto";
 import { ProjectDTO } from "./project.dto";
 
 export class TaskDTO {
@@ -29,7 +29,7 @@ export class TaskDTO {
     
     project: ProjectDTO;
 
-    person: PersonDTO;
+    user: UserDTO;
 
     childTasks: TaskDTO[];
 

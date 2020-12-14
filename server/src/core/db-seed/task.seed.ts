@@ -13,7 +13,7 @@ export const TaskSeed = [
         gitLink: null,
         commentPosts: [],
         project: 1,
-        person: 1,
+        user: 1,
         childTasks: [2],
         parentTask: null
     },
@@ -31,7 +31,7 @@ export const TaskSeed = [
         gitLink: null,
         // commentPosts: [1],
         project: 1,
-        person: 1,
+        user: 1,
         childTasks: [3],
         parentTask: 1
     },
@@ -49,7 +49,7 @@ export const TaskSeed = [
         gitLink: null,
         commentPosts: [2],
         project: 1,
-        person: 2,
+        user: 2,
         childTasks: [],
         parentTask: 2
     },

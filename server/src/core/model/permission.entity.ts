@@ -1,5 +1,5 @@
 import { Entity, ManyToMany, PrimaryColumn } from "typeorm";
-import { Person } from "./person.entity";
+import { User } from "././user.entity";
 
 @Entity()
 export class Permission {
@@ -7,8 +7,8 @@ export class Permission {
     @PrimaryColumn()
     id: string
 
-    @ManyToMany(type => Person, person => person.permissions)
-    persons: Person[];
+    @ManyToMany(type => User, user => user.permissions)
+    users: User[];
     
     constructor(values: Object = {}) {
         Object.assign(this, values);

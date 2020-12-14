@@ -1,5 +1,5 @@
 import { DocFolderDTO } from "./doc-folder.dto";
-import { PersonDTO } from "./person.dto";
+import { UserDTO } from "././user.dto";
 import { TaskDTO } from "./task.dto";
 
 export class ProjectDTO {
@@ -15,5 +15,5 @@ export class ProjectDTO {
 
     tasks: TaskDTO[];
     
-    persons: PersonDTO[];
+    users: UserDTO[];
 }

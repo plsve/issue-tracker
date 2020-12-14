@@ -6,7 +6,7 @@ import { CommentPost } from "./comment-post.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity()
-export class Person {
+export class User {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -26,22 +26,22 @@ export class Person {
     @Column({nullable: true})
     photo: string;
 
-    @ManyToMany(type => Project, project => project.persons)
+    @ManyToMany(type => Project, project => project.users)
     projects: Project[];
 
-    @OneToMany(type => Task, task => task.person)
+    @OneToMany(type => Task, task => task.user)
     tasks: Task[];
 
-    @OneToMany(type => CommentPost, commentPost => commentPost.person)
+    @OneToMany(type => CommentPost, commentPost => commentPost.user)
     commentPosts: CommentPost[];
 
-    @ManyToMany(type => Permission, permission => permission.persons)
+    @ManyToMany(type => Permission, permission => permission.users)
     @JoinTable({
-        name: "person_has_permission"
+        name: "user_has_permission"
     })
     permissions: Permission[]
 
-    @OneToOne(type => Preference, preference => preference.person, {nullable: false, cascade: true})
+    @OneToOne(type => Preference, preference => preference.user, {nullable: false, cascade: true})
     @JoinColumn()
     preference: Preference;
 

@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CommentPost } from "./comment-post.entity";
-import { Person } from "./person.entity";
+import { User } from "././user.entity";
 import { Project } from "./project.entity";
 
 @Entity()
@@ -45,8 +45,8 @@ export class Task {
     @ManyToOne(type => Project, project => project.tasks, {nullable: false})
     project: Project;
 
-    @ManyToOne(type => Person, person => person.tasks)
-    person: Person;
+    @ManyToOne(type => User, user => user.tasks)
+    user: User;
 
     @OneToMany(type => Task, childTask => childTask.parentTask)
     childTasks: Task[];

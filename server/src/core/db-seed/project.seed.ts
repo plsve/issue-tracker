@@ -6,6 +6,6 @@ export const ProjectSeed = [
         description: 'This is the Issue Tracker project.',
         // docFolders: [1],
         // tasks: [1, 2, 3],
-        // persons: [1, 2]
+        // users: [1, 2]
     }
 ]

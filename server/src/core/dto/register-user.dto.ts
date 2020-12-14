@@ -2,7 +2,7 @@ import { Type } from 'class-transformer';
 import { IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, ValidateNested } from 'class-validator';
 import { PreferenceDTO } from './plain/preference.dto';
 
-export class RegisterPersonDTO {
+export class RegisterUserDTO {
 
     @IsNotEmpty()
     @IsString()

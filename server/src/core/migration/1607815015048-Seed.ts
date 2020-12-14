@@ -4,10 +4,10 @@ import { DocFolderSeed } from "../db-seed/doc-folder.seed";
 import { DocPageSeed } from "../db-seed/doc-page.seed";
 import { LanguageSeed } from "../db-seed/language.seed";
 import { PermissionSeed } from "../db-seed/permission.seed";
-import { PersonSeed } from "../db-seed/person.seed";
 import { PreferenceSeed } from "../db-seed/preference.seed";
 import { ProjectSeed } from "../db-seed/project.seed";
 import { TaskSeed } from "../db-seed/task.seed";
+import { UserSeed } from "../db-seed/user.seed";
 
 export class Seed1607815015048 implements MigrationInterface {
 
@@ -33,8 +33,8 @@ export class Seed1607815015048 implements MigrationInterface {
             DocPageSeed
         );
         
-        await getRepository('person').save(
-            PersonSeed
+        await getRepository('user').save(
+            UserSeed
         );
 
         await getRepository('task').save(

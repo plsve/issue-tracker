@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import "reflect-metadata";
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { PersonController } from './core/controller/person.controller';
-import { PersonService } from './core/service/person.service';
-import { Person } from './core/model/person.entity';
+import { UserController } from './core/controller/user.controller';
+import { UserService } from './core/service/user.service';
+import { User } from './core/model/user.entity';
 import { PermissionService } from './core/service/permission.service';
 import { Permission } from './core/model/permission.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -43,14 +43,14 @@ import { TaskService } from './core/service/task.service';
         migrations: ["dist/core/migration/*.js"]
       }),
     }),
-    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Task, Person, Permission, Preference, Language]),
+    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Task, User, Permission, Preference, Language]),
 
   ],
   exports: [
 
   ],
-  controllers: [AppController, PersonController],
+  controllers: [AppController, UserController],
   providers: [AppService, ConfigService,
-    ProjectService, DocFolderService, DocPageService, TaskService, PersonService, PermissionService, PreferenceService, LanguageService],
+    ProjectService, DocFolderService, DocPageService, TaskService, UserService, PermissionService, PreferenceService, LanguageService],
 })
 export class AppModule { }

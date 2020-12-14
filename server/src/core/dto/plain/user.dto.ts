@@ -4,7 +4,7 @@ import { PreferenceDTO } from "./preference.dto";
 import { ProjectDTO } from "./project.dto";
 import { TaskDTO } from "./task.dto";
 
-export class PersonDTO {
+export class UserDTO {
     
     id: number;
 

@@ -1,10 +1,10 @@
-import { PersonDTO } from "./person.dto";
+import { UserDTO } from "././user.dto";
 import { TaskDTO } from "./task.dto";
 
 export class CommentPostDTO {
     id: number;
 
-    person: PersonDTO;
+    user: UserDTO;
 
     task: TaskDTO;
 

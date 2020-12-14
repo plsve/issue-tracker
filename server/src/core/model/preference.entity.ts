@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Language } from "./language.entity";
-import { Person } from "./person.entity";
+import { User } from "./user.entity";
 
 @Entity()
 export class Preference {
@@ -14,8 +14,8 @@ export class Preference {
     @ManyToOne(type => Language, language => language.preferences, {nullable: false})
     language: Language;
 
-    @OneToOne(type => Person, person => person.preference)
-    person: Person;
+    @OneToOne(type => User, user => user.preference)
+    user: User;
     
     constructor(values: Object = {}) {
         Object.assign(this, values);
