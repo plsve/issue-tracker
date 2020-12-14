@@ -21,6 +21,9 @@ import { LanguageService } from './core/service/language.service';
 import { PreferenceService } from './core/service/preference.service';
 import { ProjectService } from './core/service/project.service';
 import { TaskService } from './core/service/task.service';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -44,13 +47,14 @@ import { TaskService } from './core/service/task.service';
       }),
     }),
     TypeOrmModule.forFeature([Project, DocFolder, DocPage, Task, User, Permission, Preference, Language]),
+    AuthModule,
 
   ],
   exports: [
-
+    UserService
   ],
   controllers: [AppController, UserController],
-  providers: [AppService, ConfigService,
+  providers: [AppService, ConfigService, AuthService,
     ProjectService, DocFolderService, DocPageService, TaskService, UserService, PermissionService, PreferenceService, LanguageService],
 })
 export class AppModule { }

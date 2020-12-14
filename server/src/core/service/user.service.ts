@@ -34,6 +34,10 @@ export class UserService {
     return this.userRepository.findOne(id);
   }
 
+  async findByUsername(username: string): Promise<User[]> {
+    return await this.userRepository.find({ where: { username } });
+  }
+
   async remove(id: string): Promise<void> {
     await this.userRepository.delete(id);
   }
@@ -77,7 +81,7 @@ export class UserService {
 
     //TODO omit password
     //TODO hash password
-    
+
     return await this.userRepository.save(user);
   }
 }
