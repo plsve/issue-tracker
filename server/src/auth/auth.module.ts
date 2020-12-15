@@ -19,19 +19,25 @@ import { Preference } from 'src/core/model/preference.entity';
 import { Project } from 'src/core/model/project.entity';
 import { Task } from 'src/core/model/task.entity';
 import { User } from 'src/core/model/user.entity';
-import { JwtModule, JwtService, JwtModuleOptions } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './jwt.strategy';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
     PassportModule,
-    JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: '30s' },
+    JwtModule.registerAsync({
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get('JWT_SECRET'),
+        signOptions: { expiresIn: '90s' },
+      }),
+      inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Task, User, Permission, Preference, Language]),],
+    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Task, User, Permission, Preference, Language]),
+  ],
+
   providers: [
-    AuthService, LocalStrategy,
+    AuthService, LocalStrategy, JwtStrategy,
     UserService, ProjectService, DocFolderService, DocPageService, TaskService, PermissionService, PreferenceService, LanguageService
   ],
   exports: [JwtModule]

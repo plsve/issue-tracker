@@ -23,15 +23,15 @@ import { ProjectService } from './core/service/project.service';
 import { TaskService } from './core/service/task.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
-import { JwtModule, JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
+      isGlobal: true, 
+      expandVariables: true,
     }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres',

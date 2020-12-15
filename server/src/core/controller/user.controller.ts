@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, UseFilters } from "@nestjs/common";
+import { Body, Controller, Get, Post, UseFilters, UseGuards } from "@nestjs/common";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { QueryFailedExceptionFilter } from "src/query-failed-exception.filter";
 import { RegisterUserDTO } from "../dto/register-user.dto";
 import { User } from "../model/user.entity";
@@ -10,6 +11,7 @@ export class UserController {
 
     constructor(private userService: UserService) { }
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     findAll(): Promise<User[]> {
         return this.userService.findAll();
