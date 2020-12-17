@@ -39,7 +39,7 @@ export class User {
     @JoinTable({
         name: "user_has_permission"
     })
-    permissions: Permission[]
+    permissions: Permission[];
 
     @OneToOne(type => Preference, preference => preference.user, {nullable: false, cascade: true})
     @JoinColumn()

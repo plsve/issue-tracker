@@ -43,7 +43,8 @@ import { AuthService } from './auth/auth.service';
         entities: ["dist/**/*.entity{.ts,.js}"],
         synchronize: configService.get('TYPEORM_SYNCHRONIZE'),
         migrationsRun: configService.get('TYPEORM_MIGRATIONS_RUN'),
-        migrations: ["dist/core/migration/*.js"]
+        migrations: ["dist/core/migration/*.js"],
+        dropSchema: true
       }),
     }),
     TypeOrmModule.forFeature([Project, DocFolder, DocPage, Issue, User, Permission, Preference, Language]),

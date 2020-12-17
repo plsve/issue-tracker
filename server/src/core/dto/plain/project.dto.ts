@@ -7,6 +7,8 @@ export class ProjectDTO {
 
     name: string;
 
+    prefix: string;
+
     dateCreated: Date;
 
     description: string;

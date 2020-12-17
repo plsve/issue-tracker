@@ -32,6 +32,10 @@ export class Seed1607815015048 implements MigrationInterface {
         await getRepository('doc_page').save(
             DocPageSeed
         );
+
+        await getRepository('permission').save(
+            PermissionSeed
+        );
         
         await getRepository('user').save(
             UserSeed
@@ -45,9 +49,7 @@ export class Seed1607815015048 implements MigrationInterface {
             CommendPostSeed
         );
 
-        await getRepository('permission').save(
-            PermissionSeed
-        );
+
         
 
         

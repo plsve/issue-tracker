@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { DocFolder } from "./doc-folder.entity";
 import { User } from "././user.entity";
 import { Issue } from "./issue.entity";
@@ -6,11 +6,14 @@ import { Issue } from "./issue.entity";
 @Entity()
 export class Project {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryColumn()
+    id: string;
 
     @Column()
     name: string;
+    
+    @Column({unique: true})
+    prefix: string;
 
     @Column()
     dateCreated: Date;

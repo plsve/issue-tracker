@@ -1,7 +1,7 @@
 export const IssueSeed = [
     {
         id: 1,
-        name: 'Issue-Tracker-1',
+        name: 'IST-1',
         verboseName: 'Backend REST service',
         type: 'Epic',
         description: 'Create REST service with these endpoints...',
@@ -19,7 +19,7 @@ export const IssueSeed = [
     },
     {
         id: 2,
-        name: 'Issue-Tracker-2',
+        name: 'IST-2',
         verboseName: 'Create controller layer',
         type: 'Issue',
         description: 'Create controller layer with this specification',
@@ -37,7 +37,7 @@ export const IssueSeed = [
     },
     {
         id: 3,
-        name: 'Issue-Tracker-3',
+        name: 'IST-3',
         verboseName: 'Create register endpoint',
         type: 'Issue',
         description: 'Create register endpoint method with these parameters..',

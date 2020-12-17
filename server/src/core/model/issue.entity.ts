@@ -9,7 +9,7 @@ export class Issue {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique: true})
     name: string;
 
     @Column()
