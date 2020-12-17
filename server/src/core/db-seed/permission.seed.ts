@@ -6,7 +6,7 @@ export const PermissionSeed = [
         id: 'MANAGE_USERS'
     },
     {
-        id: 'MANAGE_TASKS'
+        id: 'MANAGE_ISSUES'
     },
     {
         id: 'MANAGE_COMMENTS'

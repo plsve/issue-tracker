@@ -6,7 +6,7 @@ import { LanguageSeed } from "../db-seed/language.seed";
 import { PermissionSeed } from "../db-seed/permission.seed";
 import { PreferenceSeed } from "../db-seed/preference.seed";
 import { ProjectSeed } from "../db-seed/project.seed";
-import { TaskSeed } from "../db-seed/task.seed";
+import { IssueSeed } from "../db-seed/issue.seed";
 import { UserSeed } from "../db-seed/user.seed";
 
 export class Seed1607815015048 implements MigrationInterface {
@@ -37,8 +37,8 @@ export class Seed1607815015048 implements MigrationInterface {
             UserSeed
         );
 
-        await getRepository('task').save(
-            TaskSeed
+        await getRepository('issue').save(
+            IssueSeed
         );
 
         await getRepository('comment_post').save(

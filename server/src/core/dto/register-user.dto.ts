@@ -30,7 +30,7 @@ export class RegisterUserDTO {
 
     @IsOptional()
     @IsInt({each: true})
-    taskIds: number[];
+    issueIds: number[];
 
     @IsOptional()
     @IsString({each: true})

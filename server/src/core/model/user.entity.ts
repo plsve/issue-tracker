@@ -1,7 +1,7 @@
 import { Permission } from "./permission.entity";
 import { Preference } from "./preference.entity";
 import { Project } from "./project.entity";
-import { Task } from "./task.entity";
+import { Issue } from "./issue.entity";
 import { CommentPost } from "./comment-post.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn, Unique } from "typeorm";
 
@@ -29,8 +29,8 @@ export class User {
     @ManyToMany(type => Project, project => project.users)
     projects: Project[];
 
-    @OneToMany(type => Task, task => task.user)
-    tasks: Task[];
+    @OneToMany(type => Issue, issue => issue.user)
+    issues: Issue[];
 
     @OneToMany(type => CommentPost, commentPost => commentPost.user)
     commentPosts: CommentPost[];

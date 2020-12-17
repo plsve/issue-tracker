@@ -2,7 +2,7 @@ import { CommentPostDTO } from "./comment-post.dto";
 import { UserDTO } from "./user.dto";
 import { ProjectDTO } from "./project.dto";
 
-export class TaskDTO {
+export class IssueDTO {
     id: number;
 
     name: string;
@@ -31,7 +31,7 @@ export class TaskDTO {
 
     user: UserDTO;
 
-    childTasks: TaskDTO[];
+    childIssues: IssueDTO[];
 
-    parentTask: TaskDTO;
+    parentIssue: IssueDTO;
 }

@@ -7,7 +7,7 @@ import { Permission } from '../model/permission.entity';
 import { User } from '../model/user.entity';
 import { Preference } from '../model/preference.entity';
 import { Project } from '../model/project.entity';
-import { Task } from '../model/task.entity';
+import { Issue } from '../model/issue.entity';
 
 @Injectable()
 export class UserService {
@@ -16,8 +16,8 @@ export class UserService {
     private userRepository: Repository<User>,
     @InjectRepository(Project)
     private projectRepository: Repository<Project>,
-    @InjectRepository(Task)
-    private taskRepository: Repository<Task>,
+    @InjectRepository(Issue)
+    private issueRepository: Repository<Issue>,
     @InjectRepository(Permission)
     private permissionRepository: Repository<Permission>,
     @InjectRepository(Preference)
@@ -48,7 +48,7 @@ export class UserService {
 
   async register(registerUserDTO: RegisterUserDTO): Promise<any> {
 
-    const { preference, projectIds, taskIds, permissionIds, ...partialUser } = registerUserDTO;
+    const { preference, projectIds, issueIds, permissionIds, ...partialUser } = registerUserDTO;
     const user = new User(partialUser);
 
 
@@ -57,14 +57,14 @@ export class UserService {
       user.projects = await this.projectRepository.findByIds(registerUserDTO.projectIds);
     }
 
-    if (registerUserDTO.taskIds?.length) {
-      user.tasks = await this.taskRepository.findByIds(registerUserDTO.taskIds);
+    if (registerUserDTO.issueIds?.length) {
+      user.issues = await this.issueRepository.findByIds(registerUserDTO.issueIds);
     }
 
     if (registerUserDTO.permissionIds?.length) {
       user.permissions = await this.permissionRepository.findByIds(registerUserDTO.permissionIds);
     } else {
-      user.permissions = await this.permissionRepository.findByIds(['MANAGE_TASKS', 'MANAGE_DOCS']);
+      user.permissions = await this.permissionRepository.findByIds(['MANAGE_ISSUES', 'MANAGE_DOCS']);
     }
 
     if (registerUserDTO.preference) {

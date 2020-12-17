@@ -1,6 +1,6 @@
 import { DocFolderDTO } from "./doc-folder.dto";
 import { UserDTO } from "././user.dto";
-import { TaskDTO } from "./task.dto";
+import { IssueDTO } from "./issue.dto";
 
 export class ProjectDTO {
     id: number;
@@ -13,7 +13,7 @@ export class ProjectDTO {
 
     docFolders: DocFolderDTO[];
 
-    tasks: TaskDTO[];
+    issues: IssueDTO[];
     
     users: UserDTO[];
 }

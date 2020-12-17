@@ -1,10 +1,10 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { CommentPost } from "./comment-post.entity";
-import { User } from "././user.entity";
+import { User } from "./user.entity";
 import { Project } from "./project.entity";
 
 @Entity()
-export class Task {
+export class Issue {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -39,18 +39,18 @@ export class Task {
     @Column({nullable: true})
     gitLink: string;
 
-    @OneToMany(type => CommentPost, commentPost => commentPost.task)
+    @OneToMany(type => CommentPost, commentPost => commentPost.issue)
     commentPosts: CommentPost[];
     
-    @ManyToOne(type => Project, project => project.tasks, {nullable: false})
+    @ManyToOne(type => Project, project => project.issues, {nullable: false})
     project: Project;
 
-    @ManyToOne(type => User, user => user.tasks)
+    @ManyToOne(type => User, user => user.issues)
     user: User;
 
-    @OneToMany(type => Task, childTask => childTask.parentTask)
-    childTasks: Task[];
+    @OneToMany(type => Issue, childIssue => childIssue.parentIssue)
+    childIssues: Issue[];
 
-    @ManyToOne(type => Task, parentTask => parentTask.childTasks)
-    parentTask: Task;
+    @ManyToOne(type => Issue, parentIssue => parentIssue.childIssues)
+    parentIssue: Issue;
 }

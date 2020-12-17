@@ -5,7 +5,7 @@ export const ProjectSeed = [
         dateCreated: new Date(),
         description: 'This is the Issue Tracker project.',
         // docFolders: [1],
-        // tasks: [1, 2, 3],
+        // issues: [1, 2, 3],
         // users: [1, 2]
     }
 ]

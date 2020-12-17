@@ -1,4 +1,4 @@
-export const TaskSeed = [
+export const IssueSeed = [
     {
         id: 1,
         name: 'Issue-Tracker-1',
@@ -14,14 +14,14 @@ export const TaskSeed = [
         commentPosts: [],
         project: 1,
         user: 1,
-        childTasks: [2],
-        parentTask: null
+        childIssues: [2],
+        parentIssue: null
     },
     {
         id: 2,
         name: 'Issue-Tracker-2',
         verboseName: 'Create controller layer',
-        type: 'Task',
+        type: 'Issue',
         description: 'Create controller layer with this specification',
         status: 'In progress',
         priority: 2,
@@ -32,14 +32,14 @@ export const TaskSeed = [
         // commentPosts: [1],
         project: 1,
         user: 1,
-        childTasks: [3],
-        parentTask: 1
+        childIssues: [3],
+        parentIssue: 1
     },
     {
         id: 3,
         name: 'Issue-Tracker-3',
         verboseName: 'Create register endpoint',
-        type: 'Task',
+        type: 'Issue',
         description: 'Create register endpoint method with these parameters..',
         status: 'Open',
         priority: 3,
@@ -50,7 +50,7 @@ export const TaskSeed = [
         commentPosts: [2],
         project: 1,
         user: 2,
-        childTasks: [],
-        parentTask: 2
+        childIssues: [],
+        parentIssue: 2
     },
 ]

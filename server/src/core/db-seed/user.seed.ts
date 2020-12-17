@@ -10,7 +10,7 @@ export const UserSeed = [
         projects: [{
             id: 1
         }],
-        // tasks: [1, 2],
+        // issues: [1, 2],
         // commentPosts: [1],
         permissions: [
             {
@@ -20,7 +20,7 @@ export const UserSeed = [
                 id: 'MANAGE_USERS'
             },
             {
-                id: 'MANAGE_TASKS'
+                id: 'MANAGE_ISSUES'
             },
             {
                 id: 'MANAGE_COMMENTS'
@@ -41,11 +41,11 @@ export const UserSeed = [
         projects: [{
             id: 1
         }],
-        // tasks: [3],
+        // issues: [3],
         // commentPosts: [2],
         permissions: [
             {
-                id: 'MANAGE_TASKS'
+                id: 'MANAGE_ISSUES'
             },
             {
                 id: 'MANAGE_DOCS'

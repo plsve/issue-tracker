@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "././user.entity";
-import { Task } from "./task.entity";
+import { Issue } from "./issue.entity";
 
 @Entity()
 export class CommentPost {
@@ -11,8 +11,8 @@ export class CommentPost {
     @ManyToOne(type => User, user => user.commentPosts, {nullable: false})
     user: User;
 
-    @ManyToOne(type => Task, task => task.commentPosts, {nullable: false})
-    task: Task;
+    @ManyToOne(type => Issue, issue => issue.commentPosts, {nullable: false})
+    issue: Issue;
 
     @Column()
     dateCreated: Date;

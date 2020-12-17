@@ -2,7 +2,7 @@ import { CommentPostDTO } from "./comment-post.dto";
 import { PermissionDTO } from "./permission.dto";
 import { PreferenceDTO } from "./preference.dto";
 import { ProjectDTO } from "./project.dto";
-import { TaskDTO } from "./task.dto";
+import { IssueDTO } from "./issue.dto";
 
 export class UserDTO {
     
@@ -20,7 +20,7 @@ export class UserDTO {
 
     projects: ProjectDTO[];
 
-    tasks: TaskDTO[];
+    issues: IssueDTO[];
 
     commentPosts: CommentPostDTO[];
 

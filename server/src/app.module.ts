@@ -12,7 +12,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Preference } from './core/model/preference.entity';
 import { Language } from './core/model/language.entity';
 import { Project } from './core/model/project.entity';
-import { Task } from './core/model/task.entity';
+import { Issue } from './core/model/issue.entity';
 import { DocFolder } from './core/model/doc-folder.entity';
 import { DocPage } from './core/model/doc-page.entity';
 import { DocFolderService } from './core/service/doc-folder.service';
@@ -20,7 +20,7 @@ import { DocPageService } from './core/service/doc-page.service';
 import { LanguageService } from './core/service/language.service';
 import { PreferenceService } from './core/service/preference.service';
 import { ProjectService } from './core/service/project.service';
-import { TaskService } from './core/service/task.service';
+import { IssueService } from './core/service/issue.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 
@@ -46,7 +46,7 @@ import { AuthService } from './auth/auth.service';
         migrations: ["dist/core/migration/*.js"]
       }),
     }),
-    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Task, User, Permission, Preference, Language]),
+    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Issue, User, Permission, Preference, Language]),
     AuthModule,
 
   ],
@@ -55,6 +55,6 @@ import { AuthService } from './auth/auth.service';
   ],
   controllers: [AppController, UserController],
   providers: [AppService, ConfigService, AuthService,
-    ProjectService, DocFolderService, DocPageService, TaskService, UserService, PermissionService, PreferenceService, LanguageService],
+    ProjectService, DocFolderService, DocPageService, IssueService, UserService, PermissionService, PreferenceService, LanguageService],
 })
 export class AppModule { }
