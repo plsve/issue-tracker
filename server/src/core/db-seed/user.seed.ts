@@ -1,3 +1,5 @@
+import { PERMISSION_IDS } from "src/common/constants/permission.enum";
+
 export const UserSeed = [
     {
         id: 1,
@@ -5,7 +7,7 @@ export const UserSeed = [
         password: 'heslo',
         name: 'Pavel',
         surname: 'Vodička',
-        photo: null,
+        photo: 'abc.jpg',
         preference: 1,
         projects: [{
             id: 1
@@ -14,19 +16,19 @@ export const UserSeed = [
         // commentPosts: [1],
         permissions: [
             {
-                id: 'MANAGE_PROJECTS'
+                id: PERMISSION_IDS.MANAGE_PROJECTS
             },
             {
-                id: 'MANAGE_USERS'
+                id: PERMISSION_IDS.MANAGE_USERS
             },
             {
-                id: 'MANAGE_ISSUES'
+                id: PERMISSION_IDS.MANAGE_COMMENTS
             },
             {
-                id: 'MANAGE_COMMENTS'
+                id: PERMISSION_IDS.MANAGE_ISSUES
             },
             {
-                id: 'MANAGE_DOCS'
+                id: PERMISSION_IDS.MANAGE_DOCS
             },
         ]
     },
@@ -45,10 +47,10 @@ export const UserSeed = [
         // commentPosts: [2],
         permissions: [
             {
-                id: 'MANAGE_ISSUES'
+                id: PERMISSION_IDS.MANAGE_ISSUES
             },
             {
-                id: 'MANAGE_DOCS'
+                id: PERMISSION_IDS.MANAGE_DOCS
             },
         ]
     }

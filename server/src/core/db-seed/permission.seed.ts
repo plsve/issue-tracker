@@ -1,17 +1,19 @@
+import { PERMISSION_IDS } from "src/common/constants/permission.enum";
+
 export const PermissionSeed = [
     {
-        id: 'MANAGE_PROJECTS'
+        id: PERMISSION_IDS.MANAGE_PROJECTS
     },
     {
-        id: 'MANAGE_USERS'
+        id: PERMISSION_IDS.MANAGE_USERS
     },
     {
-        id: 'MANAGE_ISSUES'
+        id: PERMISSION_IDS.MANAGE_ISSUES
     },
     {
-        id: 'MANAGE_COMMENTS'
+        id: PERMISSION_IDS.MANAGE_COMMENTS
     },
     {
-        id: 'MANAGE_DOCS'
+        id: PERMISSION_IDS.MANAGE_DOCS
     },
 ]
