@@ -11,7 +11,7 @@ export class Preference {
     @Column()
     theme: string;
 
-    @ManyToOne(type => Language, language => language.preferences, {nullable: false})
+    @ManyToOne(type => Language, language => language.preferences, {nullable: false, eager: true})
     language: Language;
 
     @OneToOne(type => User, user => user.preference)

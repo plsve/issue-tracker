@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsInt, IsNotEmpty, IsString } from "class-validator";
 
 export class PreferenceDTO {
     
@@ -7,6 +7,6 @@ export class PreferenceDTO {
     theme: string;
 
     @IsNotEmpty()
-    @IsString()
+    @IsInt()
     languageId: number;
 }

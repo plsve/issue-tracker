@@ -1,17 +1,13 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, ValidateNested } from 'class-validator';
-import { NewPreferenceDTO } from './new-preference.dto';
+import { CommentPostDTO } from './plain/comment-post.dto';
 import { PreferenceDTO } from './plain/preference.dto';
 
-export class RegisterUserDTO {
+export class UpdateUserDTO {
 
     @IsNotEmpty()
     @IsString()
     username: string;
-    
-    @IsNotEmpty()
-    @IsString()
-    password: string;
     
     @IsNotEmpty()
     @IsString()
@@ -25,21 +21,21 @@ export class RegisterUserDTO {
     @IsString()
     photo: string;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsInt({each: true})
     projectIds: number[];
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsInt({each: true})
     issueIds: number[];
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsString({each: true})
     permissionIds: string[];
 
-    @IsOptional()
+    @IsNotEmpty()
     @ValidateNested()
-    @Type(() => NewPreferenceDTO)
-    preference: NewPreferenceDTO;
+    @Type(() => PreferenceDTO)
+    preference: PreferenceDTO;
 
 }

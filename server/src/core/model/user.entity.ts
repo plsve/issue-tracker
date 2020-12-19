@@ -11,42 +11,42 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({unique: true})
+    @Column({ unique: true })
     username: string;
-    
-    @Column()
+
+    @Column({ select: false })
     password: string;
-    
+
     @Column()
     name: string;
-    
+
     @Column()
     surname: string;
-    
-    @Column({nullable: true})
+
+    @Column({ nullable: true })
     photo: string;
 
-    @ManyToMany(type => Project, project => project.users)
+    @ManyToMany(type => Project, project => project.users,)
     projects: Project[];
 
-    @OneToMany(type => Issue, issue => issue.user)
+    @OneToMany(type => Issue, issue => issue.user, { cascade: true, eager: true })
     issues: Issue[];
 
     @OneToMany(type => CommentPost, commentPost => commentPost.user)
     commentPosts: CommentPost[];
 
-    @ManyToMany(type => Permission, permission => permission.users)
+    @ManyToMany(type => Permission, permission => permission.users, { eager: true })
     @JoinTable({
         name: "user_has_permission"
     })
     permissions: Permission[];
 
-    @OneToOne(type => Preference, preference => preference.user, {nullable: false, cascade: true})
+    @OneToOne(type => Preference, preference => preference.user, { nullable: false, cascade: true, eager: true })
     @JoinColumn()
     preference: Preference;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
-      }
-    
+    }
+
 }

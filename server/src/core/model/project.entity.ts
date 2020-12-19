@@ -6,8 +6,8 @@ import { Issue } from "./issue.entity";
 @Entity()
 export class Project {
 
-    @PrimaryColumn()
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: number;
 
     @Column()
     name: string;
