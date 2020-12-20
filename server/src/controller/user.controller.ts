@@ -13,7 +13,7 @@ export class UserController {
 
     constructor(private userService: UserService) { }
 
-    @Post('register')
+    @Post()
     register(@Body() registerUserDTO: RegisterUserDTO): Promise<User> {
         return this.userService.register(registerUserDTO);
     }
