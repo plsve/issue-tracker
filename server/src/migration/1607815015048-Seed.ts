@@ -1,5 +1,5 @@
 import {getRepository, MigrationInterface, QueryRunner} from "typeorm";
-import { CommendPostSeed } from "../db-seed/comment-post.seed";
+import { CommentPostSeed } from "../db-seed/comment-post.seed";
 import { DocFolderSeed } from "../db-seed/doc-folder.seed";
 import { DocPageSeed } from "../db-seed/doc-page.seed";
 import { LanguageSeed } from "../db-seed/language.seed";
@@ -25,14 +25,6 @@ export class Seed1607815015048 implements MigrationInterface {
             ProjectSeed
         );
 
-        await getRepository('doc_folder').save(
-            DocFolderSeed
-        );
-
-        await getRepository('doc_page').save(
-            DocPageSeed
-        );
-
         await getRepository('permission').save(
             PermissionSeed
         );
@@ -46,7 +38,15 @@ export class Seed1607815015048 implements MigrationInterface {
         );
 
         await getRepository('comment_post').save(
-            CommendPostSeed
+            CommentPostSeed
+        );
+
+        await getRepository('doc_folder').save(
+            DocFolderSeed
+        );
+
+        await getRepository('doc_page').save(
+            DocPageSeed
         );
 
 

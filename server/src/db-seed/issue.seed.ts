@@ -15,7 +15,11 @@ export const IssueSeed = [
         project: 1,
         user: 1,
         childIssues: [2],
-        parentIssue: null
+        parentIssue: null,
+        created: new Date(),
+        edited: new Date(),
+        createdByUser: 1,
+        editedByUser: 1
     },
     {
         id: 2,
@@ -33,7 +37,11 @@ export const IssueSeed = [
         project: 1,
         user: 1,
         childIssues: [3],
-        parentIssue: 1
+        parentIssue: 1,
+        created: new Date(),
+        edited: new Date(),
+        createdByUser: 1,
+        editedByUser: 1
     },
     {
         id: 3,
@@ -51,6 +59,8 @@ export const IssueSeed = [
         project: 1,
         user: 2,
         childIssues: [],
-        parentIssue: 2
+        parentIssue: 2,
+        created: new Date(),
+        createdByUser: 1,
     },
 ]

@@ -9,7 +9,7 @@ export class Issue {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({unique: true})
+    @Column({ unique: true })
     name: string;
 
     @Column()
@@ -18,7 +18,7 @@ export class Issue {
     @Column()
     type: string;
 
-    @Column()
+    @Column({ nullable: true })
     description: string;
 
     @Column()
@@ -28,21 +28,33 @@ export class Issue {
     priority: number;
 
     @Column()
+    created: Date;
+
+    @Column({ nullable: true })
+    edited: Date;
+
+    @Column({ nullable: true })
     hoursEstimated: number;
 
-    @Column()
+    @Column({ nullable: true })
     hoursRemaining: number;
 
-    @Column()
+    @Column({ nullable: true })
     hoursSpent: number;
 
-    @Column({nullable: true})
+    @Column({ nullable: true })
     gitLink: string;
+
+    @ManyToOne(type => User, user => user.createdIssues, { nullable: false })
+    createdByUser: User;
+
+    @ManyToOne(type => User, user => user.editedIssues)
+    editedByUser: User;
 
     @OneToMany(type => CommentPost, commentPost => commentPost.issue)
     commentPosts: CommentPost[];
-    
-    @ManyToOne(type => Project, project => project.issues, {nullable: false})
+
+    @ManyToOne(type => Project, project => project.issues, { nullable: false })
     project: Project;
 
     @ManyToOne(type => User, user => user.issues)
@@ -53,4 +65,8 @@ export class Issue {
 
     @ManyToOne(type => Issue, parentIssue => parentIssue.childIssues)
     parentIssue: Issue;
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
 }

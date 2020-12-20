@@ -12,7 +12,7 @@ export class Project {
     @Column()
     name: string;
     
-    @Column({unique: true})
+    @Column({unique: true, })
     prefix: string;
 
     @Column()

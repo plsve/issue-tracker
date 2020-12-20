@@ -1,18 +1,18 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { RegisterUserDTO } from '../dto/register-user.dto';
+import { CreateUserDTO } from '../dto/create-user.dto';
 import { Language } from '../model/language.entity';
 import { Permission } from '../model/permission.entity';
 import { User } from '../model/user.entity';
 import { Preference } from '../model/preference.entity';
 import { Project } from '../model/project.entity';
 import { Issue } from '../model/issue.entity';
-import { UserDTO } from '../dto/plain/user.dto';
 import { UpdateUserDTO } from '../dto/update-user.dto';
 import { PERMISSION_IDS } from 'src/constant/permission.enum';
 import { LANGUAGE_IDS } from 'src/constant/language.enum';
 import { THEMES } from 'src/constant/theme.enum';
+import { DocPage } from 'src/model/doc-page.entity';
 
 @Injectable()
 export class UserService {
@@ -29,6 +29,8 @@ export class UserService {
     private preferenceRepository: Repository<Preference>,
     @InjectRepository(Language)
     private languageRepository: Repository<Language>,
+    @InjectRepository(DocPage)
+    private docPageRepository: Repository<DocPage>,
   ) { }
 
   findAll(): Promise<User[]> {
@@ -37,10 +39,6 @@ export class UserService {
 
   findOne(id: string): Promise<User> {
     return this.userRepository.findOne(id);
-  }
-
-  async save(user: User): Promise<User> {
-    return await this.userRepository.save(user);
   }
 
   async update(id: number, updateUserDTO: UpdateUserDTO): Promise<User> {
@@ -89,6 +87,7 @@ export class UserService {
       }
 
       return await this.userRepository.save(updateUser);
+      
 
     } else {
       throw new HttpException('userId ' + id + ' not found', HttpStatus.NOT_FOUND)
@@ -106,39 +105,47 @@ export class UserService {
   }
 
   async remove(id: string): Promise<void> {
-    await this.userRepository.delete(id);
+    const updateUser = await this.userRepository.findOne(id);
+    if(updateUser){
+      updateUser.projects = [];
+      updateUser.issues = [];
+      updateUser.deleted = true;
+      await this.userRepository.save(updateUser);
+    } else {
+      throw new HttpException('userId ' + id + ' not found', HttpStatus.NOT_FOUND)    
+    }
   }
 
-  async register(registerUserDTO: RegisterUserDTO): Promise<any> {
+  async create(createUserDTO: CreateUserDTO): Promise<User> {
 
-    const { preference, projectIds, issueIds, permissionIds, ...partialUser } = registerUserDTO;
+    const { preference, projectIds, issueIds, permissionIds, ...partialUser } = createUserDTO;
     const user = new User(partialUser);
 
     // if projectIds are not null and not empty
-    if (registerUserDTO.projectIds?.length) {
-      user.projects = await this.projectRepository.findByIds(registerUserDTO.projectIds);
+    if (createUserDTO.projectIds?.length) {
+      user.projects = await this.projectRepository.findByIds(createUserDTO.projectIds);
     }
 
-    if (registerUserDTO.issueIds?.length) {
-      user.issues = await this.issueRepository.findByIds(registerUserDTO.issueIds);
+    if (createUserDTO.issueIds?.length) {
+      user.issues = await this.issueRepository.findByIds(createUserDTO.issueIds);
     }
 
-    if (registerUserDTO.permissionIds?.length) {
-      user.permissions = await this.permissionRepository.findByIds(registerUserDTO.permissionIds);
+    if (createUserDTO.permissionIds?.length) {
+      user.permissions = await this.permissionRepository.findByIds(createUserDTO.permissionIds);
     } else {
       user.permissions = await this.permissionRepository.findByIds([PERMISSION_IDS.MANAGE_ISSUES, PERMISSION_IDS.MANAGE_DOCS]);
     }
 
-    if (registerUserDTO.preference) {
-      const newPreference = new Preference(registerUserDTO.preference);
-      user.preference = newPreference;
-      this.preferenceRepository.save(newPreference);
+    if (createUserDTO.preference) {
+      const createPreference = new Preference(createUserDTO.preference);
+      user.preference = createPreference;
+      this.preferenceRepository.save(createPreference);
     } else {
-      const newPreference = new Preference({
+      const createPreference = new Preference({
         theme: THEMES.LIGHT,
         language: await this.languageRepository.findOne(LANGUAGE_IDS.ENGLISH)
       });
-      user.preference = newPreference;
+      user.preference = createPreference;
     }
 
     //TODO hash password

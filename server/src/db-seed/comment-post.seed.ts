@@ -1,9 +1,10 @@
-export const CommendPostSeed = [
+export const CommentPostSeed = [
     {
         id: 1,
         user: 1,
         issue: 2,
         dateCreated: new Date(),
+        dateEdited: new Date(),
         content: 'I worked on this for 3 hours and solved it.'
     },
     {
