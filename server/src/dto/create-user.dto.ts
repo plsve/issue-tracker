@@ -1,9 +1,9 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, ValidateNested } from 'class-validator';
-import { NewPreferenceDTO } from './new-preference.dto';
+import { CreatePreferenceDTO } from './create-preference.dto';
 import { PreferenceDTO } from './plain/preference.dto';
 
-export class RegisterUserDTO {
+export class CreateUserDTO {
 
     @IsNotEmpty()
     @IsString()
@@ -39,7 +39,7 @@ export class RegisterUserDTO {
 
     @IsOptional()
     @ValidateNested()
-    @Type(() => NewPreferenceDTO)
-    preference: NewPreferenceDTO;
+    @Type(() => CreatePreferenceDTO)
+    preference: CreatePreferenceDTO;
 
 }

@@ -23,6 +23,7 @@ import { ProjectService } from './service/project.service';
 import { IssueService } from './service/issue.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
+import { IssueController } from './controller/issue.controller';
 
 @Module({
   imports: [
@@ -43,7 +44,7 @@ import { AuthService } from './auth/auth.service';
         entities: ["dist/**/*.entity{.ts,.js}"],
         synchronize: configService.get('TYPEORM_SYNCHRONIZE'),
         migrationsRun: configService.get('TYPEORM_MIGRATIONS_RUN'),
-        migrations: ["dist/core/migration/*.js"],
+        migrations: ["dist/migration/*.js"],
         dropSchema: true
       }),
     }),
@@ -52,9 +53,9 @@ import { AuthService } from './auth/auth.service';
 
   ],
   exports: [
-    UserService
+    UserService, IssueService
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController, UserController, IssueController],
   providers: [AppService, ConfigService, AuthService,
     ProjectService, DocFolderService, DocPageService, IssueService, UserService, PermissionService, PreferenceService, LanguageService],
 })

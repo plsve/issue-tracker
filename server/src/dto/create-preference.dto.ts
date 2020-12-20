@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class NewPreferenceDTO {
+export class CreatePreferenceDTO {
     
     @IsNotEmpty()
     @IsString()
