@@ -1,4 +1,4 @@
-import { PERMISSION_IDS } from "src/constants/permission.enum";
+import { PERMISSION_IDS } from "src/constant/permission.enum";
 
 export const UserSeed = [
     {

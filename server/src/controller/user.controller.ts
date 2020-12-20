@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseFilters, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
-import { QueryFailedExceptionFilter } from "src/errors/query-failed-exception.filter";
+import { QueryFailedExceptionFilter } from "src/error/query-failed-exception.filter";
 import { RegisterUserDTO } from "../dto/register-user.dto";
 import { UpdateUserDTO } from "../dto/update-user.dto";
 import { User } from "../model/user.entity";

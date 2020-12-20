@@ -10,8 +10,9 @@ import { Project } from '../model/project.entity';
 import { Issue } from '../model/issue.entity';
 import { UserDTO } from '../dto/plain/user.dto';
 import { UpdateUserDTO } from '../dto/update-user.dto';
-import { PERMISSION_IDS } from 'src/constants/permission.enum';
-import { LANGUAGE_IDS } from 'src/constants/language.enum';
+import { PERMISSION_IDS } from 'src/constant/permission.enum';
+import { LANGUAGE_IDS } from 'src/constant/language.enum';
+import { THEMES } from 'src/constant/theme.enum';
 
 @Injectable()
 export class UserService {
@@ -93,8 +94,6 @@ export class UserService {
       throw new HttpException('userId ' + id + ' not found', HttpStatus.NOT_FOUND)
     }
 
-
-    // return this.userRepository.findOne(id);
   }
 
   async findCredentials(username: string): Promise<User> {
@@ -136,7 +135,7 @@ export class UserService {
       this.preferenceRepository.save(newPreference);
     } else {
       const newPreference = new Preference({
-        theme: 'Light',
+        theme: THEMES.LIGHT,
         language: await this.languageRepository.findOne(LANGUAGE_IDS.ENGLISH)
       });
       user.preference = newPreference;
