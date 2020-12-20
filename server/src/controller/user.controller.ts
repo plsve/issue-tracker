@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseFilters, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { QueryFailedExceptionFilter } from "src/error/query-failed-exception.filter";
-import { RegisterUserDTO } from "../dto/register-user.dto";
+import { CreateUserDTO } from "../dto/create-user.dto";
 import { UpdateUserDTO } from "../dto/update-user.dto";
 import { User } from "../model/user.entity";
 import { UserService } from "../service/user.service";
@@ -13,11 +13,6 @@ export class UserController {
 
     constructor(private userService: UserService) { }
 
-    @Post()
-    register(@Body() registerUserDTO: RegisterUserDTO): Promise<User> {
-        return this.userService.register(registerUserDTO);
-    }
-
     @UseGuards(JwtAuthGuard)
     @Get()
     findAll(): Promise<User[]> {
@@ -28,6 +23,11 @@ export class UserController {
     @Get(':id')
     findOne(@Param() params): Promise<User> {
         return this.userService.findOne(params.id);
+    }
+    
+    @Post()
+    create(@Body() createUserDTO: CreateUserDTO): Promise<User> {
+        return this.userService.create(createUserDTO);
     }
 
     @UseGuards(JwtAuthGuard)
