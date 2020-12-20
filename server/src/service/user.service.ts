@@ -10,8 +10,8 @@ import { Project } from '../model/project.entity';
 import { Issue } from '../model/issue.entity';
 import { UserDTO } from '../dto/plain/user.dto';
 import { UpdateUserDTO } from '../dto/update-user.dto';
-import { PERMISSION_IDS } from 'src/common/constants/permission.enum';
-import { LANGUAGE_IDS } from 'src/common/constants/language.enum';
+import { PERMISSION_IDS } from 'src/constants/permission.enum';
+import { LANGUAGE_IDS } from 'src/constants/language.enum';
 
 @Injectable()
 export class UserService {

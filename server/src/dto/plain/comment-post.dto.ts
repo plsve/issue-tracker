@@ -1,5 +1,5 @@
 import { IsDate, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
-import { UserDTO } from "././user.dto";
+import { UserDTO } from "./user.dto";
 import { IssueDTO } from "./issue.dto";
 
 export class CommentPostDTO {

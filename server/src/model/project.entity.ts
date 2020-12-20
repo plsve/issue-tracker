@@ -1,6 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { DocFolder } from "./doc-folder.entity";
-import { User } from "././user.entity";
+import { User } from "./user.entity";
 import { Issue } from "./issue.entity";
 
 @Entity()

@@ -1,5 +1,5 @@
 import { DocFolderDTO } from "./doc-folder.dto";
-import { UserDTO } from "././user.dto";
+import { UserDTO } from "./user.dto";
 import { IssueDTO } from "./issue.dto";
 
 export class ProjectDTO {

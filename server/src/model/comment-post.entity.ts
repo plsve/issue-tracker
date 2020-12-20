@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "././user.entity";
+import { User } from "./user.entity";
 import { Issue } from "./issue.entity";
 
 @Entity()
