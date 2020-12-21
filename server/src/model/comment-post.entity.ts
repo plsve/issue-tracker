@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
 import { Issue } from "./issue.entity";
+import { WorkHourScale } from "src/constant/work-hour-scale.const";
 
 @Entity()
 export class CommentPost {
@@ -20,6 +21,9 @@ export class CommentPost {
     @Column({ nullable: true })
     dateEdited: Date;
 
-    @Column()
+    @Column({nullable: true})
     content: string;
+    
+    @Column({nullable: true, type: 'decimal', ...WorkHourScale})
+    workedHours: number;
 }

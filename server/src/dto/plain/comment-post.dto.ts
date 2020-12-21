@@ -1,12 +1,9 @@
-import { IsDate, IsInt, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsDate, IsDecimal, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { UserDTO } from "./user.dto";
 import { IssueDTO } from "./issue.dto";
+import { WorkHourScale } from "src/constant/work-hour-scale.const";
 
 export class CommentPostDTO {
-
-    @IsNotEmpty()
-    @IsInt()
-    id: number;
 
     @IsNotEmpty()
     @IsInt()
@@ -15,12 +12,13 @@ export class CommentPostDTO {
     @IsNotEmpty()
     @IsInt()
     issueId: number;
-
-    @IsNotEmpty()
-    @IsDate()
-    dateCreated: Date;
     
     @IsOptional()
     @IsString()
     content: string;
+
+    @IsOptional()
+    @IsNumber()
+    @IsDecimal({decimal_digits: WorkHourScale.precision + ',' + WorkHourScale.scale})
+    workedHours: number;
 }

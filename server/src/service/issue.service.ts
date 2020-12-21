@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ISSUE_STATUSES } from 'src/constant/issue-status.enum';
 import { HELPER_QUERIES } from 'src/constant/query.const';
 import { CreateIssueDTO } from 'src/dto/create-issue.dto';
 import { Project } from 'src/model/project.entity';
@@ -9,6 +10,7 @@ import { Issue } from '../model/issue.entity';
 
 @Injectable()
 export class IssueService {
+
   constructor(
     @InjectRepository(Issue)
     private issueRepository: Repository<Issue>,
@@ -18,37 +20,42 @@ export class IssueService {
     private userRepository: Repository<User>,
   ) { }
 
+  private findQueryBuilder = this.issueRepository.createQueryBuilder('issue')
+    .select([
+      'issue',
+      'project.id',
+      'issueUser.id', 'issueUser.name', 'issueUser.surname', 'issueUser.username', 'issueUser.photo', 'issueUser.deleted',
+      'commentPost',
+      'commentUser',
+      'issueParent.id', 'issueParent.name', 'issueParent.verboseName', 'issueParent.status',
+      'issueChild.id', 'issueChild.name', 'issueChild.verboseName', 'issueChild.status',
+      'issueCreatedByUser.id', 'issueCreatedByUser.name', 'issueCreatedByUser.surname', 'issueCreatedByUser.username', 'issueCreatedByUser.deleted',
+      'issueEditedByUser.id', 'issueEditedByUser.name', 'issueEditedByUser.surname', 'issueEditedByUser.username', 'issueEditedByUser.deleted',
+    ])
+    .leftJoin('issue.commentPosts', 'commentPost')
+    .leftJoin('commentPost.user', 'commentUser')
+    .leftJoin('issue.project', 'project')
+    .leftJoin('issue.user', 'issueUser')
+    .leftJoin('issue.parentIssue', 'issueParent')
+    .leftJoin('issue.childIssues', 'issueChild')
+    .leftJoin('issue.createdByUser', 'issueCreatedByUser')
+    .leftJoin('issue.editedByUser', 'issueEditedByUser');
+
   async findAll(): Promise<any[]> {
-    return await this.issueRepository.createQueryBuilder('issue')
-      .select([
-        'issue',
-        'project.id',
-        'issueUser.id', 'issueUser.name', 'issueUser.surname', 'issueUser.username', 'issueUser.photo', 'issueUser.deleted',
-        'commentPost',
-        'commentUser',
-        'issueParent.id', 'issueParent.name', 'issueParent.status',
-        'issueChild.id', 'issueChild.name', 'issueChild.status',
-        'issueCreatedByUser.id', 'issueCreatedByUser.name', 'issueCreatedByUser.surname', 'issueCreatedByUser.username', 'issueCreatedByUser.deleted',
-        'issueEditedByUser.id', 'issueEditedByUser.name', 'issueEditedByUser.surname', 'issueEditedByUser.username', 'issueEditedByUser.deleted',
-      ])
-      .leftJoin('issue.commentPosts', 'commentPost')
-      .leftJoin('commentPost.user', 'commentUser')
-      .leftJoin('issue.project', 'project')
-      .leftJoin('issue.user', 'issueUser')
-      .leftJoin('issue.parentIssue', 'issueParent')
-      .leftJoin('issue.childIssues', 'issueChild')
-      .leftJoin('issue.createdByUser', 'issueCreatedByUser')
-      .leftJoin('issue.editedByUser', 'issueEditedByUser')
-      .getMany();
+    return await this.findQueryBuilder.clone().getMany();
   }
 
-  findOne(id: string): Promise<Issue> {
-    return this.issueRepository.findOne(id);
+  async findOne(id: string): Promise<Issue> {    
+    return await this.findQueryBuilder.clone().where('issue.id = :id', { id }).getOne();
   }
 
   async remove(id: string): Promise<void> {
     await this.issueRepository.delete(id);
   }
+
+  // async update(id: number, updateIssueDTO: UpdateIssueDTO): Promise<Issue> {
+
+  // }
 
   async create(createIssueDTO: CreateIssueDTO): Promise<any> {
     const { projectId, userId, parentIssueId, createdByUserId, ...partialIssue } = createIssueDTO;
@@ -97,9 +104,15 @@ export class IssueService {
     issue.created = new Date();
     issue.name = await this.generateIssueName(project.prefix);
 
+    // Handle other
+    issue.status = ISSUE_STATUSES.OPEN;
+
     // Strip user, parent issue
     return {
       ...await this.issueRepository.save(issue),
+      // hoursEstimated: issue.hoursEstimated,
+      // hoursSpent: issue.hoursSpent,
+      // hoursRemaining: issue.hoursRemaining,
       createdByUser: {
         id: createIssueDTO.createdByUserId
       },
@@ -118,7 +131,5 @@ export class IssueService {
     return projectPrefix + '-' + (+result.max + 1);
   }
 
-  // async update(id: number, updateIssueDTO: UpdateIssueDTO): Promise<Issue> {
 
-  // }
 }

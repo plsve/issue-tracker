@@ -1,4 +1,5 @@
-import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDecimal, IsInt, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, Max } from 'class-validator';
+import { WorkHourScale } from 'src/constant/work-hour-scale.const';
 
 export class CreateIssueDTO {
 
@@ -15,10 +16,6 @@ export class CreateIssueDTO {
     description: string;
 
     @IsNotEmpty()
-    @IsString()
-    status: string;
-
-    @IsNotEmpty()
     @IsInt()
     priority: number;
     
@@ -27,15 +24,18 @@ export class CreateIssueDTO {
     createdByUserId: number;
 
     @IsOptional()
-    @IsInt()
+    @Max(1000)
+    @IsNumber({maxDecimalPlaces: WorkHourScale.scale}, {message: WorkHourScale.getValidationMessage('hoursEstimated')})
     hoursEstimated: number;
 
     @IsOptional()
-    @IsInt()
+    @Max(1000)
+    @IsNumber({maxDecimalPlaces: WorkHourScale.scale}, {message: WorkHourScale.getValidationMessage('hoursRemaining')})
     hoursRemaining: number;
 
     @IsOptional()
-    @IsInt()
+    @Max(1000)
+    @IsNumber({maxDecimalPlaces: WorkHourScale.scale}, {message: WorkHourScale.getValidationMessage('hoursSpent')})
     hoursSpent: number;
 
     @IsOptional()

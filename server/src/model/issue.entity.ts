@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 import { CommentPost } from "./comment-post.entity";
 import { User } from "./user.entity";
 import { Project } from "./project.entity";
+import { WorkHourScale } from "src/constant/work-hour-scale.const";
 
 @Entity()
 export class Issue {
@@ -32,14 +33,17 @@ export class Issue {
 
     @Column({ nullable: true })
     edited: Date;
-
+    
     @Column({ nullable: true })
+    resolved: Date;
+
+    @Column({ nullable: true, type: 'decimal', ...WorkHourScale})
     hoursEstimated: number;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'decimal', ...WorkHourScale})
     hoursRemaining: number;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'decimal', ...WorkHourScale})
     hoursSpent: number;
 
     @Column({ nullable: true })

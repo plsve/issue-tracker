@@ -1,3 +1,5 @@
+import { ISSUE_STATUSES } from "src/constant/issue-status.enum";
+
 export const IssueSeed = [
     {
         id: 1,
@@ -5,10 +7,10 @@ export const IssueSeed = [
         verboseName: 'Backend REST service',
         type: 'Epic',
         description: 'Create REST service with these endpoints...',
-        status: 'In progress',
+        status: ISSUE_STATUSES.OPEN,
         priority: 1,
-        hoursEstimated: 16,
-        hoursRemaining: 16,
+        hoursEstimated: 16.5,
+        hoursRemaining: 16.5,
         hoursSpent: 0,
         gitLink: null,
         commentPosts: [],
@@ -18,6 +20,7 @@ export const IssueSeed = [
         parentIssue: null,
         created: new Date(),
         edited: new Date(),
+        resolved: null,
         createdByUser: 1,
         editedByUser: 1
     },
@@ -27,11 +30,11 @@ export const IssueSeed = [
         verboseName: 'Create controller layer',
         type: 'Issue',
         description: 'Create controller layer with this specification',
-        status: 'In progress',
+        status: ISSUE_STATUSES.IN_PROGRESS,
         priority: 2,
         hoursEstimated: 8,
         hoursRemaining: 8,
-        hoursSpent: 0,
+        hoursSpent: 0.5,
         gitLink: null,
         // commentPosts: [1],
         project: 1,
@@ -40,6 +43,7 @@ export const IssueSeed = [
         parentIssue: 1,
         created: new Date(),
         edited: new Date(),
+        resolved: null,
         createdByUser: 1,
         editedByUser: 1
     },
@@ -49,7 +53,7 @@ export const IssueSeed = [
         verboseName: 'Create register endpoint',
         type: 'Issue',
         description: 'Create register endpoint method with these parameters..',
-        status: 'Open',
+        status: ISSUE_STATUSES.RESOLVED,
         priority: 3,
         hoursEstimated: 2,
         hoursRemaining: 2,
@@ -61,6 +65,7 @@ export const IssueSeed = [
         childIssues: [],
         parentIssue: 2,
         created: new Date(),
+        resolved: new Date(),
         createdByUser: 1,
     },
 ]
