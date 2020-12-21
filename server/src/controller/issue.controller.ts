@@ -30,11 +30,11 @@ export class IssueController {
         return this.issueService.create(createIssueDTO);
     }
 
-    // @UseGuards(JwtAuthGuard)
-    // @Put(':id')
-    // update(@Param() params: IntPathParams, @Body() updateIssueDTO: UpdateIssueDTO): Promise<Issue> {
-    //     return this.issueService.update(params.id, updateIssueDTO);
-    // }
+    @UseGuards(JwtAuthGuard)
+    @Put(':id')
+    update(@Param() params: IntPathParams, @Body() updateIssueDTO: UpdateIssueDTO): Promise<Issue> {
+        return this.issueService.update(params.id, updateIssueDTO);
+    }
 
     @UseGuards(JwtAuthGuard)
     @Delete(':id')

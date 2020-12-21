@@ -5,19 +5,19 @@ import { User } from "./user.entity";
 @Entity()
 export class Preference {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    theme: string;
+  @Column()
+  theme: string;
 
-    @ManyToOne(type => Language, language => language.preferences, {nullable: false, eager: true})
-    language: Language;
+  @ManyToOne(type => Language, language => language.preferences, { nullable: false, eager: true })
+  language: Language;
 
-    @OneToOne(type => User, user => user.preference)
-    user: User;
-    
-    constructor(values: Object = {}) {
-        Object.assign(this, values);
-      }
+  @OneToOne(type => User, user => user.preference)
+  user: User;
+
+  constructor(values: Object = {}) {
+    Object.assign(this, values);
+  }
 }

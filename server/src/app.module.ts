@@ -24,6 +24,8 @@ import { IssueService } from './service/issue.service';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
 import { IssueController } from './controller/issue.controller';
+import { CommentPost } from './model/comment-post.entity';
+import { CommentPostService } from './service/comment-post.service';
 
 @Module({
   imports: [
@@ -48,7 +50,7 @@ import { IssueController } from './controller/issue.controller';
         dropSchema: true
       }),
     }),
-    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Issue, User, Permission, Preference, Language]),
+    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Issue, User, Permission, Preference, Language, CommentPost]),
     AuthModule,
 
   ],
@@ -57,6 +59,6 @@ import { IssueController } from './controller/issue.controller';
   ],
   controllers: [AppController, UserController, IssueController],
   providers: [AppService, ConfigService, AuthService,
-    ProjectService, DocFolderService, DocPageService, IssueService, UserService, PermissionService, PreferenceService, LanguageService],
+    ProjectService, DocFolderService, DocPageService, IssueService, UserService, PermissionService, PreferenceService, LanguageService, CommentPostService],
 })
 export class AppModule { }

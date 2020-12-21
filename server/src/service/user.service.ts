@@ -33,12 +33,36 @@ export class UserService {
     private docPageRepository: Repository<DocPage>,
   ) { }
 
-  findAll(): Promise<User[]> {
-    return this.userRepository.find();
+  private findQueryBuilder = this.userRepository.createQueryBuilder('usr')
+    .select([
+      'usr',
+      'issue.id', 'issue.name', 'issue.verboseName', 'issue.status', 'issue.type', 'issue.resolved',
+      'commentPost.id', 'commentPost.workedHours', 'commentPost.issueId',
+      'preference',
+      'language',
+      'permission',
+      'createdDocPage.id', 'createdDocPage.title', 
+      'editedDocPage.id', 'editedDocPage.title', 
+      'createdIssue.id', 'createdIssue.name', 
+      'editedIssue.id', 'editedIssue.name', 
+    ])
+    .leftJoin('usr.projects', 'project')
+    .leftJoin('usr.issues', 'issue')
+    .leftJoin('usr.commentPosts', 'commentPost')
+    .leftJoin('usr.preference', 'preference')
+    .leftJoin('preference.language', 'language')
+    .leftJoin('usr.permissions', 'permission')
+    .leftJoin('usr.createdDocPages', 'createdDocPage')
+    .leftJoin('usr.editedDocPages', 'editedDocPage')
+    .leftJoin('usr.createdIssues', 'createdIssue')
+    .leftJoin('usr.editedIssues', 'editedIssue')
+
+  async findAll(): Promise<User[]> {
+    return await this.findQueryBuilder.clone().getMany();
   }
 
-  findOne(id: string): Promise<User> {
-    return this.userRepository.findOne(id);
+  async findOne(id: number): Promise<User> {
+    return await this.findQueryBuilder.clone().where('usr.id = :id', { id }).getOne();
   }
 
   async update(id: number, updateUserDTO: UpdateUserDTO): Promise<User> {
@@ -87,7 +111,7 @@ export class UserService {
       }
 
       return await this.userRepository.save(updateUser);
-      
+
 
     } else {
       throw new HttpException('userId ' + id + ' not found', HttpStatus.NOT_FOUND)
@@ -104,15 +128,15 @@ export class UserService {
       .getOne();
   }
 
-  async remove(id: string): Promise<void> {
+  async remove(id: number): Promise<void> {
     const updateUser = await this.userRepository.findOne(id);
-    if(updateUser){
+    if (updateUser) {
       updateUser.projects = [];
       updateUser.issues = [];
       updateUser.deleted = true;
       await this.userRepository.save(updateUser);
     } else {
-      throw new HttpException('userId ' + id + ' not found', HttpStatus.NOT_FOUND)    
+      throw new HttpException('userId ' + id + ' not found', HttpStatus.NOT_FOUND)
     }
   }
 

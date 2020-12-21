@@ -1,4 +1,6 @@
-import { IsDecimal, IsInt, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, Max } from 'class-validator';
+import { IsDecimal, IsEnum, IsInt, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, Max } from 'class-validator';
+import { ISSUE_TYPES } from 'src/constant/issue-type.enum';
+import { ValidationMessages } from 'src/constant/validation-message.const';
 import { WorkHourScale } from 'src/constant/work-hour-scale.const';
 
 export class CreateIssueDTO {
@@ -8,7 +10,7 @@ export class CreateIssueDTO {
     verboseName: string;
 
     @IsNotEmpty()
-    @IsString()
+    @IsEnum(ISSUE_TYPES, { message: ValidationMessages.wrongIssueType })
     type: string;
 
     @IsOptional()
@@ -18,30 +20,30 @@ export class CreateIssueDTO {
     @IsNotEmpty()
     @IsInt()
     priority: number;
-    
+
     @IsNotEmpty()
     @IsInt()
     createdByUserId: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({maxDecimalPlaces: WorkHourScale.scale}, {message: WorkHourScale.getValidationMessage('hoursEstimated')})
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursEstimated') })
     hoursEstimated: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({maxDecimalPlaces: WorkHourScale.scale}, {message: WorkHourScale.getValidationMessage('hoursRemaining')})
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursRemaining') })
     hoursRemaining: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({maxDecimalPlaces: WorkHourScale.scale}, {message: WorkHourScale.getValidationMessage('hoursSpent')})
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursSpent') })
     hoursSpent: number;
 
     @IsOptional()
     @IsString()
     gitLink: string;
-    
+
     @IsNotEmpty()
     @IsInt()
     projectId: number;

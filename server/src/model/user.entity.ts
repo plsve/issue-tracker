@@ -33,19 +33,19 @@ export class User {
     @ManyToMany(type => Project, project => project.users,)
     projects: Project[];
 
-    @OneToMany(type => Issue, issue => issue.user, { cascade: true, eager: true })
+    @OneToMany(type => Issue, issue => issue.user, { cascade: true })
     issues: Issue[];
 
     @OneToMany(type => CommentPost, commentPost => commentPost.user)
     commentPosts: CommentPost[];
 
-    @ManyToMany(type => Permission, permission => permission.users, { eager: true })
+    @ManyToMany(type => Permission, permission => permission.users)
     @JoinTable({
         name: "user_has_permission"
     })
     permissions: Permission[];
 
-    @OneToOne(type => Preference, preference => preference.user, { nullable: false, cascade: true, eager: true })
+    @OneToOne(type => Preference, preference => preference.user, { nullable: false, cascade: true})
     @JoinColumn()
     preference: Preference;
 

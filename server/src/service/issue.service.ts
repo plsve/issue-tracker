@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ISSUE_STATUSES } from 'src/constant/issue-status.enum';
 import { HELPER_QUERIES } from 'src/constant/query.const';
 import { CreateIssueDTO } from 'src/dto/create-issue.dto';
+import { UpdateIssueDTO } from 'src/dto/update-issue.dto';
+import { CommentPost } from 'src/model/comment-post.entity';
 import { Project } from 'src/model/project.entity';
 import { User } from 'src/model/user.entity';
 import { Repository } from 'typeorm';
@@ -18,6 +20,8 @@ export class IssueService {
     private projectRepository: Repository<Project>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(CommentPost)
+    private commentPostRepository: Repository<CommentPost>,
   ) { }
 
   private findQueryBuilder = this.issueRepository.createQueryBuilder('issue')
@@ -34,7 +38,7 @@ export class IssueService {
     ])
     .leftJoin('issue.commentPosts', 'commentPost')
     .leftJoin('commentPost.user', 'commentUser')
-    .leftJoin('issue.project', 'project')
+    .leftJoin('issue.project', 'project'  )
     .leftJoin('issue.user', 'issueUser')
     .leftJoin('issue.parentIssue', 'issueParent')
     .leftJoin('issue.childIssues', 'issueChild')
@@ -45,17 +49,94 @@ export class IssueService {
     return await this.findQueryBuilder.clone().getMany();
   }
 
-  async findOne(id: string): Promise<Issue> {    
+  async findOne(id: number): Promise<Issue> {
     return await this.findQueryBuilder.clone().where('issue.id = :id', { id }).getOne();
   }
 
-  async remove(id: string): Promise<void> {
-    await this.issueRepository.delete(id);
+  async remove(id: number): Promise<void> {
+    const deleteIssue = await this.issueRepository.findOne(id);
+    if(deleteIssue){
+      await this.issueRepository.delete(id);
+    } else {
+      throw new HttpException('issueId ' + id + ' not found', HttpStatus.NOT_FOUND)
+    }
   }
 
-  // async update(id: number, updateIssueDTO: UpdateIssueDTO): Promise<Issue> {
+  async update(id: number, updateIssueDTO: UpdateIssueDTO): Promise<Issue> {
+    const updateIssue = await this.issueRepository.findOne(id);
+    if (updateIssue) {
+      updateIssue.verboseName = updateIssueDTO.verboseName;
+      updateIssue.type = updateIssueDTO.type;
+      updateIssue.description = updateIssueDTO.description;
+      updateIssue.status = updateIssueDTO.status;
+      updateIssue.priority = updateIssueDTO.priority;
+      updateIssue.hoursEstimated = updateIssueDTO.hoursEstimated;
+      updateIssue.hoursRemaining = updateIssueDTO.hoursRemaining;
+      updateIssue.hoursSpent = updateIssueDTO.hoursSpent;
+      updateIssue.gitLink = updateIssueDTO.gitLink;
+      updateIssue.edited = updateIssueDTO.edited;
+      updateIssue.resolved = updateIssueDTO.resolved;
 
-  // }
+      // Handle project
+      const updateProject = await this.projectRepository.findOne(updateIssueDTO.projectId);
+      if (updateProject) {
+        updateIssue.project = updateProject;
+      } else {
+        throw new HttpException('projectId ' + updateIssueDTO.projectId + ' not found', HttpStatus.NOT_FOUND)
+      }
+
+      // Handle user
+      const updateUser = await this.userRepository.findOne(updateIssueDTO.userId);
+      if (updateUser) {
+        updateIssue.user = updateUser;
+      } else {
+        throw new HttpException('userId ' + updateIssueDTO.userId + ' not found', HttpStatus.NOT_FOUND)
+      }
+
+      // Handle editedByUser
+      if (updateIssueDTO.editedByUserId) {
+        const updateEditedByUser = await this.userRepository.findOne(updateIssueDTO.editedByUserId);
+        if (updateEditedByUser) {
+          updateIssue.editedByUser = updateEditedByUser;
+        } else {
+          throw new HttpException('editedByUserId ' + updateIssueDTO.editedByUserId + ' not found', HttpStatus.NOT_FOUND)
+        }
+      }
+
+      // Handle parent issue
+      if (updateIssueDTO.parentIssueId) {
+        const updateParentIssue = await this.issueRepository.findOne(updateIssueDTO.parentIssueId);
+        if (updateParentIssue) {
+          updateIssue.parentIssue = updateParentIssue;
+        } else {
+          throw new HttpException('parentIssueId ' + updateIssueDTO.parentIssueId + ' not found', HttpStatus.NOT_FOUND)
+        }
+      }
+
+      // Handle child issues
+      const updateChildIssues = updateIssueDTO.childIssueIds.length > 0 ? await this.issueRepository.findByIds(updateIssueDTO.childIssueIds) : [];
+      const missingChildIssueIds = updateIssueDTO.childIssueIds.filter(item => updateChildIssues.map(i => i.id).indexOf(item) < 0);
+      if (missingChildIssueIds.length === 0) {
+        updateIssue.childIssues = updateChildIssues;
+      } else {
+        throw new HttpException('childIssueIds [' + missingChildIssueIds + '] not found', HttpStatus.NOT_FOUND);
+      }
+
+      // Handle comments
+      const updateCommentPosts = updateIssueDTO.commentPostIds.length > 0 ? await this.commentPostRepository.findByIds(updateIssueDTO.commentPostIds) : [];
+      const missingCommentPostIds = updateIssueDTO.commentPostIds.filter(item => updateCommentPosts.map(i => i.id).indexOf(item) < 0);
+      if (missingCommentPostIds.length === 0) {
+        updateIssue.commentPosts = updateCommentPosts;
+      } else {
+        throw new HttpException('commentPostIds [' + missingCommentPostIds + '] not found', HttpStatus.NOT_FOUND);
+      }
+      await this.issueRepository.save(updateIssue);
+      return await this.findOne(id);
+
+    } else {
+      throw new HttpException('issueId ' + id + ' not found', HttpStatus.NOT_FOUND)
+    }
+  }
 
   async create(createIssueDTO: CreateIssueDTO): Promise<any> {
     const { projectId, userId, parentIssueId, createdByUserId, ...partialIssue } = createIssueDTO;
@@ -101,33 +182,18 @@ export class IssueService {
     } else {
       throw new HttpException('createdByUserId ' + createIssueDTO.createdByUserId + ' not found', HttpStatus.NOT_FOUND)
     }
-    issue.created = new Date();
-    issue.name = await this.generateIssueName(project.prefix);
 
     // Handle other
     issue.status = ISSUE_STATUSES.OPEN;
+    issue.created = new Date();
+    issue.name = await this.generateIssueName(project.prefix);
 
-    // Strip user, parent issue
-    return {
-      ...await this.issueRepository.save(issue),
-      // hoursEstimated: issue.hoursEstimated,
-      // hoursSpent: issue.hoursSpent,
-      // hoursRemaining: issue.hoursRemaining,
-      createdByUser: {
-        id: createIssueDTO.createdByUserId
-      },
-      user: {
-        id: createIssueDTO.userId
-      },
-      parentIssue: {
-        id: createIssueDTO.parentIssueId
-      },
-      childIssues: [],
-    };
+    await this.issueRepository.save(issue);
+    return await this.findOne(issue.id);
   }
 
   private async generateIssueName(projectPrefix: string): Promise<string> {
-    const result = (await this.issueRepository.query(HELPER_QUERIES.getMaxIssueSuffix))[0];
+    const result = (await this.issueRepository.query(HELPER_QUERIES.getMaxIssueNameSuffix))[0];
     return projectPrefix + '-' + (+result.max + 1);
   }
 

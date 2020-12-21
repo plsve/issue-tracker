@@ -1,11 +1,12 @@
 import { ISSUE_STATUSES } from "src/constant/issue-status.enum";
+import { ISSUE_TYPES } from "src/constant/issue-type.enum";
 
 export const IssueSeed = [
     {
         id: 1,
         name: 'IST-1',
         verboseName: 'Backend REST service',
-        type: 'Epic',
+        type: ISSUE_TYPES.EPIC,
         description: 'Create REST service with these endpoints...',
         status: ISSUE_STATUSES.OPEN,
         priority: 1,
@@ -28,7 +29,7 @@ export const IssueSeed = [
         id: 2,
         name: 'IST-2',
         verboseName: 'Create controller layer',
-        type: 'Issue',
+        type: ISSUE_TYPES.TASK,
         description: 'Create controller layer with this specification',
         status: ISSUE_STATUSES.IN_PROGRESS,
         priority: 2,
@@ -51,7 +52,7 @@ export const IssueSeed = [
         id: 3,
         name: 'IST-3',
         verboseName: 'Create register endpoint',
-        type: 'Issue',
+        type: ISSUE_TYPES.TASK,
         description: 'Create register endpoint method with these parameters..',
         status: ISSUE_STATUSES.RESOLVED,
         priority: 3,

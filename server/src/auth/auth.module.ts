@@ -22,6 +22,8 @@ import { PermissionService } from 'src/service/permission.service';
 import { PreferenceService } from 'src/service/preference.service';
 import { ProjectService } from 'src/service/project.service';
 import { UserService } from 'src/service/user.service';
+import { CommentPostService } from 'src/service/comment-post.service';
+import { CommentPost } from 'src/model/comment-post.entity';
 
 @Module({
   imports: [
@@ -33,12 +35,12 @@ import { UserService } from 'src/service/user.service';
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Issue, User, Permission, Preference, Language]),
+    TypeOrmModule.forFeature([Project, DocFolder, DocPage, Issue, User, Permission, Preference, Language, CommentPost]),
   ],
 
   providers: [
     AuthService, LocalStrategy, JwtStrategy,
-    UserService, ProjectService, DocFolderService, DocPageService, IssueService, PermissionService, PreferenceService, LanguageService
+    UserService, ProjectService, DocFolderService, DocPageService, IssueService, PermissionService, PreferenceService, LanguageService, CommentPostService
   ],
   exports: [JwtModule]
 })

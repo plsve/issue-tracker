@@ -12,7 +12,7 @@ export class CommentPost {
     @ManyToOne(type => User, user => user.commentPosts, { nullable: false, eager: true })
     user: User;
 
-    @ManyToOne(type => Issue, issue => issue.commentPosts, { nullable: false })
+    @ManyToOne(type => Issue, issue => issue.commentPosts, { nullable: false, onDelete: 'CASCADE' })
     issue: Issue;
 
     @Column()
