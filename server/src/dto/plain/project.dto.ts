@@ -9,7 +9,7 @@ export class ProjectDTO {
 
     prefix: string;
 
-    dateCreated: Date;
+    created: Date;
 
     description: string;
 

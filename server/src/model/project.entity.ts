@@ -16,7 +16,7 @@ export class Project {
     prefix: string;
 
     @Column()
-    dateCreated: Date;
+    created: Date;
 
     @Column()
     description: string;

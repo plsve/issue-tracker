@@ -16,14 +16,19 @@ export class CommentPost {
     issue: Issue;
 
     @Column()
-    dateCreated: Date;
+    created: Date;
 
     @Column({ nullable: true })
-    dateEdited: Date;
+    edited: Date;
 
     @Column({nullable: true})
     content: string;
     
     @Column({nullable: true, type: 'decimal', ...WorkHourScale})
     workedHours: number;
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
+
 }

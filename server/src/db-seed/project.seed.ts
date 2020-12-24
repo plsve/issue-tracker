@@ -3,7 +3,7 @@ export const ProjectSeed = [
         id: 1,
         name: 'Issue Tracker',
         prefix: 'IST',
-        dateCreated: new Date(),
+        created: new Date(),
         description: 'This is the Issue Tracker project.',
         // docFolders: [1],
         // issues: [1, 2, 3],

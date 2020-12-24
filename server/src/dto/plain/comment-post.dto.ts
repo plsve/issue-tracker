@@ -1,7 +1,6 @@
-import { IsDate, IsDecimal, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
-import { UserDTO } from "./user.dto";
-import { IssueDTO } from "./issue.dto";
+import { IsInt, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 import { WorkHourScale } from "src/constant/work-hour-scale.const";
+import { ValidationMessages } from "src/constant/validation-message.const";
 
 export class CommentPostDTO {
 
@@ -18,7 +17,6 @@ export class CommentPostDTO {
     content: string;
 
     @IsOptional()
-    @IsNumber()
-    @IsDecimal({decimal_digits: WorkHourScale.precision + ',' + WorkHourScale.scale})
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('workedHours') })
     workedHours: number;
 }

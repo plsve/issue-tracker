@@ -61,8 +61,6 @@ export class User {
     @OneToMany(type => Issue, editedIssue => editedIssue.editedByUser, {nullable: true})
     editedIssues: Issue[];
 
-
-
     constructor(values: Object = {}) {
         Object.assign(this, values);
     }

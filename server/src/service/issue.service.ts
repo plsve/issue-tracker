@@ -2,7 +2,9 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ISSUE_STATUSES } from 'src/constant/issue-status.enum';
 import { HELPER_QUERIES } from 'src/constant/query.const';
+import { CreateCommentPostDTO } from 'src/dto/create-comment-post.dto';
 import { CreateIssueDTO } from 'src/dto/create-issue.dto';
+import { UpdateCommentPostDTO } from 'src/dto/update-comment-post.dto';
 import { UpdateIssueDTO } from 'src/dto/update-issue.dto';
 import { CommentPost } from 'src/model/comment-post.entity';
 import { Project } from 'src/model/project.entity';
@@ -38,7 +40,7 @@ export class IssueService {
     ])
     .leftJoin('issue.commentPosts', 'commentPost')
     .leftJoin('commentPost.user', 'commentUser')
-    .leftJoin('issue.project', 'project'  )
+    .leftJoin('issue.project', 'project')
     .leftJoin('issue.user', 'issueUser')
     .leftJoin('issue.parentIssue', 'issueParent')
     .leftJoin('issue.childIssues', 'issueChild')
@@ -55,10 +57,79 @@ export class IssueService {
 
   async remove(id: number): Promise<void> {
     const deleteIssue = await this.issueRepository.findOne(id);
-    if(deleteIssue){
+    if (deleteIssue) {
       await this.issueRepository.delete(id);
     } else {
       throw new HttpException('issueId ' + id + ' not found', HttpStatus.NOT_FOUND)
+    }
+  }
+
+  async removeCommentPost(issueId: number, id: number): Promise<void> {
+    const updateIssue = await this.issueRepository.findOne(issueId, { relations: ['commentPosts'] });
+    if (!updateIssue) {
+      throw new HttpException('issue id ' + issueId + ' not found', HttpStatus.NOT_FOUND)
+    }
+
+    const removeCommentPost = updateIssue.commentPosts.filter(i => i.id == id)[0];
+    if (removeCommentPost) {
+      await this.commentPostRepository.delete(id);
+    } else {
+      throw new HttpException('commentPost id ' + id + ' not found for issue id ' + issueId, HttpStatus.NOT_FOUND)
+    }
+  }
+
+  async createCommentPost(issueId: number, createCommentPostDTO: CreateCommentPostDTO): Promise<Issue> {
+    const { userId, ...partialCommentPost } = createCommentPostDTO;
+    const createCommentPost = new CommentPost(partialCommentPost);
+
+    // Handle issue
+    const updateIssue = await this.issueRepository.findOne(issueId);
+    if (updateIssue) {
+      createCommentPost.issue = updateIssue;
+    } else {
+      throw new HttpException('issue id ' + issueId + ' not found', HttpStatus.NOT_FOUND)
+    }
+    // Handle user
+    const updateUser = await this.userRepository.findOne(createCommentPostDTO.userId);
+    if (updateUser) {
+      createCommentPost.user = updateUser;
+    } else {
+      throw new HttpException('userId ' + createCommentPostDTO.userId + ' not found', HttpStatus.NOT_FOUND)
+    }
+
+    createCommentPost.created = new Date();
+    // TODO track correct workedHours across issues and comments
+    await this.commentPostRepository.save(createCommentPost);
+    return await this.findOne(issueId);
+
+  }
+
+  async updateCommentPost(issueId: number, id: number, updateCommentPostDTO: UpdateCommentPostDTO): Promise<Issue> {
+
+    // Handle issue
+    const updateIssue = await this.issueRepository.findOne(issueId, { relations: ['commentPosts'] });
+    if (!updateIssue) {
+      throw new HttpException('issue id ' + issueId + ' not found', HttpStatus.NOT_FOUND)
+    }
+
+    const updateCommentPost = updateIssue.commentPosts.filter(i => i.id == id)[0];
+    if (updateCommentPost) {
+      // Handle user
+      const updateUser = await this.userRepository.findOne(updateCommentPostDTO.userId);
+      if (updateUser) {
+        updateCommentPost.user = updateUser;
+      } else {
+        throw new HttpException('userId ' + updateCommentPostDTO.userId + ' not found', HttpStatus.NOT_FOUND)
+      }
+
+      updateCommentPost.content = updateCommentPostDTO.content;
+      updateCommentPost.edited = updateCommentPostDTO.edited;
+      updateCommentPost.workedHours = updateCommentPostDTO.workedHours;
+
+      await this.commentPostRepository.save(updateCommentPost);
+      return await this.findOne(issueId);
+    } else {
+      throw new HttpException('commentPost id ' + id + ' not found for issue id ' + issueId, HttpStatus.NOT_FOUND)
     }
   }
 

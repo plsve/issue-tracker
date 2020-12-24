@@ -10,7 +10,7 @@ export class CreateIssueDTO {
     verboseName: string;
 
     @IsNotEmpty()
-    @IsEnum(ISSUE_TYPES, { message: ValidationMessages.wrongIssueType })
+    @IsEnum(ISSUE_TYPES, { message: ValidationMessages.getWrongIssueType })
     type: string;
 
     @IsOptional()
@@ -27,17 +27,17 @@ export class CreateIssueDTO {
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursEstimated') })
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('hoursEstimated') })
     hoursEstimated: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursRemaining') })
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('hoursRemaining') })
     hoursRemaining: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursSpent') })
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('hoursSpent') })
     hoursSpent: number;
 
     @IsOptional()

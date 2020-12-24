@@ -12,7 +12,7 @@ export class UpdateIssueDTO {
     verboseName: string;
 
     @IsNotEmpty()
-    @IsEnum(ISSUE_TYPES, { message: ValidationMessages.wrongIssueType })
+    @IsEnum(ISSUE_TYPES, { message: ValidationMessages.getWrongIssueType })
     type: string;
 
     @IsOptional()
@@ -20,7 +20,7 @@ export class UpdateIssueDTO {
     description: string;
 
     @IsNotEmpty()
-    @IsEnum(ISSUE_STATUSES, { message: ValidationMessages.wrongStatusType })
+    @IsEnum(ISSUE_STATUSES, { message: ValidationMessages.getWrongStatusType })
     status: string;
 
     @IsNotEmpty()
@@ -29,27 +29,29 @@ export class UpdateIssueDTO {
 
     @IsOptional()
     @IsDate()
+    @Type(() => Date)
     @MaxDate(new Date())
     edited: Date;
 
     @IsOptional()
     @IsDate()
+    @Type(() => Date)
     @MaxDate(new Date())
     resolved: Date;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursEstimated') })
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('hoursEstimated') })
     hoursEstimated: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursRemaining') })
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('hoursRemaining') })
     hoursRemaining: number;
 
     @IsOptional()
     @Max(1000)
-    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.wrongDecimalPlaceLength('hoursSpent') })
+    @IsNumber({ maxDecimalPlaces: WorkHourScale.scale }, { message: ValidationMessages.getWrongDecimals('hoursSpent') })
     hoursSpent: number;
 
     @IsOptional()
