@@ -9,16 +9,16 @@ export class Project {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique: true})
     name: string;
     
-    @Column({unique: true, })
+    @Column({unique: true, length: 4 })
     prefix: string;
 
     @Column()
     created: Date;
 
-    @Column()
+    @Column({nullable: true})
     description: string;
 
     @OneToMany(type => DocFolder, docFolder => docFolder.project)
@@ -32,4 +32,8 @@ export class Project {
         name: "project_utilizes_user"
     })
     users: User[];
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
 }

@@ -8,6 +8,7 @@ import { QueryFailedExceptionFilter } from "src/error/query-failed-exception.fil
 import { Issue } from "../model/issue.entity";
 import { IssueService } from "../service/issue.service";
 import { IntPathParams } from "./int-path-params";
+import { IssuePathParams } from "./issue-path-params";
 
 @Controller('issues')
 @UseFilters(new QueryFailedExceptionFilter())
@@ -45,18 +46,18 @@ export class IssueController {
     }
 
     @Post(':issueId/comments')
-    createComment(@Param() params: IntPathParams, @Body() createCommentPostDTO: CreateCommentPostDTO): Promise<Issue> {
+    createComment(@Param() params: IssuePathParams, @Body() createCommentPostDTO: CreateCommentPostDTO): Promise<Issue> {
         return this.issueService.createCommentPost(params.issueId, createCommentPostDTO);
     }
 
     @Put(':issueId/comments/:id')
-    updateComment(@Param() params: IntPathParams, @Body() updateCommentPostDTO: UpdateCommentPostDTO): Promise<Issue> {
+    updateComment(@Param() params: IssuePathParams, @Body() updateCommentPostDTO: UpdateCommentPostDTO): Promise<Issue> {
         return this.issueService.updateCommentPost(params.issueId, params.id, updateCommentPostDTO);
     }
     
     @UseGuards(JwtAuthGuard)
     @Delete(':issueId/comments/:id')
-    removeComment(@Param() params: IntPathParams): Promise<void> {
+    removeComment(@Param() params: IssuePathParams): Promise<void> {
         return this.issueService.removeCommentPost(params.issueId, params.id);
     }
 

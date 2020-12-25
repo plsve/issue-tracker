@@ -21,7 +21,7 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Get(':id')
-    findOne(@Param() params): Promise<User> {
+    findOne(@Param() params: IntPathParams): Promise<User> {
         return this.userService.findOne(params.id);
     }
     
@@ -38,7 +38,7 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
-    remove(@Param() params): Promise<void> {
+    remove(@Param() params: IntPathParams): Promise<void> {
         return this.userService.remove(params.id);
     }
 

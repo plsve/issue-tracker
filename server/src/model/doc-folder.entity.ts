@@ -11,7 +11,7 @@ export class DocFolder {
     @Column()
     name: string;
 
-    @ManyToOne(type => Project, project => project.docFolders, {nullable: false})
+    @ManyToOne(type => Project, project => project.docFolders, {nullable: false, onDelete: 'CASCADE'})
     project: Project;
 
     @OneToMany(type => DocPage, docPage => docPage.docFolder)
@@ -22,4 +22,8 @@ export class DocFolder {
 
     @ManyToOne(type => DocFolder, parentDocFolder => parentDocFolder.childDocFolders)
     parentDocFolder: DocFolder;
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
 }

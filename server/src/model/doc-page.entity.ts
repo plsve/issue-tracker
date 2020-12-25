@@ -28,4 +28,8 @@ export class DocPage {
 
     @ManyToOne(type => User, user => user.editedDocPages)
     editedByUser: User;
+
+    constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }
 }

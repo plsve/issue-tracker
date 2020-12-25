@@ -41,10 +41,10 @@ export class UserService {
       'preference',
       'language',
       'permission',
-      'createdDocPage.id', 'createdDocPage.title', 
-      'editedDocPage.id', 'editedDocPage.title', 
-      'createdIssue.id', 'createdIssue.name', 
-      'editedIssue.id', 'editedIssue.name', 
+      'createdDocPage.id', 'createdDocPage.title',
+      'editedDocPage.id', 'editedDocPage.title',
+      'createdIssue.id', 'createdIssue.name',
+      'editedIssue.id', 'editedIssue.name',
     ])
     .leftJoin('usr.projects', 'project')
     .leftJoin('usr.issues', 'issue')
@@ -66,12 +66,17 @@ export class UserService {
   }
 
   async update(id: number, updateUserDTO: UpdateUserDTO): Promise<User> {
-    const updateUser = await this.userRepository.findOne(id);
+    const updateUser = await this.userRepository.findOne(id, {relations: ['preference']});
     if (updateUser) {
       updateUser.name = updateUserDTO.name;
       updateUser.surname = updateUserDTO.surname;
       updateUser.photo = updateUserDTO.photo;
       updateUser.username = updateUserDTO.username;
+
+      const existingName = (await this.userRepository.find({ where: { username: updateUserDTO.username } }))[0];
+      if (existingName && existingName.id != id) {
+        throw new HttpException('username ' + updateUserDTO.username + ' already exists', HttpStatus.BAD_REQUEST);
+      }
 
       // Handle preference
       const updatePreference = await this.preferenceRepository.findOne(updateUser.preference.id);
@@ -143,37 +148,43 @@ export class UserService {
   async create(createUserDTO: CreateUserDTO): Promise<User> {
 
     const { preference, projectIds, issueIds, permissionIds, ...partialUser } = createUserDTO;
-    const user = new User(partialUser);
+    const createUser = new User(partialUser);
+
+    const existingUser = (await this.userRepository.find({ where: { username: createUserDTO.username } }))[0];
+    console.log(existingUser);
+    if (existingUser) {
+      throw new HttpException('username ' + createUserDTO.username + ' already exists', HttpStatus.BAD_REQUEST);
+    }
 
     // if projectIds are not null and not empty
     if (createUserDTO.projectIds?.length) {
-      user.projects = await this.projectRepository.findByIds(createUserDTO.projectIds);
+      createUser.projects = await this.projectRepository.findByIds(createUserDTO.projectIds);
     }
 
     if (createUserDTO.issueIds?.length) {
-      user.issues = await this.issueRepository.findByIds(createUserDTO.issueIds);
+      createUser.issues = await this.issueRepository.findByIds(createUserDTO.issueIds);
     }
 
     if (createUserDTO.permissionIds?.length) {
-      user.permissions = await this.permissionRepository.findByIds(createUserDTO.permissionIds);
+      createUser.permissions = await this.permissionRepository.findByIds(createUserDTO.permissionIds);
     } else {
-      user.permissions = await this.permissionRepository.findByIds([PERMISSION_IDS.MANAGE_ISSUES, PERMISSION_IDS.MANAGE_DOCS]);
+      createUser.permissions = await this.permissionRepository.findByIds([PERMISSION_IDS.MANAGE_ISSUES, PERMISSION_IDS.MANAGE_DOCS]);
     }
 
     if (createUserDTO.preference) {
       const createPreference = new Preference(createUserDTO.preference);
-      user.preference = createPreference;
+      createUser.preference = createPreference;
       this.preferenceRepository.save(createPreference);
     } else {
       const createPreference = new Preference({
         theme: THEMES.LIGHT,
         language: await this.languageRepository.findOne(LANGUAGE_IDS.ENGLISH)
       });
-      user.preference = createPreference;
+      createUser.preference = createPreference;
     }
 
     //TODO hash password
 
-    return await this.userRepository.save(user);
+    return await this.userRepository.save(createUser);
   }
 }
