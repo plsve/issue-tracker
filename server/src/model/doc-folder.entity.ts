@@ -11,16 +11,16 @@ export class DocFolder {
     @Column()
     name: string;
 
-    @ManyToOne(type => Project, project => project.docFolders, {nullable: false, onDelete: 'CASCADE'})
+    @ManyToOne(type => Project, project => project.docFolders, { nullable: false, onDelete: 'CASCADE' })
     project: Project;
 
     @OneToMany(type => DocPage, docPage => docPage.docFolder)
     docPages: DocPage[];
-    
+
     @OneToMany(type => DocFolder, childDocFolder => childDocFolder.parentDocFolder)
     childDocFolders: DocFolder[];
 
-    @ManyToOne(type => DocFolder, parentDocFolder => parentDocFolder.childDocFolders)
+    @ManyToOne(type => DocFolder, parentDocFolder => parentDocFolder.childDocFolders, {  onDelete: 'CASCADE' })
     parentDocFolder: DocFolder;
 
     constructor(values: Object = {}) {

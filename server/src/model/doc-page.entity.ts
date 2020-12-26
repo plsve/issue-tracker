@@ -11,7 +11,7 @@ export class DocPage {
     @Column()
     title: string;
 
-    @Column()
+    @Column({ nullable: true })
     content: string;
 
     @Column()
@@ -20,7 +20,7 @@ export class DocPage {
     @Column({ nullable: true })
     edited: Date;
 
-    @ManyToOne(type => DocFolder, docFolder => docFolder.docPages, { nullable: false })
+    @ManyToOne(type => DocFolder, docFolder => docFolder.docPages, { nullable: false, onDelete: 'CASCADE' })
     docFolder: DocFolder;
 
     @ManyToOne(type => User, user => user.createdDocPages, { nullable: false })

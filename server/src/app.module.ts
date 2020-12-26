@@ -27,6 +27,7 @@ import { IssueController } from './controller/issue.controller';
 import { CommentPost } from './model/comment-post.entity';
 import { CommentPostService } from './service/comment-post.service';
 import { ProjectController } from './controller/project.controller';
+import { DocsController } from './controller/docs-controller';
 
 @Module({
   imports: [
@@ -56,9 +57,9 @@ import { ProjectController } from './controller/project.controller';
 
   ],
   exports: [
-    UserService, IssueService, ProjectService
+    UserService, IssueService, ProjectService, DocFolderService, DocPageService
   ],
-  controllers: [AppController, UserController, IssueController, ProjectController],
+  controllers: [AppController, UserController, IssueController, ProjectController, DocsController],
   providers: [AppService, ConfigService, AuthService,
     ProjectService, DocFolderService, DocPageService, IssueService, UserService, PermissionService, PreferenceService, LanguageService, CommentPostService],
 })

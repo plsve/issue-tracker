@@ -55,14 +55,15 @@ export class ProjectService {
     console.log('existingDocFolders');
     console.log(existingDocFolders);
     const outstandingDocFolderIds = existingDocFolders.map(r => r.id);
-    if (updateProjectDTO.docFolderIds.every(item => {
+    updateProjectDTO.docFolderIds.forEach(item => {
       if (outstandingDocFolderIds.includes(item)) {
         return true;
       } else {
         missingDocFolderIds.push(item);
         return false;
       }
-    })) {
+    }); 
+    if (missingDocFolderIds.length == 0) {
       const updateDocFolders = existingDocFolders.filter(i => updateProjectDTO.docFolderIds.includes(i.id));
       console.log('updateDocFolders');
       console.log(updateDocFolders);
@@ -93,14 +94,14 @@ export class ProjectService {
     const missingIssueIds = [];
     const existingIssues = await this.issueRepository.find({ where: { project: { id } } });
     const existingIssueIds = existingIssues.map(r => r.id);
-    if (updateProjectDTO.issueIds.every(item => {
+    updateProjectDTO.issueIds.forEach(item => {
       if (existingIssueIds.includes(item)) {
         return true;
       } else {
         missingIssueIds.push(item);
         return false;
       }
-    })) {
+    }); if(missingIssueIds.length == 0) {
       const updateIssues = existingIssues.filter(i => updateProjectDTO.issueIds.includes(i.id));
       console.log('updateIssues');
       console.log(updateIssues);

@@ -57,7 +57,7 @@ export class IssueService {
 
   async remove(id: number): Promise<void> {
     await getManager().transaction(async entityManager => {
-      const deleteIssue = await entityManager.findOne(Issue,id);
+      const deleteIssue = await entityManager.findOne(Issue, id);
       if (deleteIssue) {
         deleteIssue.childIssues = [];
         await entityManager.save(Issue, deleteIssue);
@@ -98,7 +98,7 @@ export class IssueService {
         updateIssue.gitLink = updateIssueDTO.gitLink;
         updateIssue.edited = updateIssueDTO.edited;
         updateIssue.resolved = updateIssueDTO.resolved;
-  
+
         // Handle project
         const updateProject = await this.projectRepository.findOne(updateIssueDTO.projectId);
         if (updateProject) {
@@ -106,7 +106,7 @@ export class IssueService {
         } else {
           throw new HttpException('projectId ' + updateIssueDTO.projectId + ' not found', HttpStatus.NOT_FOUND)
         }
-  
+
         // Handle user
         const updateUser = await this.userRepository.findOne(updateIssueDTO.userId);
         if (updateUser) {
@@ -114,7 +114,7 @@ export class IssueService {
         } else {
           throw new HttpException('userId ' + updateIssueDTO.userId + ' not found', HttpStatus.NOT_FOUND)
         }
-  
+
         // Handle editedByUser
         if (updateIssueDTO.editedByUserId) {
           const updateEditedByUser = await this.userRepository.findOne(updateIssueDTO.editedByUserId);
@@ -124,38 +124,49 @@ export class IssueService {
             throw new HttpException('editedByUserId ' + updateIssueDTO.editedByUserId + ' not found', HttpStatus.NOT_FOUND)
           }
         }
-  
+
         // Handle parent issue
         if (updateIssueDTO.parentIssueId) {
-          const updateParentIssue = await this.issueRepository.findOne(updateIssueDTO.parentIssueId);
-          if (updateParentIssue) {
-            updateIssue.parentIssue = updateParentIssue;
+          if (id != updateIssueDTO.parentIssueId) {
+            const updateParentIssue = await this.issueRepository.findOne(updateIssueDTO.parentIssueId);
+            if (updateParentIssue) {
+              updateIssue.parentIssue = updateParentIssue;
+            } else {
+              throw new HttpException('parentIssueId ' + updateIssueDTO.parentIssueId + ' not found', HttpStatus.NOT_FOUND)
+            }
           } else {
-            throw new HttpException('parentIssueId ' + updateIssueDTO.parentIssueId + ' not found', HttpStatus.NOT_FOUND)
+            throw new HttpException('issue cannot be parent of itself', HttpStatus.BAD_REQUEST)
           }
+
         }
-  
+        // TODO test
         // Handle child issues
         const updateChildIssues = updateIssueDTO.childIssueIds.length > 0 ? await this.issueRepository.findByIds(updateIssueDTO.childIssueIds) : [];
-        const missingChildIssueIds = updateIssueDTO.childIssueIds.filter(item => updateChildIssues.map(i => i.id).indexOf(item) < 0);
-        if (missingChildIssueIds.length === 0) {
-          updateIssue.childIssues = updateChildIssues;
+        if (!updateChildIssues.some(i => i.id == id)) {
+          const missingChildIssueIds = updateIssueDTO.childIssueIds.filter(item => updateChildIssues.map(i => i.id).indexOf(item) < 0);
+          if (missingChildIssueIds.length === 0) {
+            updateIssue.childIssues = updateChildIssues;
+          } else {
+            throw new HttpException('childIssueIds [' + missingChildIssueIds + '] not found', HttpStatus.NOT_FOUND);
+          }
         } else {
-          throw new HttpException('childIssueIds [' + missingChildIssueIds + '] not found', HttpStatus.NOT_FOUND);
+          throw new HttpException('issue cannot be child of itself', HttpStatus.BAD_REQUEST)
         }
-  
+
+        // TODO test
         // Handle comments
         const missingCommentPostIds = [];
         const existingCommentPosts = await this.commentPostRepository.find({ where: { issue: { id } } });
         const outstandingCommentPostIds = existingCommentPosts.map(r => r.id);
-        if (updateIssueDTO.commentPostIds.every(item => {
+        updateIssueDTO.commentPostIds.forEach(item => {
           if (outstandingCommentPostIds.includes(item)) {
             return true;
           } else {
             missingCommentPostIds.push(item);
             return false;
           }
-        })) {
+        });
+        if (missingCommentPostIds.length == 0) {
           const updateCommentPosts = existingCommentPosts.filter(i => updateIssueDTO.commentPostIds.includes(i.id));
           const deleteCommentPosts = existingCommentPosts.filter(i => !updateIssueDTO.commentPostIds.includes(i.id));
           if (deleteCommentPosts.length > 0) {
@@ -165,10 +176,10 @@ export class IssueService {
         } else {
           throw new HttpException('commentPostIds [' + missingCommentPostIds + '] not found', HttpStatus.NOT_FOUND);
         }
-  
+
         await entityManager.save(Issue, updateIssue);
-        
-  
+
+
       } else {
         throw new HttpException('issueId ' + id + ' not found', HttpStatus.NOT_FOUND)
       }
