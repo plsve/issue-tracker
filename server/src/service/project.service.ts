@@ -74,7 +74,7 @@ export class ProjectService {
 
         // Handle doc pages
         const deleteDocPages = [];
-        deleteDocFolders.map(r => deleteDocPages.push(...r.docPages)); // TODO check when r.docPages = []
+        deleteDocFolders.map(r => deleteDocPages.push(...r.docPages));
         console.log('deleteDocPages');
         console.log(deleteDocPages);
         if (deleteDocPages.length > 0) {
@@ -82,7 +82,6 @@ export class ProjectService {
 
         }
         await entityManager.delete(DocFolder, deleteDocFolders.map(i => i.id));
-        // await this.docFolderRepository.delete(deleteDocFolders.map(i => i.id));
       }
       return updateDocFolders;
     } else {
@@ -145,7 +144,6 @@ export class ProjectService {
 
         // Handle doc folders
         updateProject.docFolders = await this.updateDocsForProject(entityManager, id, updateProjectDTO);
-        // await this.updateDocsForProject(entityManager, id, updateProjectDTO);
 
         // Handle issues
         updateProject.issues = await this.updateIssuesForProject(entityManager, id, updateProjectDTO);
@@ -164,12 +162,9 @@ export class ProjectService {
         throw new HttpException('project id ' + id + ' not found', HttpStatus.BAD_REQUEST);
       }
 
-
     });
 
     return await this.findOne(id);
-
-
   }
 
   async create(createProjectDTO: CreateProjectDTO): Promise<Project> {
@@ -199,7 +194,6 @@ export class ProjectService {
 
     await this.projectRepository.save(createProject);
     return await this.findOne(createProject.id);
-
   }
 
   async remove(id: number): Promise<void> {

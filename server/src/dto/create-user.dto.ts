@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, Length, ValidateNested } from 'class-validator';
 import { CreatePreferenceDTO } from './create-preference.dto';
-import { PreferenceDTO } from './plain/preference.dto';
+import { PreferenceDTO } from './preference.dto';
 
 export class CreateUserDTO {
 
