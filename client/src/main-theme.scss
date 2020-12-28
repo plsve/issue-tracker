@@ -1,0 +1,47 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+$main-theme-primary: mat-palette($mat-indigo, A200, A100, A400);
+$main-theme-accent:  mat-palette($mat-pink, A200, A100, A400);
+$main-theme-warn:  mat-palette($mat-red);
+
+$main-theme: mat-light-theme($main-theme-primary, $main-theme-accent, $main-theme-warn);
+
+@include angular-material-theme($main-theme);
+
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+// @include mat-base-typography($custom-typography);
+
+// // Override typography for a specific Angular Material components.
+// @include mat-checkbox-typography($custom-typography);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+
+
+// Typography for custom css
+
+// Create a config with the default typography levels.
+// $config: mat-typography-config();
+
+// // Custom header that uses only the Material `font-size` and `font-family`.
+// .unicorn-header {
+//   font-size: mat-font-size($config, headline);
+//   font-family: mat-font-family($config);
+// }
+
+// // Custom title that uses all of the typography styles from the `title` level.
+// .unicorn-title {
+//   @include mat-typography-level-to-styles($config, title);
+// }
+
+
