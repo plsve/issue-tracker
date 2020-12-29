@@ -1,12 +1,5 @@
 @import "variables.scss";
 
-.top-menu-wrap {
-    background-color: mat-color($theme, 700);
-    height: 9%;
-    border: 1px solid grey;
-    border-width: 0 0 1px 0;
-}
-
 .top-menu-background {
     position: absolute;
     top: 0;
@@ -15,7 +8,17 @@
     left: 0;
     background-image: url('../../assets/logo/banner-background.png');
     opacity: 0.4;
+    height: $top-menu-height;
 }
+
+.top-menu-wrap {
+    background-color: mat-color($theme, 700);
+    height: $top-menu-height;
+    border: 1px solid grey;
+    border-width: 0 0 1px 0;
+}
+
+
 
 .top-menu-item {
     color: mat-contrast($theme, 700);
@@ -39,20 +42,61 @@
     font-weight: 400;
 }
 
+.side-menu-background {
+    position: absolute;
+    top: $top-menu-height;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('../../assets/logo/banner-background.png');
+    opacity: 0.8;
+    width: $side-menu-width;
+}
 
 .side-menu-wrap {
     background-color: mat-color($theme-accent, 50);
-    width: 10%;
-    height: 30%;
+    width: $side-menu-width;
+    min-width: 12%;
+    height: fit-content;
+    min-height: 45%;
     
     border: 1px solid lightgray;
     border-width: 0 1px 1px 0;
+    border-radius: 0 0 1rem 0;
     // background-color: mat-contrast($palette-blue, 500);
-    
+
+}
+.side-menu-button {
+    border-radius: 2px 0 0 2px;
+}
+
+.side-menu-button-active {
+    background: linear-gradient(to right, mat-color($theme, 200) 0%, mat-color($theme, 100) 30%, mat-color($theme-accent, 50)) 100%;
+}
+
+.side-menu-button-text-active {
+    color: mat-color($theme, 700);
+    font-weight: 600;
+    font-size: 22px;
+}
+
+
+.project-wrap {
+    margin: $spacer-m $spacer-xs $spacer-m $spacer-xs
+}
+.project-label {
+    font-size: 12px;
 }
 
 .side-menu-divider {
     width: 85%;
+}
+
+
+.content-wrap {
+    width: 100%;
+    border: 1px solid gray;
+    margin: 2rem 3rem 0 4rem;
 }
 
 

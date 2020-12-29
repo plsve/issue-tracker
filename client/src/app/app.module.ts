@@ -7,13 +7,16 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { DashComponent } from './dash/dash.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashComponent
+    DashComponent,
+    routingComponents
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

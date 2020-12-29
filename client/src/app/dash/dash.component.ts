@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dash',
@@ -7,32 +8,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashComponent implements OnInit {
 
+  project = {
+    name: 'Starship-SN8'
+  }
+
   sideMenuItems = [
     {
-      name: 'Board'
+      name: 'Board',
+      route: '/board'
     },
     {
-      name: 'Issues'
+      name: 'Issues',
+      route: '/issues'
     },
     {
-      name: 'People'
+      name: 'People',
+      route: '/users'
     },
     {
-      name: 'Docs'
+      name: 'Docs',
+      route: '/docs'
     },
     {
-      name: 'Logs'
+      name: 'Logs',
+      route: '/logs'
     },
     {
-      name: 'Statistics'
+      name: 'Statistics',
+      route: '/stats'
     },
   ]
 
   panelOpenState = false;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  sideBtnClicked(event) {
+    console.log(event.target);
+  }
+
+  isRouteActive(route) {
+    console.log('route');
+    console.log(route);
+    console.log(this.router.isActive(route, false));
+    return this.router.isActive(route, false); // <-- boolean is for exactMatch
   }
 
 }
