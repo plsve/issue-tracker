@@ -7,6 +7,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashComponent implements OnInit {
 
+  sideMenuItems = [
+    {
+      name: 'Board'
+    },
+    {
+      name: 'Issues'
+    },
+    {
+      name: 'People'
+    },
+    {
+      name: 'Docs'
+    },
+    {
+      name: 'Logs'
+    },
+    {
+      name: 'Statistics'
+    },
+  ]
+
+  panelOpenState = false;
+
   constructor() { }
 
   ngOnInit(): void {

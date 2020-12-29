@@ -28,10 +28,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/main-theme.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/main-theme.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/"
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -93,10 +98,10 @@
               "src/assets"
             ],
             "styles": [
+              "src/styles.scss",
               {
                 "input": "src/main-theme.scss"
-              },
-              "src/styles.scss"
+              }
             ],
             "scripts": []
           }

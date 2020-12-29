@@ -1,11 +1,16 @@
-@import '~@angular/material/theming';
+@import 'src/variables';
 
 @include mat-core();
 
+@font-face {
+  font-family: Nunito;
+  src: url(assets/font/Nunito-Regular.ttf) format("truetype");
+}
 
-$main-theme-primary: mat-palette($mat-indigo, A200, A100, A400);
-$main-theme-accent:  mat-palette($mat-pink, A200, A100, A400);
-$main-theme-warn:  mat-palette($mat-red);
+
+$main-theme-primary: mat-palette($theme, A200, A100, A400);
+$main-theme-accent:  mat-palette($theme-accent, A200, A100, A400);
+$main-theme-warn:  mat-palette($theme-warn);
 
 $main-theme: mat-light-theme($main-theme-primary, $main-theme-accent, $main-theme-warn);
 
@@ -13,9 +18,14 @@ $main-theme: mat-light-theme($main-theme-primary, $main-theme-accent, $main-them
 
 
 $custom-typography: mat-typography-config(
-  $font-family: 'Roboto, monospace',
+  $font-family: 'Nunito',
   $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(16px, 24px, 500)
+  $title: mat-typography-level(27px, 36px, 600),
+  $subheading-2: mat-typography-level(24px, 32px, 500),
+  $subheading-1: mat-typography-level(18px, 26px, 500),
+  $body-1: mat-typography-level(16px, 24px, 400),
+  $body-2: mat-typography-level(16px, 24px, 600),
+
 );
 
 // Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).

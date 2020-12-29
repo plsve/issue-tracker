@@ -1,0 +1,86 @@
+@import '~@angular/material/theming';
+
+$theme: $mat-indigo;
+$theme-accent: $mat-blue-grey;
+
+$theme-warn: $mat-deep-orange;
+
+// spacers
+
+$spacer-xl: 6rem;
+$spacer-l: 4rem;
+$spacer-m: 2rem;
+$spacer-s: 1rem;
+$spacer-xs: 0.5rem;
+
+
+/* For use in src/lib/core/theming/_palette.scss */
+$palette-blue: (
+    50 : #eef5fb,
+    100 : #d4e5f5,
+    200 : #b7d4ee,
+    300 : #9ac2e7,
+    400 : #85b5e1,
+    500 : #6fa8dc,
+    600 : #67a0d8,
+    700 : #5c97d3,
+    800 : #528dce,
+    900 : #407dc5,
+    A100 : #ffffff,
+    A200 : #e3efff,
+    A400 : #b0d3ff,
+    A700 : #96c4ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+$palette-light-blue: (
+    50 : #f2f6fa,
+    100 : #dee9f3,
+    200 : #c8dbec,
+    300 : #b1cce4,
+    400 : #a1c1de,
+    500 : #90b6d8,
+    600 : #88afd4,
+    700 : #7da6ce,
+    800 : #739ec8,
+    900 : #618ebf,
+    A100 : #ffffff,
+    A200 : #f9fcff,
+    A400 : #c6e1ff,
+    A700 : #add4ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #000000,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+

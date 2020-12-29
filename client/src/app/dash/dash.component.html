@@ -1,22 +1,69 @@
-<p>
-    <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+<div class="top-menu-background">
+
+</div>
+<div class="top-menu-wrap">
+
+  <div fxLayout="row" fxLayoutAlign="space-between" fxFill>
+
+    <div class="top-menu-item" fxFlex="10%" fxLayoutAlign="start center">
+      <div class="logo-wrap">
+        <img src="assets/logo/issue-tracker-white.svg" class="logo-image" >
+      </div>
+      
+    </div>
+
+    <div class="top-menu-item" fxFlex="40%" fxLayoutAlign="start center">
+      <span class="title">Issue Tracker</span>
+    </div>
+
+    <div class="top-menu-item" fxFlex="25%">
+      <div class="top-menu-controls-wrap" fxLayout="column" fxLayoutAlign="space-between" fxFill>
+
+        <div fxFlex="50%">
+
+        </div>
+
+        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center">
+          <button mat-button>
+            <span class="mat-subheading-1">Projects</span>
+          </button>
+          <button mat-button>
+            <span class="mat-subheading-1">Recent</span>
+          </button>
+          <button mat-button>
+            <span class="mat-subheading-1">Create +</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="top-menu-item" fxFlex="25%" fxLayoutAlign="end center" fxFill>
+      <button mat-icon-button aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>My App</span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="side-menu-wrap">
+
+  <div fxLayout="column" fxLayoutAlign="space-between center" fxFill>
+
+    <div *ngFor="let item of sideMenuItems" class="side-menu-item" fxFlex="15%" fxFill>
+      <button mat-button fxFill fxLayoutAlign="start center" style="padding-left: 1rem;">
+        <span class="mat-subheading-1">{{item.name}}</span>
       </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
-    </mat-toolbar>
-  </p>
+      <div fxLayoutAlign="center">
+        <mat-divider class="side-menu-divider"></mat-divider>
+      </div>
+
+    </div>
+
+  </div>
 
 
-
-<mat-drawer-container class="example-container">
-    <mat-drawer mode="side" opened>Drawer content</mat-drawer>
-    <mat-drawer-content>Main content</mat-drawer-content>
-</mat-drawer-container>
+</div>
