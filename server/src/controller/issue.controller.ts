@@ -16,18 +16,17 @@ export class IssueController {
 
     constructor(private issueService: IssueService) { }
 
-    @UseGuards(JwtAuthGuard)
     @Get()
     findAll(): Promise<Issue[]> {
         return this.issueService.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get(':id')
     findOne(@Param() params): Promise<Issue> {
         return this.issueService.findOne(params.id);
     }
-    
+
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createIssueDTO: CreateIssueDTO): Promise<Issue> {
         return this.issueService.create(createIssueDTO);
@@ -45,11 +44,13 @@ export class IssueController {
         return this.issueService.remove(params.id);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Post(':issueId/comments')
     createComment(@Param() params: IssuePathParams, @Body() createCommentPostDTO: CreateCommentPostDTO): Promise<Issue> {
         return this.issueService.createCommentPost(params.issueId, createCommentPostDTO);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put(':issueId/comments/:id')
     updateComment(@Param() params: IssuePathParams, @Body() updateCommentPostDTO: UpdateCommentPostDTO): Promise<Issue> {
         return this.issueService.updateCommentPost(params.issueId, params.id, updateCommentPostDTO);

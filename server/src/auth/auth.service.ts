@@ -22,7 +22,7 @@ export class AuthService {
         const payload = { username: user.username, sub: user.userId };
         return {
             access_token: this.jwtService.sign(payload),
-            user: await this.userService.findBy({username: user.username})
+            user: (await this.userService.findBy({username: user.username}))[0]
         };
     }
 }

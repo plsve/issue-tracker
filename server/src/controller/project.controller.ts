@@ -15,13 +15,11 @@ export class ProjectController {
 
     constructor(private projectService: ProjectService) { }
 
-    @UseGuards(JwtAuthGuard)
     @Get()
     findAll(): Promise<Project[]> {
         return this.projectService.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get(':id')
     findOne(@Param() params: IntPathParams): Promise<Project> {
         return this.projectService.findOne(params.id);

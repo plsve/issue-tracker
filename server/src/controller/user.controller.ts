@@ -13,19 +13,18 @@ export class UserController {
 
     constructor(private userService: UserService) { }
 
-    @UseGuards(JwtAuthGuard)
     @Get()
     findAll(): Promise<User[]> {
         return this.userService.findAll();
     }
 
-    @UseGuards(JwtAuthGuard)
     @Get(':id')
     findOne(@Param() params: IntPathParams): Promise<User> {
         return this.userService.findOne(params.id);
     }
 
     
+    @UseGuards(JwtAuthGuard)
     @Post()
     create(@Body() createUserDTO: CreateUserDTO): Promise<User> {
         return this.userService.create(createUserDTO);
