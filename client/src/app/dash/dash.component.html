@@ -9,9 +9,9 @@
     <div class="top-menu-item" fxFlex="10%" fxLayoutAlign="start center">
 
       <div class="logo-wrap">
-        <img src="assets/logo/issue-tracker-white.svg" class="logo-image" >
+        <img src="assets/logo/issue-tracker-white.svg" class="logo-image">
       </div>
-      
+
     </div>
 
     <div class="top-menu-item" fxFlex="40%" fxLayoutAlign="start center">
@@ -31,7 +31,7 @@
           <button mat-button>
             <span class="mat-subheading-1">Projects</span>
           </button>
-          
+
           <button mat-button>
             <span class="mat-subheading-1">Recent</span>
           </button>
@@ -47,9 +47,11 @@
 
     <div class="top-menu-item" fxFlex="25%" fxLayoutAlign="end center" fxFill>
 
-      <button mat-icon-button aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
+      <span>pavel.vodicka</span>
+        <button mat-icon-button aria-label="Example icon-button with login icon">
+          <mat-icon>person</mat-icon>
+        </button>
+
 
     </div>
 
@@ -67,45 +69,44 @@
   <div class="side-menu-wrap">
 
     <div fxLayout="column" fxLayoutAlign="space-between center" fxFill>
-  
-      <div class="project-wrap" fxLayout="column" >
-  
+
+      <div class="project-wrap" fxLayout="column">
+
         <div class="project-label">
-          <span >Project:</span>
+          <span>Project:</span>
         </div>
-  
+
         <div class="project-name">
           <span class="mat-subheading-2">{{project.name}}</span>
         </div>
       </div>
-  
-      <div *ngFor="let item of sideMenuItems; let i = index" class="side-menu-item" fxFlex="15%" fxFill>
-          <button [routerLink]="item.route"  mat-button fxFill fxLayoutAlign="start center" class = "side-menu-button" routerLinkActive="side-menu-button-active">
-            <span [ngClass]="{'side-menu-button-text-active': isRouteActive(item.route)}"  class="mat-subheading-1">{{item.name}}</span>
-          </button>
 
-  
+      <div *ngFor="let item of sideMenuItems; let i = index" class="side-menu-item" fxFlex="15%" fxFill>
+        <button [routerLink]="item.route" mat-button fxFill fxLayoutAlign="start center" class="side-menu-button"
+          routerLinkActive="side-menu-button-active">
+          <span [ngClass]="{'side-menu-button-text-active': isRouteActive(item.route)}"
+            class="mat-subheading-1">{{item.name}}</span>
+        </button>
+
+
         <div *ngIf="i != sideMenuItems.length - 1" fxLayoutAlign="center">
           <mat-divider class="side-menu-divider"></mat-divider>
         </div>
-  
+
       </div>
-  
+
     </div>
-  
+
   </div>
 
 
   <div class="content-wrap">
 
     <router-outlet></router-outlet>
-    
+
   </div>
 
 
 
 
 </div>
-
-
-

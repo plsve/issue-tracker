@@ -6,7 +6,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url('../../assets/logo/banner-background.png');
+    background-image: url("../../assets/logo/banner-background.png");
     opacity: 0.4;
     height: $top-menu-height;
 }
@@ -17,8 +17,6 @@
     border: 1px solid grey;
     border-width: 0 0 1px 0;
 }
-
-
 
 .top-menu-item {
     color: mat-contrast($theme, 700);
@@ -32,8 +30,8 @@
 }
 
 .logo-image {
-    height: 100%; 
-    width: 100%; 
+    height: 100%;
+    width: 100%;
     object-fit: contain;
 }
 
@@ -48,9 +46,10 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url('../../assets/logo/banner-background.png');
+    background-image: url("../../assets/logo/banner-background.png");
     opacity: 0.8;
     width: $side-menu-width;
+    z-index: 10;
 }
 
 .side-menu-wrap {
@@ -59,19 +58,25 @@
     min-width: 12%;
     height: fit-content;
     min-height: 45%;
-    
+
     border: 1px solid lightgray;
     border-width: 0 1px 1px 0;
     border-radius: 0 0 1rem 0;
     // background-color: mat-contrast($palette-blue, 500);
-
 }
 .side-menu-button {
     border-radius: 2px 0 0 2px;
+    z-index: 11;
 }
 
 .side-menu-button-active {
-    background: linear-gradient(to right, mat-color($theme, 200) 0%, mat-color($theme, 100) 30%, mat-color($theme-accent, 50)) 100%;
+    background: linear-gradient(
+            to right,
+            mat-color($theme, 200) 0%,
+            mat-color($theme, 100) 30%,
+            mat-color($theme-accent, 50)
+        )
+        100%;
 }
 
 .side-menu-button-text-active {
@@ -80,24 +85,26 @@
     font-size: 22px;
 }
 
-
 .project-wrap {
-    margin: $spacer-m $spacer-xs $spacer-m $spacer-xs
+    margin: $spacer-m $spacer-xs $spacer-m $spacer-xs;
 }
 .project-label {
+    z-index: 11;
     font-size: 12px;
+}
+
+.project-name {
+    font-size: 25px;
+    font-weight: 500;
+    z-index: 11;
 }
 
 .side-menu-divider {
     width: 85%;
 }
 
-
 .content-wrap {
     width: 100%;
     border: 1px solid gray;
     margin: 2rem 3rem 0 4rem;
 }
-
-
-
