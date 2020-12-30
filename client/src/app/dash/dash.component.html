@@ -8,7 +8,7 @@
 
     <div class="top-menu-item" fxFlex="10%" fxLayoutAlign="start center">
 
-      <div class="logo-wrap">
+      <div fxFill>
         <img src="assets/logo/issue-tracker-white.svg" class="logo-image">
       </div>
 
@@ -29,15 +29,18 @@
         <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center">
 
           <button mat-button>
-            <span class="mat-subheading-1">Projects</span>
+            <span class="mat-subheading-1">Projects </span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
 
           <button mat-button>
-            <span class="mat-subheading-1">Recent</span>
+            <span class="mat-subheading-1">Recent </span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
 
-          <button mat-button>
-            <span class="mat-subheading-1">Create +</span>
+          <button mat-button class="create-button">
+            <span class="mat-subheading-1">Create </span>
+            <mat-icon>add</mat-icon>
           </button>
         </div>
 
@@ -47,8 +50,8 @@
 
     <div class="top-menu-item" fxFlex="25%" fxLayoutAlign="end center" fxFill>
 
-      <span>pavel.vodicka</span>
-        <button mat-icon-button aria-label="Example icon-button with login icon">
+      <span *ngIf="authService.user">{{authService.user.username}}</span>
+        <button (click)="login()" mat-icon-button aria-label="Example icon-button with login icon">
           <mat-icon>person</mat-icon>
         </button>
 
@@ -105,8 +108,6 @@
     <router-outlet></router-outlet>
 
   </div>
-
-
 
 
 </div>

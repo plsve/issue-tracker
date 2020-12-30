@@ -1,0 +1,42 @@
+@import "variables.scss";
+
+.badge-wrap {
+    border: 1px solid;
+    border-radius: 4px;
+    width: fit-content;
+    padding: 0 0.5rem 0 0.5rem;
+}
+
+.icon-open {
+    $color: mat-color($theme, A700);
+    color: $color;
+    border-color: $color;
+}
+
+.icon-in-progress {
+    $color: mat-color($theme, A700);
+    color: $color;
+    border-color: $color;
+}
+
+.icon-done {
+    $color: mat-color($theme-success, 900);
+    color: $color;
+    border-color: $color;
+}
+
+.icon-needs-info {
+    $color: mat-color($theme-warn, A700);
+    color: $color;
+    border-color: $color;
+}
+
+.icon-canceled {
+    $color: mat-color($theme-accent, 600);
+    color: $color;
+    border-color: $color;
+}
+
+.icon {
+    margin-left: 0.5rem;
+}

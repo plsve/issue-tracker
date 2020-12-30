@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-dash',
@@ -23,7 +24,7 @@ export class DashComponent implements OnInit {
     },
     {
       name: 'People',
-      route: '/users'
+      route: '/people'
     },
     {
       name: 'Docs',
@@ -41,7 +42,10 @@ export class DashComponent implements OnInit {
 
   panelOpenState = false;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -51,10 +55,13 @@ export class DashComponent implements OnInit {
   }
 
   isRouteActive(route) {
-    console.log('route');
-    console.log(route);
-    console.log(this.router.isActive(route, false));
     return this.router.isActive(route, false); // <-- boolean is for exactMatch
+  }
+
+  login() {
+    if (!this.authService.user) {
+      this.authService.login({ username: "pavel.vodicka", password: "heslo" });
+    }
   }
 
 }

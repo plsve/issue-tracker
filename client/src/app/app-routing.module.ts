@@ -10,7 +10,7 @@ const routes: Routes = [
         component: IssueListComponent
     },
     {
-        path: 'users',
+        path: 'people',
         component: UserListComponent
     },
 ];

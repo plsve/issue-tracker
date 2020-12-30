@@ -1,2 +1,52 @@
-<p class="test">issue-list works!</p>
+<div class="page-wrap">
 
+
+    <span class="mat-display-2">Issues</span>
+
+    <div class="table-wrap">
+
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFill>
+
+
+
+
+            <table cellpadding="15" cellspacing="5" class="issue-table">
+
+
+                <tr class="table-row header-row">
+                    <th>Key</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Assignee</th>
+                    <th>Time spent</th>
+                    <th>Time remaining</th>
+                    <th>Created</th>
+                    <th>Resolved</th>
+                </tr>
+
+                <tr class="table-row" *ngFor="let issue of issueList; let i = index;">
+                    <td><a [routerLink]="'/issues'" class="link">{{issue.name}}</a></td>
+                    <td><a [routerLink]="'/issues'" class="link">{{issue.verboseName}}</a></td>
+                    <td>{{issue.type}}</td>
+                    <td>{{issue.priority}}</td>
+                    <td>
+                        <app-issue-status-badge [status]="issue.status"></app-issue-status-badge>
+                    </td>
+                    <td><a [routerLink]="'/people'" class="link">{{issue.user.username}}</a></td>
+                    <td>{{format.getWorkTime(issue.hoursSpent)}}</td>
+                    <td>{{format.getWorkTime(issue.hoursRemaining)}}</td>
+                    <td>{{issue.created | date:'short'}}</td>
+                    <td>{{issue.resolved ? (issue.resolved | date:'short'): '-'}}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+</div>
