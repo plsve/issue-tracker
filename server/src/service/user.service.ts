@@ -65,8 +65,13 @@ export class UserService {
     return await this.findQueryBuilder.clone().where('usr.id = :id', { id }).getOne();
   }
 
+  async findBy(filter: any): Promise<User[]> {
+    console.log(filter);
+    return await this.findQueryBuilder.clone().where(filter).getMany();
+  }
+
   async update(id: number, updateUserDTO: UpdateUserDTO): Promise<User> {
-    const updateUser = await this.userRepository.findOne(id, {relations: ['preference']});
+    const updateUser = await this.userRepository.findOne(id, { relations: ['preference'] });
     if (updateUser) {
       updateUser.name = updateUserDTO.name;
       updateUser.surname = updateUserDTO.surname;

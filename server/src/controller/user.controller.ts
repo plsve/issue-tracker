@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseFilters, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UseFilters, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { QueryFailedExceptionFilter } from "src/error/query-failed-exception.filter";
 import { CreateUserDTO } from "../dto/create-user.dto";
@@ -24,10 +24,18 @@ export class UserController {
     findOne(@Param() params: IntPathParams): Promise<User> {
         return this.userService.findOne(params.id);
     }
+
     
     @Post()
     create(@Body() createUserDTO: CreateUserDTO): Promise<User> {
         return this.userService.create(createUserDTO);
+    }
+
+    // TODO validate query params
+    // TODO full test
+    @Post('filter')
+    findBy(@Body() filter: any): Promise<User[]> {
+        return this.userService.findBy(filter);
     }
 
     @UseGuards(JwtAuthGuard)
