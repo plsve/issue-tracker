@@ -15,6 +15,7 @@ import { DataFormatter } from './utils/data-formatter.utils';
 import { IssueStatusBadgeComponent } from './issue-status-badge/issue-status-badge.component';
 import { IssuePriorityBadgeComponent } from './issue-priority-badge/issue-priority-badge.component';
 import { IssueTypeBadgeComponent } from './issue-type-badge/issue-type-badge.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { IssueTypeBadgeComponent } from './issue-type-badge/issue-type-badge.com
     routingComponents,
     IssueStatusBadgeComponent,
     IssuePriorityBadgeComponent,
-    IssueTypeBadgeComponent
+    IssueTypeBadgeComponent,
+    BreadcrumbComponent
   ],
   imports: [
     AppRoutingModule,
