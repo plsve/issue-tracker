@@ -12,18 +12,29 @@ export class IssueStatusBadgeComponent implements OnInit {
   @Input()
   status;
 
+  @Input()
+  hideText = false;
+  
+  @Input()
+  hideBorder = false;
+
   constructor(public format: DataFormatter) { }
 
   ngOnInit(): void {
   }
 
-  getStyle(status) {
-    switch (status) {
-      case ISSUE_STATUSES.OPEN: return 'icon-open';
-      case ISSUE_STATUSES.IN_PROGRESS: return 'icon-in-progress';
-      case ISSUE_STATUSES.NEEDS_INFORMATION: return 'icon-needs-info';
-      case ISSUE_STATUSES.DONE: return 'icon-done';
-      case ISSUE_STATUSES.CANCELED: return 'icon-canceled';
+  getStyle() {
+    let borderClass = '';
+    if(!this.hideBorder){
+      borderClass = ' border';
+    }
+
+    switch (this.status) {
+      case ISSUE_STATUSES.OPEN: return 'icon-open' + borderClass;
+      case ISSUE_STATUSES.IN_PROGRESS: return 'icon-in-progress' + borderClass;
+      case ISSUE_STATUSES.NEEDS_INFORMATION: return 'icon-needs-info' + borderClass;
+      case ISSUE_STATUSES.DONE: return 'icon-done' + borderClass;
+      case ISSUE_STATUSES.CANCELED: return 'icon-canceled' + borderClass;
     }
   }
 

@@ -1,0 +1,13 @@
+@import "variables.scss";
+
+.epic {
+    color: $issue-type-epic-color;
+}
+
+.task {
+    color: $issue-type-task-color;
+}
+
+.bug {
+    color: $issue-type-bug-color;
+}

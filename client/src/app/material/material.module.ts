@@ -9,8 +9,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const MaterialComponents = [
   MatDatepickerModule, MatNativeDateModule,
@@ -23,7 +24,8 @@ const MaterialComponents = [
   MatIconModule,
   MatGridListModule,
   MatExpansionModule,
-  MatDividerModule
+  MatDividerModule,
+  MatTooltipModule
 ]
 
 @NgModule({

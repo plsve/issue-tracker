@@ -30,10 +30,10 @@
                 <tr class="table-row" *ngFor="let issue of issueList; let i = index;">
                     <td><a [routerLink]="'/issues'" class="link">{{issue.name}}</a></td>
                     <td><a [routerLink]="'/issues'" class="link">{{issue.verboseName}}</a></td>
-                    <td>{{issue.type}}</td>
-                    <td>{{issue.priority}}</td>
+                    <td><app-issue-type-badge [type]="issue.type"></app-issue-type-badge></td>
+                    <td><app-issue-priority-badge [priority]="issue.priority"></app-issue-priority-badge></td>
                     <td>
-                        <app-issue-status-badge [status]="issue.status"></app-issue-status-badge>
+                        <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
                     </td>
                     <td><a [routerLink]="'/people'" class="link">{{issue.user.username}}</a></td>
                     <td>{{format.getWorkTime(issue.hoursSpent)}}</td>

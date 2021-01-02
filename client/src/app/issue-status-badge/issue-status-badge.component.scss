@@ -1,42 +1,46 @@
 @import "variables.scss";
 
 .badge-wrap {
+    width: fit-content;
+    padding: 0 0.3rem 0 0.3rem;
+}
+
+.border {
     border: 1px solid;
     border-radius: 4px;
-    width: fit-content;
-    padding: 0 0.5rem 0 0.5rem;
 }
 
 .icon-open {
-    $color: mat-color($theme, A700);
+    $color: $issue-status-open-color;
     color: $color;
     border-color: $color;
 }
 
 .icon-in-progress {
-    $color: mat-color($theme, A700);
+    $color: $issue-status-in-progress-color;
     color: $color;
     border-color: $color;
 }
 
 .icon-done {
-    $color: mat-color($theme-success, 900);
+    $color: $issue-status-done-color;
     color: $color;
     border-color: $color;
 }
 
 .icon-needs-info {
-    $color: mat-color($theme-warn, A700);
+    $color: $issue-status-needs-info-color;
     color: $color;
     border-color: $color;
 }
 
 .icon-canceled {
-    $color: mat-color($theme-accent, 600);
+    $color: $issue-status-canceled-color;
     color: $color;
     border-color: $color;
 }
 
-.icon {
-    margin-left: 0.5rem;
+
+.text {
+    margin-left: 0.2rem;
 }

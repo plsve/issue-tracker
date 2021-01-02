@@ -13,13 +13,17 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { IssueService } from './issue.service';
 import { DataFormatter } from './utils/data-formatter.utils';
 import { IssueStatusBadgeComponent } from './issue-status-badge/issue-status-badge.component';
+import { IssuePriorityBadgeComponent } from './issue-priority-badge/issue-priority-badge.component';
+import { IssueTypeBadgeComponent } from './issue-type-badge/issue-type-badge.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashComponent,
     routingComponents,
-    IssueStatusBadgeComponent
+    IssueStatusBadgeComponent,
+    IssuePriorityBadgeComponent,
+    IssueTypeBadgeComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,21 @@
+@import "variables.scss";
+
+.very-high {
+    color: $issue-priority-very-high-color;
+}
+
+.high {
+    color: $issue-priority-high-color;
+}
+
+.medium {
+    color: $issue-priority-medium-color;
+}
+
+.low {
+    color: $issue-priority-low-color;
+}
+
+.very-low {
+    color: $issue-priority-very-low-color;
+}

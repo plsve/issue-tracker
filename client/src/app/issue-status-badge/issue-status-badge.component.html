@@ -1,6 +1,7 @@
-<div class="badge-wrap" [ngClass]="getStyle(status)" fxLayout="row" fxLayoutAlign="center">
-
-    <span >{{getText()}}</span>
+<div class="badge-wrap" [ngClass]="getStyle()" fxLayout="row" fxLayoutAlign="center">
 
     <mat-icon class="icon">{{getIcon()}}</mat-icon>
+    
+    <span *ngIf="!hideText" class="text">{{getText()}}</span>
+
 </div>
