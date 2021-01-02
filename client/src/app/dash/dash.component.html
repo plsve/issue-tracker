@@ -2,7 +2,7 @@
 
 </div>
 
-<div class="top-menu-wrap">
+<div class="top-menu-wrap" #topMenu>
 
   <div fxLayout="row" fxLayoutAlign="space-between" fxFill>
 
@@ -65,11 +65,9 @@
 
 <div class="page-wrap" fxLayout="row" fxFill>
 
-  <div class="side-menu-background">
 
-  </div>
 
-  <div class="side-menu-wrap">
+  <div class="side-menu-wrap" [ngClass]="sideMenuClass">
 
     <div fxLayout="column" fxLayoutAlign="space-between center" fxFill>
 
@@ -99,6 +97,15 @@
       </div>
 
     </div>
+
+  </div>
+
+  <!-- <div class="side-menu-background">
+
+  </div> -->
+
+  
+  <div *ngIf="sideMenuClass == 'side-menu-fixed'" class="side-menu-spacer">
 
   </div>
 

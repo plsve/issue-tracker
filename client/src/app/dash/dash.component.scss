@@ -1,5 +1,9 @@
 @import "variables.scss";
 
+.page-wrap {
+    height: 99% - $top-menu-height;
+}
+
 .top-menu-background {
     position: absolute;
     top: 0;
@@ -41,21 +45,9 @@
     font-weight: 400;
 }
 
-.side-menu-background {
-    position: absolute;
-    top: $top-menu-height;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-image: url("../../assets/logo/banner-background.png");
-    opacity: 0.8;
-    width: $side-menu-width;
-    z-index: 1;
-    height: $side-menu-height;
-}
 
 .side-menu-wrap {
-    background-color: mat-color($theme-accent, 50);
+    background: url("../../assets/logo/banner-background.png"), mat-color($theme-accent, 50);
     width: $side-menu-width;
     min-width: 12%;
     height: $side-menu-height;
@@ -65,8 +57,43 @@
     border-width: 0 1px 1px 0;
     border-radius: 0 0 1rem 0;
 }
+
+.side-menu-static {
+    position: absolute;
+}
+
+.side-menu-fixed {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    top: 0;
+}
+
+.side-menu-spacer {
+    margin-right: $side-menu-width;
+}
+
+
+// .side-menu-background {
+//     position: fixed;
+//     top: $top-menu-height;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     background-image: url("../../assets/logo/banner-background.png");
+//     opacity: 0.8;
+//     width: $side-menu-width;
+//     z-index: 1;
+//     height: $side-menu-height;
+// }
+
 .side-menu-button {
     border-radius: 2px 0 0 2px;
+    z-index: 2;
+}
+
+.side-menu-item {
     z-index: 2;
 }
 
