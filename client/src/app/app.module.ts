@@ -13,13 +13,15 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { IssueService } from './issue.service';
 import { DataFormatter } from './utils/data-formatter.utils';
 import { IssueStatusBadgeComponent } from './issue-status-badge/issue-status-badge.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashComponent,
     routingComponents,
-    IssueStatusBadgeComponent
+    IssueStatusBadgeComponent,
+    BreadcrumbComponent
   ],
   imports: [
     AppRoutingModule,

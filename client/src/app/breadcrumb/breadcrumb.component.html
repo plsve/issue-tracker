@@ -1,0 +1,10 @@
+<div class="wrap" fxLayout="row" fxLayoutAlign="center">
+
+    <button mat-mini-fab color="primary">
+        <mat-icon>home</mat-icon>
+        <span>/</span>
+    </button>
+      
+    <mat-icon class="icon">home</mat-icon>
+    <a *ngFor="let crumb of getCrumbs()" (click)="navigate(crumb)" class="crumb">{{route.text}}</a>
+</div>
