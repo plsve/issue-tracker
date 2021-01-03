@@ -16,13 +16,14 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   getCrumbs(){
-    console.log(this.router.url);
+    // console.log(this.router.url);
 
-    return this.router.url;
+    return [this.router.url];
   }
   
   navigate(link){
-    console.log(link);
+    // console.log(link);
+    // this.router.navigateByUrl(link);
   }
 
 }

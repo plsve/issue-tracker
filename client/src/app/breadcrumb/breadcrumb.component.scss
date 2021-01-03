@@ -3,6 +3,9 @@
 .wrap {
     color: mat-color($theme-accent, 300);
 }
-.icon {
+.home-icon {
     color: mat-color($theme, 500);
+}
+.home-icon:hover {
+    cursor:pointer;
 }
