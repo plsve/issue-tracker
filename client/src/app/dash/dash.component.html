@@ -51,9 +51,9 @@
     <div class="top-menu-item" fxFlex="25%" fxLayoutAlign="end center" fxFill>
 
       <span *ngIf="authService.user">{{authService.user.username}}</span>
-        <button (click)="login()" mat-icon-button aria-label="Example icon-button with login icon">
-          <mat-icon>person</mat-icon>
-        </button>
+      <button (click)="login()" mat-icon-button aria-label="Example icon-button with login icon">
+        <mat-icon>person</mat-icon>
+      </button>
 
 
     </div>
@@ -73,12 +73,17 @@
 
       <div class="project-wrap" fxLayout="column">
 
-        <div class="project-label">
+        <div *ngIf="projectService.selectedProject" class="project-label">
           <span>Project:</span>
         </div>
 
         <div class="project-name">
-          <span class="mat-subheading-2">{{project.name}}</span>
+          <a [routerLink]="projectService.selectedProject.name" *ngIf="projectService.selectedProject"
+            class="mat-subheading-2 project-link">{{projectService.selectedProject.name}}</a>
+
+          <button *ngIf="!projectService.selectedProject" mat-button>
+            Select a project
+          </button>
         </div>
       </div>
 
@@ -104,7 +109,7 @@
 
   </div> -->
 
-  
+
   <div *ngIf="sideMenuClass == 'side-menu-fixed'" class="side-menu-spacer">
 
   </div>
@@ -112,7 +117,14 @@
 
   <div class="content-wrap">
 
-    <router-outlet></router-outlet>
+    <div fxLayout="column" fxLayoutAlign="start" fxFill>
+
+      <app-breadcrumb class="breadcrumb-wrap" fxFlexAlign="start"></app-breadcrumb>
+
+      <router-outlet></router-outlet>
+
+    </div>
+
 
   </div>
 

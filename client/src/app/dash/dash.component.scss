@@ -128,12 +128,27 @@
     z-index: 2;
 }
 
+
+
+.project-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.project-name :hover {
+    text-decoration: underline;
+}
+
 .side-menu-divider {
     width: 85%;
     z-index: 2;
 }
 
+.breadcrumb-wrap {
+    margin-bottom: 2rem;
+}
+
 .content-wrap {
     width: 100%;
-    margin: 2rem 3rem 0 4rem;
+    margin: 0.5rem 3rem 0 4rem;
 }

@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-dash',
@@ -48,23 +49,23 @@ export class DashComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    public projectService: ProjectService
   ) { }
 
   ngOnInit(): void {
-    
+    this.projectService.getProject(1).subscribe(r => {
+      this.projectService.selectedProject = r;
+    });
   }
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
-    console.log(window.pageYOffset);
     if(window.pageYOffset > this.elementView.nativeElement.offsetHeight){
       this.sideMenuClass = 'side-menu-fixed';
     } else {
       this.sideMenuClass = 'side-menu-wrap';
     }
-    // console.log(event);
-    // console.log(event.target.scrollingElement.clientTop);
   }
 
   getSideMenuStyle(){
@@ -75,18 +76,7 @@ export class DashComponent implements OnInit {
     }
   }
 
-  getPositionStyle(){
-    // let pos = document.documentElement.scrollTop;
-    // console.log(pos);
-    // console.log(document.documentElement.scrollHeight);
-    // if(pos > 0){
-    //   return 'side-menu-fixed';
-    // }
-    
-  }
-
   sideBtnClicked(event) {
-    console.log(event.target);
   }
 
   isRouteActive(route) {
