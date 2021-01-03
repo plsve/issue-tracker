@@ -8,7 +8,9 @@ import { AfterViewInit, Component, ElementRef } from '@angular/core';
 export class AppComponent implements AfterViewInit {
   title = 'client';
 
-  constructor(private elementRef: ElementRef) {
+  constructor(
+    private elementRef: ElementRef
+    ) {
 
   }
   ngAfterViewInit() {

@@ -12,21 +12,11 @@ $td-padding-left: 1rem;
     border-collapse: collapse;
 }
 
-
-
-
-
 .table-row {
     
     border-top: 1px solid mat-color($theme-accent, 100);
-    th {
+    td, th {
         text-align: left;
-        padding-left: $td-padding-left;
-    }
-
-    td{
-        text-align: left;
-        padding-left: $td-padding-left;
     }
 }
 
@@ -49,6 +39,31 @@ $td-padding-left: 1rem;
     text-decoration: underline;
 }
 
-.icon {
+$icon-height: 1.5rem;
 
+.sort-icon-down, .sort-icon-up {
+    cursor: pointer;
+    // margin-left: 0.5rem;
+    color: mat-color($theme, 500);
+    visibility: hidden;
+    $icon-width: 12px;
+    width: $icon-width;
+    height: $icon-height;
+    min-width: $icon-width;
+    min-height: $icon-height;
+}
+
+.sort-icon-up {
+    margin-left: 0.5rem;
+}
+
+.sort-icon-up:hover, .sort-icon-down:hover {
+    stroke: mat-color($theme, 500);
+    stroke-width: 1.5rem;
+    // height: $icon-height + 0.5rem;
+    // min-height: $icon-height + 0.5rem;
+}
+
+.sort-header-hover {
+    visibility: visible;
 }

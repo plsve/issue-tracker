@@ -14,8 +14,20 @@
             <table cellpadding="15" cellspacing="5" class="issue-table">
 
 
-                <tr class="table-row header-row">
-                    <th>Key</th>
+
+                <tr class="table-row header-row" on-mouseover='onHoverHeader(true)' on-mouseout='onHoverHeader(false)'>
+                    <th *ngFor="let col of columnData" >
+                        <div fxLayout="row" fxLayoutAlign="start" fxFill >
+                            {{col.text}}
+                            <mat-icon (click)="sortData(col.name, true)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-up"  svgIcon="sort-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">
+                            </mat-icon>
+                            <mat-icon (click)="sortData(col.name, false)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-down"  svgIcon="sort-down" aria-hidden="false" aria-label="Example thumbs up SVG icon">
+                            </mat-icon>
+                        </div>
+
+
+                    </th>
+                    <!-- <th>Key</th>
                     <th>Title</th>
                     <th>Type</th>
                     <th>Priority</th>
@@ -24,14 +36,18 @@
                     <th>Time spent</th>
                     <th>Time remaining</th>
                     <th>Created</th>
-                    <th>Resolved</th>
+                    <th>Resolved</th> -->
                 </tr>
 
-                <tr class="table-row" *ngFor="let issue of issueList; let i = index;">
+                <tr class="table-row" *ngFor="let issue of issueList; let i = index;" fxFill>
                     <td><a [routerLink]="'/issues'" class="link">{{issue.name}}</a></td>
                     <td><a [routerLink]="'/issues'" class="link">{{issue.verboseName}}</a></td>
-                    <td><app-issue-type-badge [type]="issue.type"></app-issue-type-badge></td>
-                    <td><app-issue-priority-badge [priority]="issue.priority"></app-issue-priority-badge></td>
+                    <td>
+                        <app-issue-type-badge [type]="issue.type"></app-issue-type-badge>
+                    </td>
+                    <td>
+                        <app-issue-priority-badge [priority]="issue.priority"></app-issue-priority-badge>
+                    </td>
                     <td>
                         <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
                     </td>

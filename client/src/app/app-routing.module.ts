@@ -3,8 +3,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { IssueListComponent } from './issue-list/issue-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { AppComponent } from './app.component';
+import { DashComponent } from './dash/dash.component';
+import { BoardComponent } from './board/board.component';
 
 const routes: Routes = [
+    {
+        path: 'board',
+        component: BoardComponent
+    },
     {
         path: 'issues',
         component: IssueListComponent

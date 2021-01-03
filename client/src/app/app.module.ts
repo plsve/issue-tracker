@@ -16,6 +16,9 @@ import { IssueStatusBadgeComponent } from './issue-status-badge/issue-status-bad
 import { IssuePriorityBadgeComponent } from './issue-priority-badge/issue-priority-badge.component';
 import { IssueTypeBadgeComponent } from './issue-type-badge/issue-type-badge.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { ProjectService } from './project.service';
+import { BoardComponent } from './board/board.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     IssueStatusBadgeComponent,
     IssuePriorityBadgeComponent,
     IssueTypeBadgeComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    BoardComponent,
+    ProjectListComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -38,6 +43,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
   ],
   providers: [
     AuthService,
+    ProjectService,
     IssueService,
     DataFormatter
   ],
