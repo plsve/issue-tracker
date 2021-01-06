@@ -1,0 +1,100 @@
+@import "variables.scss";
+
+$td-padding-left: 1rem;
+
+.page-wrap {
+
+}
+
+.project-table {
+    width: 100%;
+    margin: 1rem;
+    border-collapse: collapse;
+}
+
+.table-row {
+    
+    border-top: 1px solid mat-color($theme-accent, 100);
+    td, th {
+        text-align: left;
+    }
+}
+
+.header-row {
+    border-top: none;
+}
+
+.table-header-divider {
+    width: 100%;
+}
+
+.link, .link:visited {
+    color: mat-color($theme, 500);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+$icon-height: 1.5rem;
+
+.sort-icon-down, .sort-icon-up {
+    cursor: pointer;
+    // margin-left: 0.5rem;
+    color: mat-color($theme, 500);
+    visibility: hidden;
+    $icon-width: 12px;
+    width: $icon-width;
+    height: $icon-height;
+    min-width: $icon-width;
+    min-height: $icon-height;
+}
+
+.sort-icon-up {
+    margin-left: 0.5rem;
+}
+
+.sort-icon-up:hover, .sort-icon-down:hover {
+    stroke: mat-color($theme, 500);
+    stroke-width: 1.5rem;
+    // height: $icon-height + 0.5rem;
+    // min-height: $icon-height + 0.5rem;
+}
+
+.sort-header-hover {
+    visibility: visible;
+}
+
+#issueCount-header {
+    background-color: mat-color($theme-accent, 100);
+    border-top-left-radius: 1rem;
+}
+
+#doneIssueCount-header {
+    background-color: mat-color($theme-accent, 50);
+    border-top-right-radius: 1rem;
+}
+
+#inProgressIssueCount-header, #openIssueCount-header {
+    background-color: mat-color($theme-accent, 50);
+}
+
+#issueCount-row {
+    background-color: mat-color($theme-accent, 50);
+}
+
+.icon-selected, .icon-unselected {
+
+}
+
+.icon-selected {
+    color: mat-color($theme-success, 500);
+}
+
+.icon-unselected {
+    
+}

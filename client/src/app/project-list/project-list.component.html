@@ -1,1 +1,57 @@
-<p>project-list works!</p>
+<div class="page-wrap">
+
+
+    <span class="mat-display-2">Projects</span>
+
+    <div class="table-wrap">
+
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFill>
+
+
+
+
+            <table cellpadding="15" cellspacing="5" class="project-table">
+
+
+
+                <tr class="table-row header-row" on-mouseover='onHoverHeader(true)' on-mouseout='onHoverHeader(false)'>
+                    <th id="{{col.name + '-header'}}" *ngFor="let col of columnData" >
+                        <div fxLayout="row" fxLayoutAlign="start" fxFill >
+                            {{col.text}}
+                            <mat-icon (click)="sortData(col.name, true)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-up"  svgIcon="sort-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">
+                            </mat-icon>
+                            <mat-icon (click)="sortData(col.name, false)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-down"  svgIcon="sort-down" aria-hidden="false" aria-label="Example thumbs up SVG icon">
+                            </mat-icon>
+                        </div>
+                    </th>
+                </tr>
+
+                <tr class="table-row" *ngFor="let project of projectList; let i = index;" fxFill>
+                    <td><a [routerLink]="['/projects', {name: project.name}]" class="link">{{project.name}}</a></td>
+                    <td><a [routerLink]="['/projects', {name: project.name}]"class="link">{{project.prefix}}</a></td>
+                    <td>{{project.created | date:'shortDate'}}</td>
+                    <td><a (click)="routeToPeople(project.name)" class="link">{{project.users.length}}</a></td>
+                    <td id="issueCount-row"><a (click)="routeToIssues(project.name)" class="link">{{project.issues.length}}</a></td>
+                    <td id="issueCount-row"><a (click)="routeToIssues(project.name, ISSUE_STATUSES.OPEN)" class="link">{{getIssueCount(project.issues, ISSUE_STATUSES.OPEN)}}</a></td>
+                    <td id="issueCount-row"><a (click)="routeToIssues(project.name, ISSUE_STATUSES.IN_PROGRESS)" class="link">{{getIssueCount(project.issues, ISSUE_STATUSES.IN_PROGRESS)}}</a></td>
+                    <td id="issueCount-row"><a (click)="routeToIssues(project.name, ISSUE_STATUSES.DONE)" class="link">{{getIssueCount(project.issues, ISSUE_STATUSES.DONE)}}</a></td>
+                    <td>{{getCommentCount(project)}}</td>
+                    <td>{{getWorkDaySum(project)}}</td>
+                    <td><a [routerLink]="['/projects', project.name, 'docs']" class="link">{{getDocPageCount(project)}}</a></td>
+                    <td>
+                        <mat-icon class="project.id == projectService.selectedProject.id ? icon-selected : icon-unselected">
+                            {{project.id == projectService.selectedProject.id ? check_circle : radio_button_unchecked}}
+                        </mat-icon>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+</div>

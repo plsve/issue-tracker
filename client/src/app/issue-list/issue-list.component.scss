@@ -6,13 +6,20 @@ $td-padding-left: 1rem;
 
 }
 
-.issue-table {
+.issue-table {    
+    // table-layout: fixed;
     width: 100%;
     margin: 1rem;
     border-collapse: collapse;
+    
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 .table-row {
+
+    // white-space: nowrap;
+    // width: 5rem;
     
     border-top: 1px solid mat-color($theme-accent, 100);
     td, th {

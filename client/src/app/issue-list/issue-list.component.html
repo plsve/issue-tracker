@@ -6,7 +6,7 @@
     <div class="table-wrap">
 
 
-        <div fxLayout="row" fxLayoutAlign="space-between" fxFill>
+        <div fxLayout="row" fxLayoutAlign="space-between" >
 
 
 
@@ -24,19 +24,7 @@
                             <mat-icon (click)="sortData(col.name, false)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-down"  svgIcon="sort-down" aria-hidden="false" aria-label="Example thumbs up SVG icon">
                             </mat-icon>
                         </div>
-
-
                     </th>
-                    <!-- <th>Key</th>
-                    <th>Title</th>
-                    <th>Type</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Assignee</th>
-                    <th>Time spent</th>
-                    <th>Time remaining</th>
-                    <th>Created</th>
-                    <th>Resolved</th> -->
                 </tr>
 
                 <tr class="table-row" *ngFor="let issue of issueList; let i = index;" fxFill>
@@ -52,8 +40,8 @@
                         <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
                     </td>
                     <td><a [routerLink]="'/people'" class="link">{{issue.user.username}}</a></td>
-                    <td>{{format.getWorkTime(issue.hoursSpent)}}</td>
-                    <td>{{format.getWorkTime(issue.hoursRemaining)}}</td>
+                    <td>{{format.getWorkTime(issue.hoursSpent, false)}}</td>
+                    <td>{{format.getWorkTime(issue.hoursRemaining, false)}}</td>
                     <td>{{issue.created | date:'short'}}</td>
                     <td>{{issue.resolved ? (issue.resolved | date:'short'): '-'}}</td>
                 </tr>

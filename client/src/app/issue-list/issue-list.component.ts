@@ -16,49 +16,38 @@ export interface IssueHeader {
 })
 export class IssueListComponent implements OnInit {
   issueList = [];
-  sortedIssueList = [];
   hoveringOnHeader = false;
 
   columnData = [{
     text: 'Key',
     name: 'name',
-    sorted: false
   }, {
     text: 'Title',
     name: 'verboseName',
-    sorted: false
   }, {
     text: 'Type',
     name: 'type',
-    sorted: false
   }, {
     text: 'Priority',
     name: 'priority',
-    sorted: false
   }, {
     text: 'Status',
     name: 'status',
-    sorted: false
   }, {
     text: 'Assignee',
     name: 'user',
-    sorted: false
   }, {
     text: 'Time spent',
     name: 'hoursSpent',
-    sorted: false
   }, {
     text: 'Time remaining',
     name: 'hoursRemaining',
-    sorted: false
   }, {
     text: 'Created',
     name: 'created',
-    sorted: false
   }, {
     text: 'Resolved',
     name: 'resolved',
-    sorted: false
   }
   ]
 

@@ -6,8 +6,13 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AppComponent } from './app.component';
 import { DashComponent } from './dash/dash.component';
 import { BoardComponent } from './board/board.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 const routes: Routes = [
+    {
+        path: 'projects',
+        component: ProjectListComponent
+    },
     {
         path: 'board',
         component: BoardComponent

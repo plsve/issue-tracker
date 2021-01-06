@@ -33,6 +33,7 @@ export class ProjectService {
       'usr',
       'issue.id', 'issue.status',
       'comment.workedHours',
+      'docFolder.id',
       'docPage.id',
     ])
     .leftJoin('project.users', 'usr')
