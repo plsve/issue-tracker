@@ -6,18 +6,24 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class IssueService {
+export class UserService {
 
-  private issuesUrl = environment.backendUrl + 'issues'
+  currentUser = null;
+
+  private usersUrl = environment.backendUrl + 'users'
 
   constructor(
     private authService: AuthService,
     private http: HttpClient
     ) { }
 
-  getIssues(queryParams?){
-    return this.http.get<any>(this.issuesUrl, {
+  getUsers(queryParams){
+    return this.http.get<any>(this.usersUrl, {
       params: queryParams
     });
+  }
+
+  getUser(id){
+    return this.http.get<any>(this.usersUrl + '/' + id);
   }
 }

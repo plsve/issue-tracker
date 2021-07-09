@@ -1,6 +1,9 @@
 @import '~@angular/material/theming';
 
 $theme: $mat-indigo;
+// $theme: $mat-pink;
+// $theme: $mat-brown;
+// $theme: $mat-brown;
 $theme-accent: $mat-blue-grey;
 
 $theme-warn: $mat-deep-orange;
@@ -19,16 +22,24 @@ $side-menu-height: 50%;
 
 $create-button-color: rgba(33, 204, 85, 0.88);
 
+$dark-black-color: #172B4D;
+$black-color: #42526E;
+
+
 // task icon colors
 $issue-type-epic-color: rgb(164, 33, 204);
 $issue-type-task-color: #3f51b5;
 $issue-type-bug-color: #dd2c00;
 
 $issue-status-in-progress-color:  #3f51b5;
+// $issue-status-open-color:  #3f51b5;
+// $issue-status-needs-info-color: #e64a19;
+// $issue-status-done-color: #0bad2a;
+// $issue-status-canceled-color: #546e7a;
 $issue-status-open-color:  #3f51b5;
-$issue-status-needs-info-color: #e64a19;
-$issue-status-done-color: #0bad2a;
-$issue-status-canceled-color: #546e7a;
+$issue-status-needs-info-color: #3f51b5;
+$issue-status-done-color: #3f51b5;
+$issue-status-canceled-color: #3f51b5;
 
 $issue-priority-very-high-color:#dd2c00;
 $issue-priority-high-color:#ff6e40;

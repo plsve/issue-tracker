@@ -2,6 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FILTER_PAGE_TYPES } from '../constant/filter-page-types.enum';
+import { FilterService } from '../filter.service';
 import { IssueService } from '../issue.service';
 import { DataFormatter } from '../utils/data-formatter.utils';
 
@@ -17,6 +19,7 @@ export interface IssueHeader {
 export class IssueListComponent implements OnInit {
   issueList = [];
   hoveringOnHeader = false;
+  FILTER_PAGE_TYPES = FILTER_PAGE_TYPES;
 
   columnData = [{
     text: 'Key',
@@ -53,6 +56,7 @@ export class IssueListComponent implements OnInit {
 
   constructor(
     private issueService: IssueService,
+    public filterService: FilterService,
     public format: DataFormatter,
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer
   ) {
@@ -61,21 +65,27 @@ export class IssueListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.issueService.getIssues().subscribe(r => {
+    this.loadData();
+
+
+  }
+
+  loadData(){
+    console.log('load data');
+    
+    this.issueService.getIssues(this.filterService.getQueryParams()).subscribe(r => {
       this.issueList = r;
-      this.issueList = this.issueList.concat(r);
-      this.issueList = this.issueList.concat(r);
-      this.issueList = this.issueList.concat(r);
-      this.issueList = this.issueList.concat(r);
-      this.issueList = this.issueList.concat(r);
+      // this.issueList = this.issueList.concat(r);
+      // this.issueList = this.issueList.concat(r);
+      // this.issueList = this.issueList.concat(r);
+      // this.issueList = this.issueList.concat(r);
+      // this.issueList = this.issueList.concat(r);
       this.sortData('name', false);
-      console.log(this.issueList);
     })
   }
 
   // TODO add sensible sorts specific for issue table - assignee, type, status, 
   sortData(name, asc) {
-    console.log(name, asc);
     this.issueList.sort((a, b) => {
       if (asc) {
         return a[name] < b[name] ? -1 : 0;

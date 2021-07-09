@@ -2,12 +2,16 @@
 
 .badge-wrap {
     width: fit-content;
-    padding: 0 0.3rem 0 0.3rem;
+    padding: 0 0.3rem 0 0;
 }
 
 .border {
     border: 1px solid;
     border-radius: 4px;
+}
+
+.icon {
+    font-size: 22px;
 }
 
 .icon-open {

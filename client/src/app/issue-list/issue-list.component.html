@@ -1,22 +1,22 @@
 <div class="page-wrap">
 
 
-    <span class="mat-display-2">Issues</span>
+    <span class="mat-display-2 title">Issues</span>
 
     <div class="table-wrap">
 
 
-        <div fxLayout="row" fxLayoutAlign="space-between" >
+        <div fxLayout="column" fxLayoutAlign="space-between" >
 
 
-
+            <app-filter [filterType]="FILTER_PAGE_TYPES.ISSUE" (changed)="loadData()"></app-filter>
 
             <table cellpadding="15" cellspacing="5" class="issue-table">
 
 
 
                 <tr class="table-row header-row" on-mouseover='onHoverHeader(true)' on-mouseout='onHoverHeader(false)'>
-                    <th *ngFor="let col of columnData" >
+                    <th *ngFor="let col of columnData" class="table-header">
                         <div fxLayout="row" fxLayoutAlign="start" fxFill >
                             {{col.text}}
                             <mat-icon (click)="sortData(col.name, true)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-up"  svgIcon="sort-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">
@@ -39,7 +39,11 @@
                     <td>
                         <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
                     </td>
-                    <td><a [routerLink]="'/people'" class="link">{{issue.user.username}}</a></td>
+                    <!-- <td><a [routerLink]="'/people'" class="link">{{issue.user.username}}</a></td> -->
+                    <td>
+                        <app-user-handle [user]="issue.user" [hideUsername]="false" [hidePhoto]="true"></app-user-handle>
+                    </td>
+                    
                     <td>{{format.getWorkTime(issue.hoursSpent, false)}}</td>
                     <td>{{format.getWorkTime(issue.hoursRemaining, false)}}</td>
                     <td>{{issue.created | date:'short'}}</td>

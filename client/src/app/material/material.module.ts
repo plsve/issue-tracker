@@ -12,6 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const MaterialComponents = [
   MatDatepickerModule, MatNativeDateModule,
@@ -25,7 +26,8 @@ const MaterialComponents = [
   MatGridListModule,
   MatExpansionModule,
   MatDividerModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatCheckboxModule
 ]
 
 @NgModule({

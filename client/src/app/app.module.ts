@@ -19,6 +19,10 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { ProjectService } from './project.service';
 import { BoardComponent } from './board/board.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { FilterComponent } from './filter/filter.component';
+import { FilterDropdownComponent } from './filter-dropdown/filter-dropdown.component';
+import { ClickOutsideDirective } from './directive/click-outside.directive';
+import { UserHandleComponent } from './user-handle/user-handle.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import { ProjectListComponent } from './project-list/project-list.component';
     BreadcrumbComponent,
     BoardComponent,
     ProjectListComponent,
+    FilterComponent,
+    FilterDropdownComponent,
+    ClickOutsideDirective,
+    UserHandleComponent
   ],
   imports: [
     AppRoutingModule,
@@ -39,7 +47,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     AuthService,

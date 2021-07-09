@@ -1,6 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { MockData } from '../constant/mock-data.const';
+import { FilterService } from '../filter.service';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -50,13 +52,15 @@ export class DashComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthService,
-    public projectService: ProjectService
+    public projectService: ProjectService,
+    public filterService: FilterService
   ) { }
 
   ngOnInit(): void {
-    this.projectService.getProject(1).subscribe(r => {
-      this.projectService.selectedProject = r;
-    });
+    this.projectService.selectedProject = MockData.selectedProject;
+    this.filterService.filter = {
+      projects: [this.projectService.selectedProject]
+    }
   }
 
   @HostListener('window:scroll', ['$event']) // for window scroll events

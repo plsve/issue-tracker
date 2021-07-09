@@ -12,9 +12,13 @@ export class IssueTypeBadgeComponent implements OnInit {
   @Input()
   type;
 
+  @Input()
+  hideTooltip = false;
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   getIcon() {
