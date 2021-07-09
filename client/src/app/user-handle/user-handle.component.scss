@@ -1,0 +1,22 @@
+@import "variables.scss";
+
+.wrap {
+    cursor: pointer;
+}
+
+.wrap:hover {
+    .username {
+        text-decoration: underline;
+    }
+}
+
+.username {
+    color: mat-color($theme, 500);
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.photo-icon {
+    padding-right: $spacer-xs;
+}

@@ -1,0 +1,4 @@
+<div class="wrap" (click)="onClick()" fxLayout="row" fxLayoutAlign="start stretch">
+    <mat-icon *ngIf="!hidePhoto" class="photo-icon" >account_circle</mat-icon>
+    <span *ngIf="!hideUsername" class="username">{{user.username}}</span>
+</div>
