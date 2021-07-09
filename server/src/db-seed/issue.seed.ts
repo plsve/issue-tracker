@@ -91,7 +91,7 @@ export const IssueSeed = [
     },
     {
         id: 5,
-        name: 'IST-5',
+        name: 'ISF-5',
         verboseName: 'Fix delete endpoint',
         type: ISSUE_TYPES.TASK,
         description: 'Create register endpoint method with these parameters..',
@@ -102,7 +102,7 @@ export const IssueSeed = [
         hoursSpent: 5,
         gitLink: null,
         commentPosts: [],
-        project: 1,
+        project: 2,
         user: 1,
         childIssues: [],
         parentIssue: null,

@@ -41,7 +41,7 @@ export const UserSeed = [
         photo: null,
         preference: 2,
         projects: [{
-            id: 1
+            id: 2
         }],
         // issues: [3],
         // commentPosts: [2],
