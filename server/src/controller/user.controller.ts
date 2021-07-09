@@ -14,8 +14,8 @@ export class UserController {
     constructor(private userService: UserService) { }
 
     @Get()
-    findAll(): Promise<User[]> {
-        return this.userService.findAll();
+    findAll(@Query() queryParams): Promise<User[]> {
+        return this.userService.findAll(queryParams);
     }
 
     @Get(':id')

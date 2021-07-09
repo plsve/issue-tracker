@@ -47,8 +47,31 @@ export class IssueService {
     .leftJoin('issue.createdByUser', 'issueCreatedByUser')
     .leftJoin('issue.editedByUser', 'issueEditedByUser');
 
-  async findAll(): Promise<any[]> {
-    return await this.findQueryBuilder.clone().getMany();
+  async findAll(queryParams): Promise<any[]> {
+    console.log(queryParams);
+    
+    let builder = this.findQueryBuilder.clone();
+    
+    if(queryParams.projects){    
+      builder = builder.andWhere("project.id IN (:...ids)", { ids: queryParams.projects.split(',') });
+    }
+        
+    if(queryParams.users){    
+      builder = builder.andWhere("issue.userId IN (:...ids)", { ids: queryParams.users.split(',') });
+    }
+            
+    if(queryParams.types){    
+      builder = builder.andWhere("issue.type IN (:...types)", { types: queryParams.types.split(',') });
+    }
+                
+    if(queryParams.statuses){    
+      builder = builder.andWhere("issue.status IN (:...statuses)", { statuses: queryParams.statuses.split(',') });
+    }
+
+    // return await this.findQueryBuilder.clone().where('issue.name = :projectId', {projectId: "IST-1"}).getMany();
+    // return await this.findQueryBuilder.clone().getMany();
+    return await builder.getMany();
+    // return await this.findQueryBuilder.clone().orWhere('issue.name = :projectId', {projectId: "IST-1"}).getMany();
   }
 
   async findOne(id: number): Promise<Issue> {

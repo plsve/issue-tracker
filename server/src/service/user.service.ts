@@ -55,10 +55,21 @@ export class UserService {
     .leftJoin('usr.createdDocPages', 'createdDocPage')
     .leftJoin('usr.editedDocPages', 'editedDocPage')
     .leftJoin('usr.createdIssues', 'createdIssue')
-    .leftJoin('usr.editedIssues', 'editedIssue')
+    .leftJoin('usr.editedIssues', 'editedIssue');
 
-  async findAll(): Promise<User[]> {
-    return await this.findQueryBuilder.clone().getMany();
+    private getValidKeysQuery = ''
+
+  async findAll(queryParams): Promise<User[]> {
+
+    console.log(queryParams);
+    
+    let builder = this.findQueryBuilder.clone();
+    
+    if(queryParams.projects){    
+      builder = builder.andWhere("project.id IN (:...ids)", { ids: queryParams.projects.split(',') });
+    }
+    
+    return await builder.getMany();
   }
 
   async findOne(id: number): Promise<User> {

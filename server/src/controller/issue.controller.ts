@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, UseFilters, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UseFilters, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CreateCommentPostDTO } from "src/dto/create-comment-post.dto";
 import { CreateIssueDTO } from "src/dto/create-issue.dto";
@@ -17,8 +17,8 @@ export class IssueController {
     constructor(private issueService: IssueService) { }
 
     @Get()
-    findAll(): Promise<Issue[]> {
-        return this.issueService.findAll();
+    findAll(@Query() queryParams): Promise<Issue[]> {
+        return this.issueService.findAll(queryParams);
     }
 
     @Get(':id')
