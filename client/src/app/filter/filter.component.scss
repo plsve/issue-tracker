@@ -1,0 +1,31 @@
+@import "variables.scss";
+
+.wrap {
+    margin: $spacer-s 0 $spacer-s 0;
+    // color: mat-color($theme-accent, 300);
+    // border: 1px black solid;
+}
+
+.filters-wrap {
+}
+
+.filter-label {
+    font-size: 14px;
+    padding-right: $spacer-s;
+}
+
+.dropdown-wrap {
+    padding-right: $spacer-s;
+    min-width: 6rem;
+}
+
+.clear-icon-wrap {
+    font-size: 12px;
+    color: mat-color($theme-accent, 200);
+}
+
+.clear-icon-wrap:hover {
+    cursor: pointer;
+}
+
+

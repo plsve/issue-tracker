@@ -1,0 +1,31 @@
+<div class="wrap" fxLayout="row" fxLayoutAlign="start stretch" (clickOutside)="closeDropdown($event)">
+
+    <div fxLayout="row" class="dropdown" (click)="openDropdown()" [ngClass]="isHighlighted ? 'highlighted-row' : null">
+        <mat-label [ngClass]="isHighlighted ? 'highlighted-type' : null">{{type}}</mat-label>
+        <mat-label *ngIf="selectedValues.length > 0" class="colon">: </mat-label>
+        <mat-label *ngIf="selectedValues.length == 1">{{getValueForType(allValues[0])}}</mat-label>
+        <mat-label *ngIf="selectedValues.length > 1">{{getValueForType(allValues[0])}} and {{selectedValues.length - 1}} more..</mat-label>
+        <mat-icon class="dropdown-icon" >arrow_drop_down</mat-icon>
+    </div>
+
+    <div *ngIf="isSelected"  class="dropdown-content-wrap"  >
+        
+        <div *ngFor="let val of allValues" class="value-row-wrap" fxLayout="row" fxLayoutAlign="start stretch">
+            <mat-checkbox color="primary" [(ngModel)]="val.checked" class="checkbox" (change)="updateVals()"></mat-checkbox>
+            <span *ngIf="type == FILTER_DROPDOWN_TYPES.PROJECT">{{getValueForType(val)}}</span>
+            <!-- <a *ngIf="type == FILTER_DROPDOWN_TYPES.ASSIGNEE" [routerLink]="'/people'" class="link">{{getValueForType(val)}}</a> -->
+            <app-user-handle *ngIf="type == FILTER_DROPDOWN_TYPES.ASSIGNEE" [user]="val" [hideUsername]="false" [hidePhoto]="true"></app-user-handle>
+            <div *ngIf="type == FILTER_DROPDOWN_TYPES.TYPE" fxLayout="row">
+                <app-issue-type-badge [type]="val.value" class="issue-type-badge" [hideTooltip]="true"></app-issue-type-badge>
+                <span>{{getValueForType(val)}}</span>
+
+            </div>
+            <div *ngIf="type == FILTER_DROPDOWN_TYPES.STATUS" fxLayout="row">
+                <app-issue-status-badge [status]="val.value" [hideBorder]="true"></app-issue-status-badge>
+
+            </div>
+        </div>
+    </div>
+    
+
+</div>
