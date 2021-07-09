@@ -3,12 +3,12 @@
     <div fxLayout="row" class="dropdown" (click)="openDropdown()" [ngClass]="isHighlighted ? 'highlighted-row' : null">
         <mat-label [ngClass]="isHighlighted ? 'highlighted-type' : null">{{type}}</mat-label>
         <mat-label *ngIf="selectedValues.length > 0" class="colon">: </mat-label>
-        <mat-label *ngIf="selectedValues.length == 1">{{getValueForType(allValues[0])}}</mat-label>
-        <mat-label *ngIf="selectedValues.length > 1">{{getValueForType(allValues[0])}} and {{selectedValues.length - 1}} more..</mat-label>
+        <mat-label *ngIf="selectedValues.length == 1">{{getValueForType(selectedValues[0])}}</mat-label>
+        <mat-label *ngIf="selectedValues.length > 1">{{getValueForType(selectedValues[0])}} and {{selectedValues.length - 1}} more..</mat-label>
         <mat-icon class="dropdown-icon" >arrow_drop_down</mat-icon>
     </div>
 
-    <div *ngIf="isSelected"  class="dropdown-content-wrap"  >
+    <div *ngIf="isOpened"  class="dropdown-content-wrap"  >
         
         <div *ngFor="let val of allValues" class="value-row-wrap" fxLayout="row" fxLayoutAlign="start stretch">
             <mat-checkbox color="primary" [(ngModel)]="val.checked" class="checkbox" (change)="updateVals()"></mat-checkbox>

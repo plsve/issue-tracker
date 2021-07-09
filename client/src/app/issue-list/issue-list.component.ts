@@ -66,13 +66,9 @@ export class IssueListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-
-
   }
 
-  loadData(){
-    console.log('load data');
-    
+  loadData(){    
     this.issueService.getIssues(this.filterService.getQueryParams()).subscribe(r => {
       this.issueList = r;
       // this.issueList = this.issueList.concat(r);

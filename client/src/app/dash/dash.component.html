@@ -28,10 +28,7 @@
 
         <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center">
 
-          <button mat-button>
-            <span class="mat-subheading-1">Projects </span>
-            <mat-icon>keyboard_arrow_down</mat-icon>
-          </button>
+          <app-projects-dropdown></app-projects-dropdown>
 
           <button mat-button>
             <span class="mat-subheading-1">Recent </span>
@@ -81,7 +78,8 @@
           <a [routerLink]="projectService.selectedProject.name" *ngIf="projectService.selectedProject"
             class="mat-subheading-2 project-link">{{projectService.selectedProject.name}}</a>
 
-          <button *ngIf="!projectService.selectedProject" mat-button>
+          <button *ngIf="!projectService.selectedProject" mat-button (click)="openProjectsDropdown()"
+            class="select-project-button">
             Select a project
           </button>
         </div>

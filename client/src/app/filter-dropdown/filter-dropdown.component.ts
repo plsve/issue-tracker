@@ -26,7 +26,7 @@ export class FilterDropdownComponent implements OnInit {
   changed: EventEmitter<any> = new EventEmitter();
 
   isHighlighted = false;
-  isSelected = false;
+  isOpened = false;
   selectedValues = [];
   allValues = [];
   FILTER_DROPDOWN_TYPES = FILTER_DROPDOWN_TYPES;
@@ -50,9 +50,13 @@ export class FilterDropdownComponent implements OnInit {
 
         this.projectService.getProjects().subscribe(r => {
           this.allValues = r.map(e => {
+            let checked = false;
+            if (this.projectService.selectedProject != null && this.projectService.selectedProject.id == e.id) {
+              checked = true;
+            }
             return {
               ...e,
-              checked: this.projectService.selectedProject.id == e.id
+              checked: checked
             }
           })
           this.updateVals();
@@ -61,9 +65,11 @@ export class FilterDropdownComponent implements OnInit {
       }
       case FILTER_DROPDOWN_TYPES.ASSIGNEE: {
         let projects = this.filterService.filter['projects'];
-        if (projects == null) {
+        if (projects == null || projects == []) {
+
           projects = [];
         } else {
+          console.log(projects);
           projects = projects.map(e => e.id);
         }
 
@@ -108,17 +114,17 @@ export class FilterDropdownComponent implements OnInit {
   }
 
   openDropdown() {
-    this.isSelected = !this.isSelected;
+    this.isOpened = !this.isOpened;
     this.dropdownContentBuffer = JSON.stringify(this.selectedValues);
 
   }
 
   closeDropdown(event) {
 
-    if (this.isSelected) {
+    if (this.isOpened) {
       // console.log('closeDropdown');
 
-      this.isSelected = !this.isSelected;
+      this.isOpened = !this.isOpened;
 
       // content changed, emit event to reload page
       if (this.dropdownContentBuffer != JSON.stringify(this.selectedValues)) {
@@ -157,10 +163,10 @@ export class FilterDropdownComponent implements OnInit {
     // todo update filter vals
     this.filterService.updateFilter(this.type, this.selectedValues);
     console.log(this.filterService.filter);
-    
 
 
-    
+
+
   }
 
 }

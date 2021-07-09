@@ -1,0 +1,60 @@
+<div class="wrap" (clickOutside)="closeDropdown($event)">
+    <button mat-button (click)="openDropdown()" class="dropdown-button">
+        <span class="mat-subheading-1">Projects</span>
+        <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+
+    <div *ngIf="isOpened" class="dropdown-content-wrap">
+
+        <div *ngFor="let val of allProjects; let i = index" class="value-row-wrap" fxLayout="column">
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="column">
+                    <div class="project-header" fxLayout="row" fxLayoutAlign="space-between">
+                        <span class="mat-subheading-2 project-label"
+                            [ngClass]="isProjectSelected(val) ? 'project-label-selected' : ''">
+                            {{val.name}}
+                            <mat-icon *ngIf="isProjectSelected(val)">check</mat-icon>
+                        </span>
+
+                    </div>
+
+                    <div class="description-wrap">
+                        <span>{{val.description}}</span>
+                    </div>
+
+                    <div class="stat-wrap">
+                        <div fxLayout="row">
+                            <a [routerLink]="'/people'" class="link">{{val.users.length}}
+                                <span *ngIf="val.users.length == 1"> user</span>
+                                <span *ngIf="val.users.length != 1"> users</span>
+                            </a>
+                            <a [routerLink]="'/issues'" class="link issues-link">{{val.issues.length}}
+                                <span *ngIf="val.issues.length == 1"> issue</span>
+                                <span *ngIf="val.issues.length != 1"> issues</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div fxLayout="column" fxLayoutAlign="center">
+                    <button *ngIf="!isProjectSelected(val)" mat-button class="select-button" color="primary"
+                        (click)="selectProject(val, true)">
+                        <span class="mat-body-1">Select</span>
+                    </button>
+                    <button *ngIf="isProjectSelected(val)" mat-button class="unselect-button" color="primary"
+                        (click)="selectProject(val, false)">
+                        <span class="mat-body-1">Unselect</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <div *ngIf="i != allProjects.length - 1" fxLayoutAlign="center">
+                <mat-divider class="divider"></mat-divider>
+            </div>
+
+        </div>
+    </div>
+</div>

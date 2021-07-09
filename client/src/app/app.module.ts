@@ -23,6 +23,7 @@ import { FilterComponent } from './filter/filter.component';
 import { FilterDropdownComponent } from './filter-dropdown/filter-dropdown.component';
 import { ClickOutsideDirective } from './directive/click-outside.directive';
 import { UserHandleComponent } from './user-handle/user-handle.component';
+import { ProjectsDropdownComponent } from './projects-dropdown/projects-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UserHandleComponent } from './user-handle/user-handle.component';
     FilterComponent,
     FilterDropdownComponent,
     ClickOutsideDirective,
-    UserHandleComponent
+    UserHandleComponent,
+    ProjectsDropdownComponent
   ],
   imports: [
     AppRoutingModule,

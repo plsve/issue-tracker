@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { MockData } from '../constant/mock-data.const';
 import { FilterService } from '../filter.service';
 import { ProjectService } from '../project.service';
+import { ProjectsDropdownComponent } from '../projects-dropdown/projects-dropdown.component';
 
 @Component({
   selector: 'app-dash',
@@ -13,6 +14,8 @@ import { ProjectService } from '../project.service';
 export class DashComponent implements OnInit {
 
   @ViewChild('topMenu') elementView: ElementRef;
+
+  @ViewChild(ProjectsDropdownComponent) projectsDropdownComponent:ProjectsDropdownComponent;
 
   sideMenuClass = 'side-menu-wrap';
 
@@ -59,7 +62,7 @@ export class DashComponent implements OnInit {
   ngOnInit(): void {
     this.projectService.selectedProject = MockData.selectedProject;
     this.filterService.filter = {
-      projects: [this.projectService.selectedProject]
+      projects: this.projectService.selectedProject != null ? [this.projectService.selectedProject] : []
     }
   }
 
@@ -91,6 +94,12 @@ export class DashComponent implements OnInit {
     if (!this.authService.user) {
       this.authService.login({ username: "pavel.vodicka", password: "heslo" });
     }
+  }
+
+  openProjectsDropdown(){
+    setTimeout(() => {
+      this.projectsDropdownComponent.openDropdown();
+    }, 10);
   }
 
 }

@@ -27,7 +27,7 @@ export class FilterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.initVals(true);
+    this.initVals(this.projectService.selectedProject != null);
   }
 
   initVals(isProjectSelected) {
