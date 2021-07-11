@@ -1,4 +1,7 @@
-<div class="wrap" (click)="onClick()" fxLayout="row" fxLayoutAlign="start stretch">
-    <mat-icon *ngIf="!hidePhoto" class="photo-icon" >account_circle</mat-icon>
-    <span *ngIf="!hideUsername" class="username">{{user.username}}</span>
+<div class="wrap" (click)="onClick($event)" fxLayout="row" fxLayoutAlign="start stretch">
+    <a [routerLink]="'/people/' + user.id" class="link">
+        <mat-icon *ngIf="!hidePhoto" class="photo-icon" >account_circle</mat-icon>
+        <span *ngIf="!hideUsername" class="username">{{user.username}}</span>
+    </a>
+
 </div>

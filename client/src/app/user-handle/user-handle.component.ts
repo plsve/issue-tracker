@@ -22,8 +22,10 @@ export class UserHandleComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClick(){
+  onClick(event){
     this.router.navigateByUrl('/people/' + this.user.id);
+    event.stopPropagation();
+
   }
 
 }

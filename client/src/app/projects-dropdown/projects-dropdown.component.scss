@@ -23,7 +23,7 @@
     overflow-y: auto;
 
     color: $black-color;
-    background-color: ghostwhite;
+    background-color: $whitecolor;
     border: 0.5px mat-color($theme-accent, 100) solid;
     border-radius: 0.2rem;
 }

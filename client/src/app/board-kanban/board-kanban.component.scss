@@ -1,0 +1,109 @@
+@import "variables.scss";
+
+
+.title {
+    margin-bottom: 24px;
+}
+
+.status-header-wrap {    
+    padding-top: $spacer-s;
+    padding-bottom: $spacer-s;
+    padding-left: $kanbanHeaderOffset;
+}
+
+.status-header {    
+    background-color: mat-color($theme-accent, 50);
+    border-radius: 2px;
+    margin-right: $kanbanSwimlanePadding;
+    min-width: $kanbanSwimlaneWidth;
+    max-width: $kanbanSwimlaneWidth;
+    width: $kanbanSwimlaneWidth;
+    padding-top: $spacer-xs;
+    padding-bottom: $spacer-xs;
+}
+
+.status {
+    margin-left: $spacer-s;
+    font-weight: 600;
+    color: mat-color($theme-accent, 600);
+}
+
+.cat-row {
+    padding-bottom: 4px;
+}
+
+.cat-row-collapsed {
+    padding-bottom: 4px;
+}
+
+.dropdown-button {
+    border-radius: 0;
+}
+
+.content-block {
+    background-color: mat-color($theme-accent, 50);
+    min-width: $kanbanSwimlaneWidth;
+    max-width: $kanbanSwimlaneWidth;
+    width: $kanbanSwimlaneWidth;
+    
+    margin-right: $kanbanSwimlanePadding;
+    
+}
+
+.cat-header {
+    align-items: center;
+    border: 1px solid mat-color($theme-accent, 100);
+    border-radius: 5px 5px 0 0;
+    $rightSideOverflow: 3rem;    
+    min-width: $kanbanSwimlaneWidth * 4 + 3 * $kanbanSwimlanePadding + $rightSideOverflow;
+    max-width: $kanbanSwimlaneWidth * 4 + 3 * $kanbanSwimlanePadding + $rightSideOverflow;
+    width: $kanbanSwimlaneWidth * 4 + 3 * $kanbanSwimlanePadding + $rightSideOverflow;
+    cursor: pointer;
+}
+
+.cat-header-collapsed {    
+    border-radius: 5px 5px 5px 5px;
+}
+
+.cat-content {    
+    padding-left: $kanbanHeaderOffset;
+    margin-bottom: $spacer-s;
+}
+
+.cat-content-drag {
+    border: 3px dashed mat-color($theme, 500);
+}
+
+.cat-badge {
+    padding-right: $spacer-s;
+}
+.cat-name {
+    padding-right: $spacer-m;
+    min-width: 3rem;
+}
+
+.cat-status {
+    padding-right: $spacer-m;
+    min-width: 3rem;
+}
+
+.cat-sub-issues {
+    padding-right: $spacer-m;
+    min-width: 6rem;
+}
+
+.cat-verbose-name {
+    padding-right: $spacer-m;
+}
+
+.kanban-issue {
+    margin: 4px 8px 4px 8px;
+}
+
+.first-issue {
+    margin-top: 14px;
+}
+
+.last-issue {
+    margin-bottom: 14px;
+}

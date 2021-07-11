@@ -24,6 +24,7 @@
                 <app-issue-status-badge [status]="val.value" [hideBorder]="true"></app-issue-status-badge>
 
             </div>
+            <span *ngIf="type == FILTER_DROPDOWN_TYPES.EPIC">{{getValueForType(val)}}</span>
         </div>
     </div>
     

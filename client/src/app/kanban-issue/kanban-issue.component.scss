@@ -1,0 +1,47 @@
+@import "variables.scss";
+
+.wrap {
+    background-color: $whitecolor;
+    
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgb(9 30 66 / 25%);
+}
+
+.wrap:hover {
+    cursor: move;
+}
+
+.title {
+    padding: $spacer-s;
+}
+
+.type-badge {
+    padding-right: $spacer-xs;
+}
+
+.left-side-footer {
+    padding: $spacer-s;
+    width: 27%;
+}
+
+.right-side-footer {
+    padding: $spacer-s;
+    width: 46%;
+}
+
+.issue-handle {    
+    padding-right: $spacer-xs;
+}
+
+.empty-space {
+    width: 27%;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

@@ -24,6 +24,9 @@ import { FilterDropdownComponent } from './filter-dropdown/filter-dropdown.compo
 import { ClickOutsideDirective } from './directive/click-outside.directive';
 import { UserHandleComponent } from './user-handle/user-handle.component';
 import { ProjectsDropdownComponent } from './projects-dropdown/projects-dropdown.component';
+import { BoardKanbanComponent } from './board-kanban/board-kanban.component';
+import { KanbanIssueComponent } from './kanban-issue/kanban-issue.component';
+import { IssueHandleComponent } from './issue-handle/issue-handle.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { ProjectsDropdownComponent } from './projects-dropdown/projects-dropdown
     FilterDropdownComponent,
     ClickOutsideDirective,
     UserHandleComponent,
-    ProjectsDropdownComponent
+    ProjectsDropdownComponent,
+    BoardKanbanComponent,
+    KanbanIssueComponent,
+    IssueHandleComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,0 +1,93 @@
+<div class="wrap" fxLayout="column">
+
+    <span class="mat-display-2 title">Board</span>
+
+    <app-filter [filterType]="FILTER_PAGE_TYPES.BOARD" ></app-filter>
+
+    <div class="status-header-wrap" fxLayout="row"  >
+        <div class="status-header">
+            <span class="status">TODO</span>
+        </div>
+        <div class="status-header">
+            <span class="status">IN PROGRESS</span>
+        </div>
+        <div class="status-header">
+            <span class="status">NEEDS INFORMATION</span>
+        </div>
+        <div class="status-header">
+            <span class="status">DONE</span>
+        </div>
+    </div>
+
+    <div *ngFor="let cat of allCategories" fxLayout="column" class="cat-row" >
+
+        <div *ngIf="cat.id != otherCategoryName" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
+
+            <button mat-icon-button  class="dropdown-button"  [disableRipple]="true">
+                <mat-icon>{{cat.opened ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>
+            </button>
+
+            <app-issue-handle class="cat-name" [issue]="cat" [hideVerboseName]="true" [hideType]="false"></app-issue-handle>
+
+            <span class="cat-status" >
+                {{cat.status}}
+            </span>
+
+            <span class="cat-sub-issues">
+                {{cat.childIssues != null ? cat.childIssues.length : 0}} sub-issues
+            </span>
+
+            <span class="cat-verbose-name">
+                {{cat.verboseName}}
+            </span>
+        </div>
+
+        <div *ngIf="cat.id == otherCategoryName && cat.childIssues.length > 0" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
+
+            <button mat-icon-button  [disableRipple]="true">
+                <mat-icon>{{cat.opened ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>
+            </button>
+
+            <span class="cat-name">
+                {{cat.name}}
+            </span>
+
+            <span class="cat-sub-issues">
+                {{cat.childIssues != null ? cat.childIssues.length : 0}} issues
+            </span>
+        </div>
+
+        <div *ngIf="cat.opened" [ngClass]="getCatContentClass(cat)" fxLayout="row" cdkDropListGroup>
+
+            <div class="content-block todo-content" fxLayout="column" [ngClass]="getSwimlaneDraggingClass(cat)" cdkDropList [cdkDropListData]="[]" (cdkDropListDropped)="drop($event, ISSUE_STATUSES.OPEN)">
+                <div *ngFor="let issue of getIssuesForStatus(ISSUE_STATUSES.OPEN, cat.childIssues); let i = index;" fxLayout="column" cdkDrag>
+                    <app-kanban-issue [issue]="issue" [category]="cat" class="kanban-issue" [ngClass]="getFirstOrLastClass(i, getIssuesForStatus(ISSUE_STATUSES.OPEN, cat.childIssues).length)"></app-kanban-issue>
+                </div>
+            </div>
+
+            <div class="content-block in-progress-content" fxLayout="column" [ngClass]="getSwimlaneDraggingClass(cat)" cdkDropList [cdkDropListData]="[]" (cdkDropListDropped)="drop($event, ISSUE_STATUSES.IN_PROGRESS)">
+                <div *ngFor="let issue of getIssuesForStatus(ISSUE_STATUSES.IN_PROGRESS, cat.childIssues); let i = index;" fxLayout="column" cdkDrag>
+                    <app-kanban-issue [issue]="issue" [category]="cat" class="kanban-issue" [ngClass]="getFirstOrLastClass(i, getIssuesForStatus(ISSUE_STATUSES.IN_PROGRESS, cat.childIssues).length)"></app-kanban-issue>
+                </div>
+            </div>
+
+            <div class="content-block needs-info-content" fxLayout="column" [ngClass]="getSwimlaneDraggingClass(cat)"  cdkDropList [cdkDropListData]="[]" (cdkDropListDropped)="drop($event, ISSUE_STATUSES.NEEDS_INFORMATION)">
+                <div *ngFor="let issue of getIssuesForStatus(ISSUE_STATUSES.NEEDS_INFORMATION, cat.childIssues); let i = index;" fxLayout="column" cdkDrag>
+                    <app-kanban-issue [issue]="issue" [category]="cat" class="kanban-issue" [ngClass]="getFirstOrLastClass(i, getIssuesForStatus(ISSUE_STATUSES.NEEDS_INFORMATION, cat.childIssues).length)"></app-kanban-issue>
+                </div>
+            </div>
+
+            <div class="content-block done-content" fxLayout="column" [ngClass]="getSwimlaneDraggingClass(cat)" cdkDropList [cdkDropListData]="[]" (cdkDropListDropped)="drop($event, ISSUE_STATUSES.DONE)">
+                <div *ngFor="let issue of getIssuesForStatus(ISSUE_STATUSES.DONE, cat.childIssues); let i = index;" fxLayout="column" cdkDrag>
+                    <app-kanban-issue [issue]="issue" [category]="cat" class="kanban-issue" [ngClass]="getFirstOrLastClass(i, getIssuesForStatus(ISSUE_STATUSES.DONE, cat.childIssues).length)"></app-kanban-issue>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+</div>

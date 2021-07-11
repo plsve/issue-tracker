@@ -153,6 +153,9 @@ export class FilterDropdownComponent implements OnInit {
       case FILTER_DROPDOWN_TYPES.TYPE: {
         return this.format.capitalize(obj.value);
       }
+      case FILTER_DROPDOWN_TYPES.EPIC: {
+        return obj.verboseName;
+      }
     }
   }
 

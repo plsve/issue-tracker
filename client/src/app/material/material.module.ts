@@ -13,6 +13,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const MaterialComponents = [
   MatDatepickerModule, MatNativeDateModule,
@@ -27,7 +29,9 @@ const MaterialComponents = [
   MatExpansionModule,
   MatDividerModule,
   MatTooltipModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatRippleModule,
+  DragDropModule
 ]
 
 @NgModule({

@@ -35,6 +35,8 @@ export class FilterComponent implements OnInit {
 
 
     switch (this.filterType) {
+      case FILTER_PAGE_TYPES.BOARD: {
+      }
       case FILTER_PAGE_TYPES.ISSUE: {
         this.filterService.filter = {
           projects: isProjectSelected == true ? [this.projectService.selectedProject] : null,

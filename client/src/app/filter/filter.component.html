@@ -2,6 +2,13 @@
 
     
     <span class="filter-label">Filters: </span>
+
+    <div *ngSwitchCase="FILTER_PAGE_TYPES.BOARD" class="filters-wrap" fxLayout="row">
+        <app-filter-dropdown [type]="FILTER_DROPDOWN_TYPES.ASSIGNEE" class="dropdown-wrap" (changed)="changed.emit()"></app-filter-dropdown>
+        <app-filter-dropdown [type]="FILTER_DROPDOWN_TYPES.TYPE" class="dropdown-wrap" (changed)="changed.emit()"></app-filter-dropdown>
+        <app-filter-dropdown [type]="FILTER_DROPDOWN_TYPES.EPIC" class="dropdown-wrap" (changed)="changed.emit()"></app-filter-dropdown>        
+
+    </div>
     
     <div *ngSwitchCase="FILTER_PAGE_TYPES.ISSUE" class="filters-wrap" fxLayout="row">
         <app-filter-dropdown [type]="FILTER_DROPDOWN_TYPES.PROJECT" class="dropdown-wrap" (changed)="changed.emit()"></app-filter-dropdown>

@@ -26,19 +26,23 @@
 
         </div>
 
-        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxFlex="50%" fxLayout="row" fxLayoutAlign="space-between center stretch">
 
-          <app-projects-dropdown></app-projects-dropdown>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+            <app-projects-dropdown></app-projects-dropdown>
 
-          <button mat-button>
-            <span class="mat-subheading-1">Recent </span>
-            <mat-icon>keyboard_arrow_down</mat-icon>
-          </button>
+            <button mat-button>
+              <span class="mat-subheading-1">Recent </span>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
 
-          <button mat-button class="create-button">
-            <span class="mat-subheading-1">Create </span>
-            <mat-icon>add</mat-icon>
-          </button>
+            <button mat-button class="create-button">
+              <span class="mat-subheading-1">Create </span>
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+
+
         </div>
 
       </div>

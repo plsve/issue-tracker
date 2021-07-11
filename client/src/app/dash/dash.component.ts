@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { MockData } from '../constant/mock-data.const';
 import { FilterService } from '../filter.service';
+import { KanbanDragService } from '../kanban-drag.service';
 import { ProjectService } from '../project.service';
 import { ProjectsDropdownComponent } from '../projects-dropdown/projects-dropdown.component';
 
@@ -15,7 +16,7 @@ export class DashComponent implements OnInit {
 
   @ViewChild('topMenu') elementView: ElementRef;
 
-  @ViewChild(ProjectsDropdownComponent) projectsDropdownComponent:ProjectsDropdownComponent;
+  @ViewChild(ProjectsDropdownComponent) projectsDropdownComponent: ProjectsDropdownComponent;
 
   sideMenuClass = 'side-menu-wrap';
 
@@ -56,7 +57,8 @@ export class DashComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     public projectService: ProjectService,
-    public filterService: FilterService
+    public filterService: FilterService,
+    public kanbanDrag: KanbanDragService,
   ) { }
 
   ngOnInit(): void {
@@ -68,15 +70,15 @@ export class DashComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event']) // for window scroll events
   onScroll(event) {
-    if(window.pageYOffset > this.elementView.nativeElement.offsetHeight){
+    if (window.pageYOffset > this.elementView.nativeElement.offsetHeight) {
       this.sideMenuClass = 'side-menu-fixed';
     } else {
       this.sideMenuClass = 'side-menu-wrap';
     }
   }
 
-  getSideMenuStyle(){
-    if(window.pageYOffset > this.elementView.nativeElement.offsetHeight){
+  getSideMenuStyle() {
+    if (window.pageYOffset > this.elementView.nativeElement.offsetHeight) {
       return 'side-menu-fixed';
     } else {
       return '';
@@ -96,7 +98,7 @@ export class DashComponent implements OnInit {
     }
   }
 
-  openProjectsDropdown(){
+  openProjectsDropdown() {
     setTimeout(() => {
       this.projectsDropdownComponent.openDropdown();
     }, 10);

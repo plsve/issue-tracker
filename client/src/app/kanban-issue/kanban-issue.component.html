@@ -1,0 +1,26 @@
+<div class="wrap unselectable" fxLayout="column" (mousedown)="mouseDown($event)" (mouseup)="mouseUp()"
+    onselectstart="return false">
+
+    <span class="title">
+        {{issue.verboseName}}
+    </span>
+
+    <div class="footer" fxLayout="row" fxLayoutAlign="space-between">
+
+        <div class="left-side-footer" fxLayout="row">
+            <app-issue-type-badge [type]="issue.type" class="type-badge"></app-issue-type-badge>
+
+            <app-issue-priority-badge [priority]="issue.priority"></app-issue-priority-badge>
+        </div>
+
+
+        <div class="right-side-footer" fxLayout="row" fxLayoutAlign="flex-end">
+            <app-issue-handle class="issue-handle" [issue]="issue" [hideVerboseName]="true" [hideType]="true">
+            </app-issue-handle>
+
+            <app-user-handle *ngIf="issue.user != null" [user]="issue.user" [hideUsername]="true"></app-user-handle>
+        </div>
+
+
+    </div>
+</div>
