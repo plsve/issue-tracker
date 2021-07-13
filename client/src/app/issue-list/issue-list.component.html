@@ -39,9 +39,8 @@
                     <td>
                         <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
                     </td>
-                    <!-- <td><a [routerLink]="'/people'" class="link">{{issue.user.username}}</a></td> -->
                     <td>
-                        <app-user-handle [user]="issue.user" [hideUsername]="false" [hidePhoto]="true"></app-user-handle>
+                        <app-user-handle *ngIf="issue.user != null" [user]="issue.user" [hideUsername]="false" [hidePhoto]="true"></app-user-handle>
                     </td>
                     
                     <td>{{format.getWorkTime(issue.hoursSpent, false)}}</td>

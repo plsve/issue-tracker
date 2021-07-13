@@ -10,6 +10,12 @@ export class IssuePriorityBadgeComponent implements OnInit {
   @Input()
   priority;
 
+  @Input()
+  hideText = false;
+
+  @Input()
+  hideTooltip = false;
+
   constructor() { }
 
   ngOnInit(): void {

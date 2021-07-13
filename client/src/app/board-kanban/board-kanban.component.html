@@ -2,7 +2,7 @@
 
     <span class="mat-display-2 title">Board</span>
 
-    <app-filter [filterType]="FILTER_PAGE_TYPES.BOARD" ></app-filter>
+    <app-filter [filterType]="FILTER_PAGE_TYPES.BOARD" (changed)="loadData()" ></app-filter>
 
     <div class="status-header-wrap" fxLayout="row"  >
         <div class="status-header">

@@ -20,6 +20,7 @@
     background-color: mat-color($theme, 400);
 }
 
+
 .highlighted-type {
     font-weight: 600;
 }
@@ -30,6 +31,10 @@
 
 .dropdown-icon {
     // color: mat-color($theme-accent, 500);
+}
+
+.disabled-row {
+    filter: opacity(0.5);
 }
 
 .dropdown-content-wrap {

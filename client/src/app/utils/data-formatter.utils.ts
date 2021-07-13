@@ -1,3 +1,4 @@
+import { ISSUE_PRIORITIES } from "../constant/issue-priorities.enum";
 import { ISSUE_STATUSES } from "../constant/issue-status.enum";
 
 export class DataFormatter {
@@ -27,6 +28,18 @@ export class DataFormatter {
             case ISSUE_STATUSES.NEEDS_INFORMATION: return 'info';
             case ISSUE_STATUSES.DONE: return 'check_circle';
             case ISSUE_STATUSES.CANCELED: return 'cancel';
+        }
+
+    }
+
+    public getPriorityName(priority){
+
+        switch(priority) {
+            case ISSUE_PRIORITIES.VERY_LOW: return 'Very low';
+            case ISSUE_PRIORITIES.LOW: return 'Low';
+            case ISSUE_PRIORITIES.MEDIUM: return 'Medium';
+            case ISSUE_PRIORITIES.HIGH: return 'High';
+            case ISSUE_PRIORITIES.VERY_HIGH: return 'Very high';
         }
 
     }

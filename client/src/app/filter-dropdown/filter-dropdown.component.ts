@@ -1,6 +1,8 @@
 import { ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FILTER_DROPDOWN_TYPES } from '../constant/filter-dropdown-types.enum';
+import { ISSUE_PRIORITIES } from '../constant/issue-priorities.enum';
 import { ISSUE_STATUSES } from '../constant/issue-status.enum';
 import { ISSUE_TYPES } from '../constant/issue-types.enum';
 import { FilterService } from '../filter.service';
@@ -15,9 +17,6 @@ import { DataFormatter } from '../utils/data-formatter.utils';
   styleUrls: ['./filter-dropdown.component.scss'],
 })
 export class FilterDropdownComponent implements OnInit {
-
-  // @ViewChild('checkBox')
-  // checkBox: any;
 
   @Input()
   type;
@@ -37,7 +36,8 @@ export class FilterDropdownComponent implements OnInit {
     public projectService: ProjectService,
     public userService: UserService,
     public issueService: IssueService,
-    public format: DataFormatter
+    public format: DataFormatter,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +69,6 @@ export class FilterDropdownComponent implements OnInit {
 
           projects = [];
         } else {
-          console.log(projects);
           projects = projects.map(e => e.id);
         }
 
@@ -100,6 +99,28 @@ export class FilterDropdownComponent implements OnInit {
       }
       case FILTER_DROPDOWN_TYPES.TYPE: {
         this.allValues = Object.values(ISSUE_TYPES).map(e => {
+
+          let checked = false;
+          
+          if(this.filterService.filter['types'] != null && this.filterService.filter['types'].length != null){
+            
+            if(this.filterService.filter['types'].find(e2 => e2.value == e && e2.checked == true) != null){
+              checked = true;
+            }
+          }
+
+          return {
+            value: e,
+            checked: checked
+          }
+        })
+
+        this.updateVals();
+        break;
+      }
+      case FILTER_DROPDOWN_TYPES.PRIORITY: {
+        
+        this.allValues = Object.values(ISSUE_PRIORITIES).map(e => {
           return {
             value: e,
             checked: false
@@ -113,6 +134,15 @@ export class FilterDropdownComponent implements OnInit {
     }
   }
 
+  isRowDisabled(val){
+    
+    if(this.router.url == '/board' && this.type == FILTER_DROPDOWN_TYPES.TYPE && val.value == ISSUE_TYPES.EPIC){
+      return true;
+      
+    }
+    return false;
+  }
+
   openDropdown() {
     this.isOpened = !this.isOpened;
     this.dropdownContentBuffer = JSON.stringify(this.selectedValues);
@@ -122,13 +152,11 @@ export class FilterDropdownComponent implements OnInit {
   closeDropdown(event) {
 
     if (this.isOpened) {
-      // console.log('closeDropdown');
 
       this.isOpened = !this.isOpened;
 
       // content changed, emit event to reload page
       if (this.dropdownContentBuffer != JSON.stringify(this.selectedValues)) {
-        console.log('emitting');
 
         this.changed.emit();
       }
@@ -153,8 +181,8 @@ export class FilterDropdownComponent implements OnInit {
       case FILTER_DROPDOWN_TYPES.TYPE: {
         return this.format.capitalize(obj.value);
       }
-      case FILTER_DROPDOWN_TYPES.EPIC: {
-        return obj.verboseName;
+      case FILTER_DROPDOWN_TYPES.PRIORITY: {        
+        return this.format.getPriorityName(obj.value);
       }
     }
   }

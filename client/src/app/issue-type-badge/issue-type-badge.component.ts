@@ -15,6 +15,9 @@ export class IssueTypeBadgeComponent implements OnInit {
   @Input()
   hideTooltip = false;
 
+  @Input()
+  hideText = false;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -10,21 +10,22 @@
 
     <div *ngIf="isOpened"  class="dropdown-content-wrap"  >
         
-        <div *ngFor="let val of allValues" class="value-row-wrap" fxLayout="row" fxLayoutAlign="start stretch">
-            <mat-checkbox color="primary" [(ngModel)]="val.checked" class="checkbox" (change)="updateVals()"></mat-checkbox>
+        <div *ngFor="let val of allValues" class="value-row-wrap" fxLayout="row" fxLayoutAlign="start stretch" [ngClass]="isRowDisabled(val) ? 'disabled-row' : ''">
+            <mat-checkbox color="primary" [(ngModel)]="val.checked" class="checkbox" (change)="updateVals()" [disabled]="isRowDisabled(val)"></mat-checkbox>
             <span *ngIf="type == FILTER_DROPDOWN_TYPES.PROJECT">{{getValueForType(val)}}</span>
-            <!-- <a *ngIf="type == FILTER_DROPDOWN_TYPES.ASSIGNEE" [routerLink]="'/people'" class="link">{{getValueForType(val)}}</a> -->
             <app-user-handle *ngIf="type == FILTER_DROPDOWN_TYPES.ASSIGNEE" [user]="val" [hideUsername]="false" [hidePhoto]="true"></app-user-handle>
             <div *ngIf="type == FILTER_DROPDOWN_TYPES.TYPE" fxLayout="row">
                 <app-issue-type-badge [type]="val.value" class="issue-type-badge" [hideTooltip]="true"></app-issue-type-badge>
-                <span>{{getValueForType(val)}}</span>
 
             </div>
             <div *ngIf="type == FILTER_DROPDOWN_TYPES.STATUS" fxLayout="row">
                 <app-issue-status-badge [status]="val.value" [hideBorder]="true"></app-issue-status-badge>
 
             </div>
-            <span *ngIf="type == FILTER_DROPDOWN_TYPES.EPIC">{{getValueForType(val)}}</span>
+            <div *ngIf="type == FILTER_DROPDOWN_TYPES.PRIORITY" fxLayout="row">
+                <app-issue-priority-badge [priority]="val.value" [hideBorder]="true"></app-issue-priority-badge>
+
+            </div>
         </div>
     </div>
     

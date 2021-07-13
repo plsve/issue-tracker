@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FILTER_DROPDOWN_TYPES } from './constant/filter-dropdown-types.enum';
+import { ISSUE_TYPES } from './constant/issue-types.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,11 @@ export class FilterService {
 
   constructor() { }
 
-  resetFilter(){
-    this.filter = {};
+  resetFilter(projects){
+    this.filter = {
+      projects: projects
+    };
+    
   }
 
   updateFilter(type, selectedValues){
@@ -32,8 +36,20 @@ export class FilterService {
         this.filter['types'] = selectedValues;
         break;
       }
+      case FILTER_DROPDOWN_TYPES.PRIORITY: {
+        this.filter['priorities'] = selectedValues;
+        break;
+      }
     }
 
+  }
+
+  getBoardInitTypes(){
+    return [
+      { value: ISSUE_TYPES.EPIC, checked: true },
+      { value: ISSUE_TYPES.BUG, checked: true },
+      { value: ISSUE_TYPES.TASK, checked: true }
+    ]
   }
 
   getQueryParams(){
@@ -70,7 +86,13 @@ export class FilterService {
         statuses: this.filter['statuses'].map(e => e.value).join(',')
       }
     }
-    
+
+    if(this.filter['priorities'] != null && this.filter['priorities'].length > 0){
+      queryParams = {
+        ...queryParams,
+        priorities: this.filter['priorities'].map(e => e.value).join(',')
+      }
+    }    
 
     return queryParams;
 

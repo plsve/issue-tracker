@@ -5,6 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FILTER_PAGE_TYPES } from '../constant/filter-page-types.enum';
 import { FilterService } from '../filter.service';
 import { IssueService } from '../issue.service';
+import { ProjectService } from '../project.service';
 import { DataFormatter } from '../utils/data-formatter.utils';
 
 export interface IssueHeader {
@@ -55,6 +56,7 @@ export class IssueListComponent implements OnInit {
   ]
 
   constructor(
+    public projectService: ProjectService,
     private issueService: IssueService,
     public filterService: FilterService,
     public format: DataFormatter,
@@ -65,17 +67,13 @@ export class IssueListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.filterService.resetFilter(this.projectService.selectedProject != null ? [this.projectService.selectedProject] : []);
     this.loadData();
   }
 
   loadData(){    
     this.issueService.getIssues(this.filterService.getQueryParams()).subscribe(r => {
       this.issueList = r;
-      // this.issueList = this.issueList.concat(r);
-      // this.issueList = this.issueList.concat(r);
-      // this.issueList = this.issueList.concat(r);
-      // this.issueList = this.issueList.concat(r);
-      // this.issueList = this.issueList.concat(r);
       this.sortData('name', false);
     })
   }

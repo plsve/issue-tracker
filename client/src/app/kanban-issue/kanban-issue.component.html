@@ -8,9 +8,9 @@
     <div class="footer" fxLayout="row" fxLayoutAlign="space-between">
 
         <div class="left-side-footer" fxLayout="row">
-            <app-issue-type-badge [type]="issue.type" class="type-badge"></app-issue-type-badge>
+            <app-issue-type-badge [type]="issue.type" [hideText]="true" class="type-badge"></app-issue-type-badge>
 
-            <app-issue-priority-badge [priority]="issue.priority"></app-issue-priority-badge>
+            <app-issue-priority-badge [priority]="issue.priority" [hideText]="true"></app-issue-priority-badge>
         </div>
 
 

@@ -31,11 +31,20 @@ export class FilterComponent implements OnInit {
   }
 
   initVals(isProjectSelected) {
-    this.filterService.resetFilter();
+    this.filterService.resetFilter([]);
 
 
     switch (this.filterType) {
       case FILTER_PAGE_TYPES.BOARD: {
+        this.filterService.filter = {
+          projects: isProjectSelected == true ? [this.projectService.selectedProject] : null,
+          users: null,
+          types: this.filterService.getBoardInitTypes(),
+          statuses: null,
+          priorities: null,
+          searchString: null,
+        }
+        break;
       }
       case FILTER_PAGE_TYPES.ISSUE: {
         this.filterService.filter = {

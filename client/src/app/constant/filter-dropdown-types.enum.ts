@@ -3,5 +3,5 @@ export enum FILTER_DROPDOWN_TYPES {
     ASSIGNEE = 'Assignee',
     TYPE = 'Type',
     STATUS = 'Status',
-    EPIC = 'Epic'
+    PRIORITY = 'Priority'
 }
