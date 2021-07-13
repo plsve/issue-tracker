@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ISSUE_STATUSES } from 'src/constant/issue-status.enum';
+import { ISSUE_TYPES } from 'src/constant/issue-type.enum';
 import { HELPER_QUERIES } from 'src/constant/query.const';
 import { CreateCommentPostDTO } from 'src/dto/create-comment-post.dto';
 import { CreateIssueDTO } from 'src/dto/create-issue.dto';
@@ -49,29 +50,45 @@ export class IssueService {
 
   async findAll(queryParams): Promise<any[]> {
     console.log(queryParams);
-    
+
     let builder = this.findQueryBuilder.clone();
-    
-    if(queryParams.projects){    
+
+
+
+
+    if (queryParams.projects) {
       builder = builder.andWhere("project.id IN (:...ids)", { ids: queryParams.projects.split(',') });
     }
-        
-    if(queryParams.users){    
+
+    if (queryParams.users) {
       builder = builder.andWhere("issue.userId IN (:...ids)", { ids: queryParams.users.split(',') });
     }
-            
-    if(queryParams.types){    
+
+    if (queryParams.types) {
       builder = builder.andWhere("issue.type IN (:...types)", { types: queryParams.types.split(',') });
     }
-                
-    if(queryParams.statuses){    
+
+    if (queryParams.statuses) {
       builder = builder.andWhere("issue.status IN (:...statuses)", { statuses: queryParams.statuses.split(',') });
     }
 
-    // return await this.findQueryBuilder.clone().where('issue.name = :projectId', {projectId: "IST-1"}).getMany();
-    // return await this.findQueryBuilder.clone().getMany();
-    return await builder.getMany();
-    // return await this.findQueryBuilder.clone().orWhere('issue.name = :projectId', {projectId: "IST-1"}).getMany();
+    if (queryParams.priorities) {
+      builder = builder.andWhere("issue.priority IN (:...priorities)", { priorities: queryParams.priorities.split(',') });
+    }
+
+    let results = await builder.getMany();
+
+    if (queryParams.addEpics == "true") {
+      let epics = await builder.where('issue.type = :type', { type: ISSUE_TYPES.EPIC }).getMany();
+
+     for(const epic of epics){
+       if(results.find(e => e.id == epic.id) == null){
+        results.push(epic);
+       }
+     }
+    }
+
+    return results;
   }
 
   async findOne(id: number): Promise<Issue> {
