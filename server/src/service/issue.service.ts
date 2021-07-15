@@ -35,7 +35,7 @@ export class IssueService {
       'commentPost',
       'commentUser',
       'issueParent.id', 'issueParent.name', 'issueParent.verboseName', 'issueParent.status',
-      'issueChild.id', 'issueChild.name', 'issueChild.verboseName', 'issueChild.status',
+      'issueChild.id', 'issueChild.name', 'issueChild.verboseName', 'issueChild.status', 'issueChild.type',
       'issueCreatedByUser.id', 'issueCreatedByUser.name', 'issueCreatedByUser.surname', 'issueCreatedByUser.username', 'issueCreatedByUser.deleted',
       'issueEditedByUser.id', 'issueEditedByUser.name', 'issueEditedByUser.surname', 'issueEditedByUser.username', 'issueEditedByUser.deleted',
     ])
