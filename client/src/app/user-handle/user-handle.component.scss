@@ -4,6 +4,10 @@
     cursor: pointer;
 }
 
+.link {
+    text-decoration: none;
+}
+
 .wrap:hover {
     .link {
         .username {
@@ -17,6 +21,10 @@
     font-weight: 500;
     font-size: 1rem;
     text-decoration: none;
+}
+
+.grey {
+    color: mat-color($theme-accent, 500);
 }
 
 .photo-icon {

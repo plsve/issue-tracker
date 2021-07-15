@@ -1,0 +1,232 @@
+@import "variables.scss";
+
+$border: 0.5px solid mat-color($theme-accent, 100);
+
+
+.title {
+    margin-bottom: 24px;
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: $spacer-m;
+}
+
+.subtitle {
+    font-weight: 600;
+    margin: 0;
+}
+
+.overview-wrap {
+    margin-bottom: $spacer-s;
+
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.overview-row1 {
+    margin-bottom: $spacer-s;
+}
+
+.type {
+    min-width: 10rem;
+    margin-right: 3rem;
+}
+
+.status {
+    min-width: 15rem;
+}
+
+.priority {
+    min-width: 10rem;
+    margin-right: 3rem;
+}
+
+.resolved {
+    min-width: 13.6rem;
+}
+
+.edit-wrap {    
+}
+
+.created-edited-by-wrap {    
+    color: mat-color($theme-accent, 500);
+}
+
+.edited-text-part {
+    margin-right: 0.3rem;
+}
+
+.created-by-wrap {    
+    margin-right: $spacer-xs;
+}
+
+.edited-by-wrap {    
+    margin-right: $spacer-s;
+}
+
+.edit-button-wrap {
+    text-align: end;
+    font-size: 2rem;    
+    line-height: 2.5rem;
+    padding: $spacer-xs $spacer-s $spacer-xs $spacer-xs;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.edit-icon {
+    font-size: 2.25rem;
+    margin-right: $spacer-s;
+}
+
+.edit {
+    font-size: 1.75rem;
+}
+
+.desc-wrap {
+    margin-bottom: $spacer-s;
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+
+.description {
+    margin-bottom: $spacer-xs;
+}
+.issue-hours-wrap {
+    margin-bottom: $spacer-s;
+}
+
+.issues-wrap {
+    margin-right: $spacer-s;
+    min-width: 500px;
+}
+
+.issues-inner-wrap {
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.parent-issue-wrap {
+    margin-bottom: $spacer-s;
+}
+
+.parent-issue {
+    margin-right: $spacer-m;
+    margin-bottom: $spacer-xs;
+}
+
+.sub-issues {
+    margin-right: 2.75rem;
+}
+
+.sub-issue {
+    margin-bottom: $spacer-xs;
+}
+
+.sub-issue-list-wrap {
+    
+    max-height: 11rem;
+    overflow-y: auto;    
+    overflow-x: auto;
+    padding-right: $spacer-xs;
+}
+
+.hours-wrap {
+    width: 40%;
+    
+}
+
+.metrics-wrap {
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+    padding-bottom: 0;
+    padding-right: 0;
+    min-width: 450px;
+    margin-right: $spacer-s;
+}
+
+.graph-wrap {
+}
+
+.chart {
+    height: 200px;
+}
+
+.hours-row {
+    min-width: 15rem;
+    margin-bottom: $spacer-s;
+}
+
+.estimated {
+    margin-right: 2rem;
+}
+
+.spent {
+    margin-right: 4.1rem;
+}
+
+.remaining {
+    margin-right: 2rem;
+}
+
+.progress {
+    min-width: 5rem;
+    text-align: center;
+    top: -50%;
+    margin: 0;
+    position: relative;
+}
+
+.git-assignee-wrap {  
+    width: 30%;
+}
+
+.git-assignee-inner-wrap{
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: $spacer-s;  
+}
+
+.git-wrap {    
+    width: 50%;
+}
+
+.git-link {    
+    min-width: 4rem;
+    margin-right: $spacer-m;
+    margin-bottom: $spacer-xs;
+    
+}
+
+.assignee-wrap {    
+    width: 50%;
+}
+
+.assignee {    
+    min-width: 4rem;
+    margin-right: $spacer-m;
+    margin-bottom: $spacer-xs;
+}
+
+.files-attachments-wrap {
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: $spacer-s;
+}
+
+.files {    
+    margin-bottom: $spacer-xs;
+}
+
+.log {    
+    margin-bottom: $spacer-xs;
+}
+
+.file {
+    margin-right: $spacer-s;
+}

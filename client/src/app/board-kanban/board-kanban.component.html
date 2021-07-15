@@ -23,7 +23,7 @@
 
         <div *ngIf="cat.id != otherCategoryName" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
 
-            <button mat-icon-button  class="dropdown-button"  [disableRipple]="true">
+            <button mat-icon-button  class="dropdown-button" [disableRipple]="true">
                 <mat-icon>{{cat.opened ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>
             </button>
 

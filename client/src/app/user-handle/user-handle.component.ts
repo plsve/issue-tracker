@@ -17,13 +17,17 @@ export class UserHandleComponent implements OnInit {
   @Input()
   hideUsername = false;
 
+  @Input()
+  specialClass;
+
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    
   }
 
   onClick(event){
-    this.router.navigateByUrl('/people/' + this.user.id);
+    this.router.navigate(['/people', this.user.id]);
     event.stopPropagation();
 
   }

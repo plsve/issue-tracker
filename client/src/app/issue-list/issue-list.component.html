@@ -28,8 +28,12 @@
                 </tr>
 
                 <tr class="table-row" *ngFor="let issue of issueList; let i = index;" fxFill>
-                    <td><a [routerLink]="'/issues'" class="link">{{issue.name}}</a></td>
-                    <td><a [routerLink]="'/issues'" class="link">{{issue.verboseName}}</a></td>
+                    <td>
+                        <app-issue-handle class="cat-name" [issue]="issue" [hideVerboseName]="true" [hideType]="true"></app-issue-handle>
+                    </td>
+                    <td>
+                        <app-issue-handle class="cat-name" [issue]="issue" [hideName]="true" [hideType]="true"></app-issue-handle>
+                    </td>
                     <td>
                         <app-issue-type-badge [type]="issue.type"></app-issue-type-badge>
                     </td>

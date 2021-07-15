@@ -1,0 +1,190 @@
+<div class="wrap" fxLayout="column">
+
+    <span *ngIf="issue != null" class="mat-display-1 title">{{issue.name}} {{issue.verboseName}}</span>
+
+    <div *ngIf="issue != null" class="header-wrap" fxLayout="row" fxLayoutAlign="space-between">
+
+        <div class="overview-wrap" fxLayout="column">
+
+            <div class="overview-row1" fxLayout="row">
+                <div class="type" fxLayout="row" fxLayoutAlign="space-between">
+                    <label class="mat-subheading-1 subtitle">Type:</label>
+                    <app-issue-type-badge [type]="issue.type" class="issue-type-badge" [hideTooltip]="true">
+                    </app-issue-type-badge>
+                </div>
+
+                <div class="status" *ngIf="issue.type != ISSUE_TYPES.EPIC" fxLayout="row" fxLayoutAlign="space-between">
+                    <label class="mat-subheading-1 subtitle">Status:</label>
+                    <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
+                </div>
+
+            </div>
+
+            <div class="overview-row2" fxLayout="row">
+                <div class="priority" fxLayout="row" fxLayoutAlign="space-between">
+                    <label class="mat-subheading-1 subtitle">Priority:</label>
+                    <app-issue-priority-badge [priority]="issue.priority">
+                    </app-issue-priority-badge>
+                </div>
+
+                <div class="resolved" fxLayout="row" fxLayoutAlign="space-between">
+                    <label class="mat-subheading-1 subtitle">Resolved:</label>
+                    <span>21.12.2020</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="edit-wrap" fxLayout="column">
+
+            
+
+            <div class="created-edited-by-wrap" fxLayout="row">
+                <div fxLayout="row" class="created-by-wrap">
+                    <span class="edited-text-part">
+                        Created  
+                    </span>
+                    <span *ngIf="issue.created" class="edited-text-part">
+                        {{issue.created | date:'short'}}
+                    </span>
+                    <span class="edited-text-part">
+                        by 
+                    </span>
+                    
+                    <app-user-handle *ngIf="issue.createdByUser != null" [user]="issue.createdByUser" [hidePhoto]="true" [specialClass]="'grey'"></app-user-handle>
+                    <span>.</span>
+                </div>
+
+                <div fxLayout="row" class="edited-by-wrap"> 
+                    <span class="edited-text-part">
+                        Last edited   
+                    </span>
+                    <span *ngIf="issue.edited" class="edited-text-part">
+                        {{issue.edited | date:'short'}}
+                    </span>
+                    <span class="edited-text-part">
+                        by 
+                    </span>
+                    <app-user-handle *ngIf="issue.editedByUser != null" [user]="issue.editedByUser" [hidePhoto]="true" [specialClass]="'grey'"></app-user-handle>
+                </div>
+
+            </div>
+
+            <div  fxLayout="row" fxLayoutAlign="flex-end" >
+                <div class="edit-button-wrap" fxLayout="row" matRipple [matRippleUnbounded]="false">
+                    <mat-icon  class="edit-icon">edit</mat-icon>
+                    <span class="edit">Edit</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="desc-wrap" fxLayout="column">
+        <span class="mat-subheading-1 subtitle description">Description</span>
+        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo eros, auctor nec turpis luctus,
+            pharetra dapibus odio. Pellentesque egestas dui rhoncus nunc cursus, in pulvinar lacus fermentum. Praesent
+            ac libero volutpat, ultrices lacus vitae, iaculis est. In odio dui, iaculis in nulla nec, ultricies dictum
+            quam. Curabitur at egestas nunc. Suspendisse sapien velit, facilisis ac diam id, sod.</span>
+    </div>
+
+
+    <div class="issue-hours-wrap" fxLayout="row">
+        <div class="issues-wrap" fxLayout="column">
+
+            <div class="issues-inner-wrap" fxLayout="column">
+                <div *ngIf="issue != null" class="parent-issue-wrap" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle parent-issue">Parent Issue:</label>
+                    <app-issue-handle [issue]="issue"></app-issue-handle>
+                </div>
+
+                <div *ngIf="issue != null" class="sub-issue-wrap" fxLayout="row">
+
+                    <label class="mat-subheading-1 subtitle sub-issues">Sub Issues:</label>
+
+                    <div class="sub-issue-list-wrap" fxLayout="column">
+                        <app-issue-handle class="sub-issue" *ngFor="let subIssue of issue.childIssues"
+                            [issue]="subIssue"></app-issue-handle>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+
+        <div class="metrics-wrap" fxLayout="row">
+            <div *ngIf="issue != null" class="hours-wrap" fxLayout="column">
+                <div class="hours-row" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle estimated">Hours estimated:</label>
+                    <span>{{issue.hoursEstimated != null ? issue.hoursEstimated : '-'}}</span>
+                </div>
+                <div class="hours-row" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle spent">Hours spent:</label>
+                    <span>{{issue.hoursSpent != null ? issue.hoursSpent : '-'}}</span>
+
+                </div>
+                <div class="hours-row" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle remaining">Hours remaining:</label>
+                    <span>{{issue.hoursRemaining != null ? issue.hoursRemaining : '-'}}</span>
+                </div>
+            </div>
+
+            <div class="graph-wrap" fxLayout="column">
+
+
+
+                <chart #progressChart id="progress-chart" class="chart" [type]="chartType" [data]="chartData"
+                    [options]="chartOptions"></chart>
+
+
+                <span #progressPercent matTooltip="{{getProgressPercent()}} % of estimation fulfilled"
+                    class="mat-subheading-2 progress">{{getProgressPercent()}} %</span>
+
+
+
+            </div>
+        </div>
+
+
+        <div *ngIf="issue != null" class="git-assignee-wrap" fxLayout="column">
+            <div class="git-assignee-inner-wrap" fxLayout="column" fxLayoutAlign="end stretch">
+                <div class="git-wrap" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle git-link">Git link:</label>
+                    <a *ngIf="issue.gitLink != null" href="{{issue.gitLink}}">link</a>
+                    <span *ngIf="issue.gitLink == null">-</span>
+                </div>
+
+                <div class="assignee-wrap" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle assignee">Assignee:</label>
+                    <app-user-handle *ngIf="issue.user != null" [user]="issue.user"></app-user-handle>
+                    <span *ngIf="issue.user == null">-</span>
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+
+    <div class="files-attachments-wrap" fxLayout="column">
+
+        <label class="mat-subheading-1 subtitle files">File attachments</label>
+        <div class="files-wrap" fxLayout="row">
+
+            <span *ngFor="let file of files" class="file">{{file}}</span>
+        </div>
+    </div>
+
+    <div class="log-wrap" fxLayout="column">
+        <label class="mat-subheading-1 subtitle log">Log</label>
+        <span>user comment 1</span>
+        <span>user comment 2</span>
+    </div>
+
+</div>

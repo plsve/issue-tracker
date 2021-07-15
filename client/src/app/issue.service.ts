@@ -20,4 +20,8 @@ export class IssueService {
       params: queryParams
     });
   }
+
+  getIssue(id){
+    return this.http.get<any>(this.issuesUrl + '/' + id);
+  }
 }

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { DashComponent } from './dash/dash.component';
 import { BoardComponent } from './board/board.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,10 @@ const routes: Routes = [
     {
         path: 'issues',
         component: IssueListComponent
+    },
+    {
+        path: 'issues/:id',
+        component: IssueDetailComponent
     },
     {
         path: 'people',

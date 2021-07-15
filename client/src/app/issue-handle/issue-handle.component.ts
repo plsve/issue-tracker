@@ -13,13 +13,13 @@ export class IssueHandleComponent implements OnInit {
   issue;
 
   @Input()
-  hideName;
+  hideName = false;
   
   @Input()
-  hideVerboseName;
+  hideVerboseName = false;
 
   @Input()
-  hideType: boolean;
+  hideType = false;
 
   constructor(private router: Router) { }
 
@@ -27,7 +27,6 @@ export class IssueHandleComponent implements OnInit {
   }
 
   onClick(event){
-    // this.router.navigateByUrl('/issues/' + this.issue.id);
     event.stopPropagation();
 
   }

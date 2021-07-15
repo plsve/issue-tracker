@@ -1,7 +1,7 @@
 <div class="wrap" (click)="onClick($event)" >
 
     <a [routerLink]="'/issues/' + issue.id" class="link" fxLayout="row" fxLayoutAlign="start stretch">
-        <app-issue-type-badge *ngIf="!hideType" [type]="issue.type" class="type-badge" [hideTooltip]="true">
+        <app-issue-type-badge *ngIf="!hideType" [type]="issue.type" class="type-badge" [hideTooltip]="true" [hideText]="true">
         </app-issue-type-badge>
         <span *ngIf="!hideName" class="issue-name">{{issue.name}}</span>
         <span *ngIf="!hideVerboseName" class="issue-name verbose-name">{{issue.verboseName}}</span>

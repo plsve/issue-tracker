@@ -27,6 +27,8 @@ import { ProjectsDropdownComponent } from './projects-dropdown/projects-dropdown
 import { BoardKanbanComponent } from './board-kanban/board-kanban.component';
 import { KanbanIssueComponent } from './kanban-issue/kanban-issue.component';
 import { IssueHandleComponent } from './issue-handle/issue-handle.component';
+import { IssueDetailComponent } from './issue-detail/issue-detail.component';
+import { ChartModule } from 'angular2-chartjs';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { IssueHandleComponent } from './issue-handle/issue-handle.component';
     ProjectsDropdownComponent,
     BoardKanbanComponent,
     KanbanIssueComponent,
-    IssueHandleComponent
+    IssueHandleComponent,
+    IssueDetailComponent
   ],
   imports: [
     AppRoutingModule,
@@ -56,6 +59,8 @@ import { IssueHandleComponent } from './issue-handle/issue-handle.component';
     MaterialModule,
     FlexLayoutModule,
     HttpClientModule,
+    ChartModule
+    
   ],
   providers: [
     AuthService,
