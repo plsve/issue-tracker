@@ -34,7 +34,7 @@ export class IssueService {
       'issueUser.id', 'issueUser.name', 'issueUser.surname', 'issueUser.username', 'issueUser.photo', 'issueUser.deleted',
       'commentPost',
       'commentUser',
-      'issueParent.id', 'issueParent.name', 'issueParent.verboseName', 'issueParent.status',
+      'issueParent.id', 'issueParent.name', 'issueParent.verboseName', 'issueParent.status', 'issueParent.type',
       'issueChild.id', 'issueChild.name', 'issueChild.verboseName', 'issueChild.status', 'issueChild.type',
       'issueCreatedByUser.id', 'issueCreatedByUser.name', 'issueCreatedByUser.surname', 'issueCreatedByUser.username', 'issueCreatedByUser.deleted',
       'issueEditedByUser.id', 'issueEditedByUser.name', 'issueEditedByUser.surname', 'issueEditedByUser.username', 'issueEditedByUser.deleted',
@@ -136,7 +136,7 @@ export class IssueService {
         updateIssue.hoursRemaining = updateIssueDTO.hoursRemaining;
         updateIssue.hoursSpent = updateIssueDTO.hoursSpent;
         updateIssue.gitLink = updateIssueDTO.gitLink;
-        updateIssue.edited = updateIssueDTO.edited;
+        updateIssue.edited = new Date();
         updateIssue.resolved = updateIssueDTO.resolved;
 
         // Handle project
