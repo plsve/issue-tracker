@@ -1,5 +1,5 @@
-<div class="wrap" (click)="onClick($event)">
-    <a [routerLink]="'/people/' + user.id" class="link"  fxLayout="row" fxLayoutAlign="start stretch">
+<div class="wrap">
+    <a [routerLink]="disableLink == true ? null : ('/people/' + user.id)" class="link"  fxLayout="row" fxLayoutAlign="start stretch">
         <mat-icon *ngIf="!hidePhoto" class="photo-icon" >account_circle</mat-icon>
         <span *ngIf="!hideUsername" class="username" [ngClass]="specialClass != null ? specialClass : ''">{{user.username}}</span>
     </a>

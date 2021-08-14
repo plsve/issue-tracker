@@ -62,6 +62,8 @@ export class DashComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.authService.login({ username: "pavel.vodicka", password: "heslo" });
+
     this.projectService.selectedProject = MockData.selectedProject;
     this.filterService.filter = {
       projects: this.projectService.selectedProject != null ? [this.projectService.selectedProject] : []

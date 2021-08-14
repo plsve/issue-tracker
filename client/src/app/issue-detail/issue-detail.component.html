@@ -4,31 +4,58 @@
 
     <div *ngIf="issue != null" class="header-wrap" fxLayout="row" fxLayoutAlign="space-between">
 
-        <div class="overview-wrap" fxLayout="column">
+        <div class="overview-wrap border" fxLayout="column" [ngClass]="hoveringEdit ? 'highlighted-border' : ''">
 
             <div class="overview-row1" fxLayout="row">
-                <div class="type" fxLayout="row" fxLayoutAlign="space-between">
-                    <label class="mat-subheading-1 subtitle">Type:</label>
-                    <app-issue-type-badge [type]="issue.type" class="issue-type-badge" [hideTooltip]="true">
-                    </app-issue-type-badge>
+                <div class="type-wrap" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle type">Type:</label>
+
+                    <div *ngIf="!editMode">
+                        <app-issue-type-badge [type]="issue.type" class="issue-type-badge" [hideTooltip]="true">
+                        </app-issue-type-badge>
+                    </div>
+
+                    <div *ngIf="editMode">
+                        <app-issue-field-dropdown [type]="FILTER_DROPDOWN_TYPES.TYPE" [issue]="issue">
+                        </app-issue-field-dropdown>
+                    </div>
+
+
+
                 </div>
 
-                <div class="status" *ngIf="issue.type != ISSUE_TYPES.EPIC" fxLayout="row" fxLayoutAlign="space-between">
-                    <label class="mat-subheading-1 subtitle">Status:</label>
-                    <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
+                <div class="statu-wrap" *ngIf="issue.type != ISSUE_TYPES.EPIC" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle status">Status:</label>
+
+                    <div *ngIf="!editMode">
+                        <app-issue-status-badge [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
+                    </div>
+
+                    <div *ngIf="editMode">
+                        <app-issue-field-dropdown [type]="FILTER_DROPDOWN_TYPES.STATUS" [issue]="issue">
+                        </app-issue-field-dropdown>
+                    </div>
                 </div>
 
             </div>
 
             <div class="overview-row2" fxLayout="row">
-                <div class="priority" fxLayout="row" fxLayoutAlign="space-between">
-                    <label class="mat-subheading-1 subtitle">Priority:</label>
-                    <app-issue-priority-badge [priority]="issue.priority">
-                    </app-issue-priority-badge>
+                <div class="priority-wrap" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle priority">Priority:</label>
+
+                    <div *ngIf="!editMode">
+                        <app-issue-priority-badge [priority]="issue.priority" [hideTooltip]="true">
+                        </app-issue-priority-badge>
+                    </div>
+
+                    <div *ngIf="editMode">
+                        <app-issue-field-dropdown [type]="FILTER_DROPDOWN_TYPES.PRIORITY" [issue]="issue">
+                        </app-issue-field-dropdown>
+                    </div>
                 </div>
 
-                <div class="resolved" fxLayout="row" fxLayoutAlign="space-between">
-                    <label class="mat-subheading-1 subtitle">Resolved:</label>
+                <div class="resolved-wrap" fxLayout="row">
+                    <label class="mat-subheading-1 subtitle resolved">Resolved:</label>
                     <span>21.12.2020</span>
                 </div>
 
@@ -38,43 +65,52 @@
 
         <div class="edit-wrap" fxLayout="column">
 
-            
+
 
             <div class="created-edited-by-wrap" fxLayout="row">
                 <div fxLayout="row" class="created-by-wrap">
                     <span class="edited-text-part">
-                        Created  
+                        Created
                     </span>
                     <span *ngIf="issue.created" class="edited-text-part">
                         {{issue.created | date:'short'}}
                     </span>
                     <span class="edited-text-part">
-                        by 
+                        by
                     </span>
-                    
-                    <app-user-handle *ngIf="issue.createdByUser != null" [user]="issue.createdByUser" [hidePhoto]="true" [specialClass]="'grey'"></app-user-handle>
+
+                    <app-user-handle *ngIf="issue.createdByUser != null" [user]="issue.createdByUser" [hidePhoto]="true"
+                        [specialClass]="'grey'"></app-user-handle>
                     <span>.</span>
                 </div>
 
-                <div fxLayout="row" class="edited-by-wrap"> 
+                <div fxLayout="row" class="edited-by-wrap">
                     <span class="edited-text-part">
-                        Last edited   
+                        Last edited
                     </span>
                     <span *ngIf="issue.edited" class="edited-text-part">
                         {{issue.edited | date:'short'}}
                     </span>
                     <span class="edited-text-part">
-                        by 
+                        by
                     </span>
-                    <app-user-handle *ngIf="issue.editedByUser != null" [user]="issue.editedByUser" [hidePhoto]="true" [specialClass]="'grey'"></app-user-handle>
+                    <app-user-handle *ngIf="issue.editedByUser != null" [user]="issue.editedByUser" [hidePhoto]="true"
+                        [specialClass]="'grey'"></app-user-handle>
                 </div>
 
             </div>
 
-            <div  fxLayout="row" fxLayoutAlign="flex-end" >
-                <div class="edit-button-wrap" fxLayout="row" matRipple [matRippleUnbounded]="false">
-                    <mat-icon  class="edit-icon">edit</mat-icon>
+            <div fxLayout="row" fxLayoutAlign="flex-start">
+                <div *ngIf="!editMode" class="edit-button-wrap" fxLayout="row" matRipple [matRippleUnbounded]="false"
+                    (click)="editSaveClicked()" (mouseenter)="hoveringEdit = true" (mouseleave)="hoveringEdit = false">
+                    <mat-icon class="edit-icon">edit</mat-icon>
                     <span class="edit">Edit</span>
+                </div>
+
+                <div *ngIf="editMode" class="save-button-wrap" fxLayout="row" matRipple [matRippleUnbounded]="false"
+                    (click)="editSaveClicked()">
+                    <mat-icon class="save-icon">done</mat-icon>
+                    <span class="save">Save</span>
                 </div>
             </div>
 
@@ -82,59 +118,124 @@
     </div>
 
 
-    <div class="desc-wrap" fxLayout="column">
-        <span class="mat-subheading-1 subtitle description">Description</span>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec justo eros, auctor nec turpis luctus,
-            pharetra dapibus odio. Pellentesque egestas dui rhoncus nunc cursus, in pulvinar lacus fermentum. Praesent
-            ac libero volutpat, ultrices lacus vitae, iaculis est. In odio dui, iaculis in nulla nec, ultricies dictum
-            quam. Curabitur at egestas nunc. Suspendisse sapien velit, facilisis ac diam id, sod.</span>
+    <div *ngIf="issue != null" class="desc-wrap border" fxLayout="column" [ngClass]="hoveringEdit ? 'highlighted-border' : ''">
+        <span class="mat-subheading-1 subtitle description-title">Description</span>
+
+        <div *ngIf="!editMode">
+            <span class="description">
+                {{issue.description}}
+            </span>
+        </div>
+
+        <div *ngIf="editMode" class="input-field-wrap" >
+            <textarea [(ngModel)]="issue.description" class="mat-body-1 input-field input-field-description" [ngClass]="editMode ? 'animated-border' : ''"></textarea>
+
+            <!-- <input type="text" [(ngModel)]="issue.description" class="mat-body-1 input-field input-field-description"> -->
+        </div>
     </div>
 
 
     <div class="issue-hours-wrap" fxLayout="row">
         <div class="issues-wrap" fxLayout="column">
 
-            <div class="issues-inner-wrap" fxLayout="column">
-                <div *ngIf="issue != null" class="parent-issue-wrap" fxLayout="row">
+            <div class="issues-inner-wrap border" fxLayout="column" [ngClass]="getIssuesWrapClass()">
+                <div *ngIf="issue != null && issue.parentIssue != null" class="parent-issue-wrap" fxLayout="row">
                     <label class="mat-subheading-1 subtitle parent-issue">Parent Issue:</label>
-                    <app-issue-handle [issue]="issue"></app-issue-handle>
+
+                    <div *ngIf="!editMode">
+                        <app-issue-handle [issue]="issue.parentIssue"></app-issue-handle>
+                    </div>
+
+                    <div *ngIf="editMode">
+                        <app-issue-field-dropdown [type]="FILTER_DROPDOWN_TYPES.ISSUE" [issue]="issue">
+                        </app-issue-field-dropdown>
+                    </div>
                 </div>
 
                 <div *ngIf="issue != null" class="sub-issue-wrap" fxLayout="row">
 
                     <label class="mat-subheading-1 subtitle sub-issues">Sub Issues:</label>
 
-                    <div class="sub-issue-list-wrap" fxLayout="column">
+                    <!-- <div class="sub-issue-list-wrap" fxLayout="column" [ngClass]="editMode ? 'animated-border sub-issues-edit' : ''">
                         <app-issue-handle class="sub-issue" *ngFor="let subIssue of issue.childIssues"
                             [issue]="subIssue"></app-issue-handle>
+                    </div> -->
+
+                    <div *ngIf="!editMode" class="sub-issue-list-wrap">
+                        <div class="sub-issue" *ngFor="let subIssue of issue.childIssues">
+                            <app-issue-handle [issue]="subIssue"></app-issue-handle>
+                        </div>
                     </div>
+
+                    <div *ngIf="editMode" class="sub-issue-list-wrap sub-issues-edit"
+                        [ngClass]="newSubIssue == null ? 'animated-border' : 'no-scroll'">
+                        <div class="sub-issue" *ngFor="let subIssue of issue.childIssues" fxLayout="row">
+                            <app-issue-handle [issue]="subIssue" [disableLink]="true"></app-issue-handle>
+                            <button mat-icon-button class="remove-subissue-button"
+                                (click)="removeSubIssueClicked(subIssue)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div fxLayout="column" *ngIf="editMode" class="add-sub-issue">
+
+                    <div *ngIf="newSubIssue">
+                        <app-issue-field-dropdown [type]="FILTER_DROPDOWN_TYPES.CHILD_ISSUE" [issue]="issue" (newSubIssueConfirmed)="newSubIssueConfirmed($event)">
+                        </app-issue-field-dropdown>
+                    </div>
+
+                    <button mat-icon-button class="add-subissue-button" (click)="addSubIssueClicked()">
+                        <mat-icon>add</mat-icon>
+                    </button>
                 </div>
             </div>
-
-
-
         </div>
 
 
-
-        <div class="metrics-wrap" fxLayout="row">
+        <div class="metrics-wrap border" fxLayout="row" [ngClass]="hoveringEdit ? 'highlighted-border' : ''">
             <div *ngIf="issue != null" class="hours-wrap" fxLayout="column">
                 <div class="hours-row" fxLayout="row">
                     <label class="mat-subheading-1 subtitle estimated">Hours estimated:</label>
-                    <span>{{issue.hoursEstimated != null ? issue.hoursEstimated : '-'}}</span>
+
+                    <div *ngIf="!editMode">
+                        <span>{{issue.hoursEstimated != null ? issue.hoursEstimated : '-'}}</span>
+                    </div>
+
+                    <div *ngIf="editMode" class="input-field-wrap" [ngClass]="editMode ? 'animated-border' : ''">
+                        <input type="number" min="0" max="1000" [(ngModel)]="issue.hoursEstimated" class="mat-body-1 input-field">
+                    </div>
+
                 </div>
                 <div class="hours-row" fxLayout="row">
                     <label class="mat-subheading-1 subtitle spent">Hours spent:</label>
-                    <span>{{issue.hoursSpent != null ? issue.hoursSpent : '-'}}</span>
+
+                    <div *ngIf="!editMode">
+                        <span>{{issue.hoursSpent != null ? issue.hoursSpent : '-'}}</span>
+                    </div>
+
+                    <div *ngIf="editMode" class="input-field-wrap" [ngClass]="editMode ? 'animated-border' : ''">
+                        <input type="number" min="0" max="1000" [(ngModel)]="issue.hoursSpent" class="mat-body-1 input-field">
+                    </div>
 
                 </div>
                 <div class="hours-row" fxLayout="row">
                     <label class="mat-subheading-1 subtitle remaining">Hours remaining:</label>
-                    <span>{{issue.hoursRemaining != null ? issue.hoursRemaining : '-'}}</span>
+
+                    <div *ngIf="!editMode">
+                        <span>{{issue.hoursRemaining != null ? issue.hoursRemaining : '-'}}</span>
+                    </div>
+
+                    <div *ngIf="editMode" class="input-field-wrap" [ngClass]="editMode ? 'animated-border' : ''">
+                        <input type="number" min="0" max="1000" [(ngModel)]="issue.hoursRemaining" class="mat-body-1 input-field">
+                    </div>
                 </div>
             </div>
 
-            <div class="graph-wrap" fxLayout="column">
+            <div class="graph-wrap" fxLayout="column" *ngIf="!editMode">
 
 
 
@@ -146,33 +247,50 @@
                     class="mat-subheading-2 progress">{{getProgressPercent()}} %</span>
 
 
-
             </div>
         </div>
 
 
         <div *ngIf="issue != null" class="git-assignee-wrap" fxLayout="column">
-            <div class="git-assignee-inner-wrap" fxLayout="column" fxLayoutAlign="end stretch">
+            <div class="git-assignee-inner-wrap border" fxLayout="column" fxLayoutAlign="end stretch"
+                [ngClass]="hoveringEdit ? 'highlighted-border' : ''">
                 <div class="git-wrap" fxLayout="row">
                     <label class="mat-subheading-1 subtitle git-link">Git link:</label>
-                    <a *ngIf="issue.gitLink != null" href="{{issue.gitLink}}">link</a>
-                    <span *ngIf="issue.gitLink == null">-</span>
+
+                    <div *ngIf="!editMode">
+                        <a *ngIf="issue.gitLink != null" href="{{issue.gitLink}}">link</a>
+                        <span *ngIf="issue.gitLink == null">-</span>
+                    </div>
+
+                    <div *ngIf="editMode" class="input-field-wrap" [ngClass]="editMode ? 'animated-border' : ''">
+                        <input type="text" [(ngModel)]="issue.gitLink" class="mat-body-1 input-field input-field-git">
+                    </div>
                 </div>
+
+
 
                 <div class="assignee-wrap" fxLayout="row">
                     <label class="mat-subheading-1 subtitle assignee">Assignee:</label>
-                    <app-user-handle *ngIf="issue.user != null" [user]="issue.user"></app-user-handle>
-                    <span *ngIf="issue.user == null">-</span>
+
+                    <div *ngIf="!editMode">
+                        <app-user-handle *ngIf="issue.user != null" [user]="issue.user"></app-user-handle>
+                        <span *ngIf="issue.user == null">-</span>
+                    </div>
+
+                    <div *ngIf="editMode">
+                        <app-issue-field-dropdown [type]="FILTER_DROPDOWN_TYPES.ASSIGNEE" [issue]="issue">
+                        </app-issue-field-dropdown>
+                    </div>
                 </div>
 
             </div>
-            
+
         </div>
 
     </div>
 
 
-    <div class="files-attachments-wrap" fxLayout="column">
+    <div class="files-attachments-wrap border" fxLayout="column" [ngClass]="hoveringEdit ? 'highlighted-border' : ''">
 
         <label class="mat-subheading-1 subtitle files">File attachments</label>
         <div class="files-wrap" fxLayout="row">

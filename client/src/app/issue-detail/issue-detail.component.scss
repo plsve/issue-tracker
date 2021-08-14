@@ -1,7 +1,6 @@
 @import "variables.scss";
 
-$border: 0.5px solid mat-color($theme-accent, 100);
-
+$border: 1px solid mat-color($theme-accent, 100);
 
 .title {
     margin-bottom: 24px;
@@ -25,87 +24,137 @@ $border: 0.5px solid mat-color($theme-accent, 100);
 
 .overview-row1 {
     margin-bottom: $spacer-s;
+    margin-right: $spacer-s;
 }
 
-.type {
-    min-width: 10rem;
+.type-wrap {
+    // align-items: center;
+    // justify-content: center;
+    min-width: 12rem;
     margin-right: 3rem;
 }
 
-.status {
+.type, .priority {    
+    min-width: 6rem;
+}
+
+.status, .resolved {    
+    min-width: 7rem;
+}
+
+.status-wrap {
     min-width: 15rem;
 }
 
-.priority {
-    min-width: 10rem;
+
+.priority-wrap {
+    min-width: 12rem;
     margin-right: 3rem;
 }
 
-.resolved {
+.resolved-wrap {
     min-width: 13.6rem;
 }
 
-.edit-wrap {    
+.edit-wrap {
 }
 
-.created-edited-by-wrap {    
+.created-edited-by-wrap {
     color: mat-color($theme-accent, 500);
+    margin-bottom: $spacer-xs;
 }
 
 .edited-text-part {
     margin-right: 0.3rem;
 }
 
-.created-by-wrap {    
+.created-by-wrap {
     margin-right: $spacer-xs;
 }
 
-.edited-by-wrap {    
+.edited-by-wrap {
     margin-right: $spacer-s;
 }
 
-.edit-button-wrap {
+.edit-button-wrap,
+.save-button-wrap {
     text-align: end;
-    font-size: 2rem;    
+    font-size: 2rem;
     line-height: 2.5rem;
     padding: $spacer-xs $spacer-s $spacer-xs $spacer-xs;
     cursor: pointer;
+    // border: $border;
     border-radius: 8px;
 }
 
-.edit-icon {
+.edit-button-wrap:hover {
+    background-color: mat-color($theme-accent, 50);
+}
+
+.save-button-wrap {
+    background-color: mat-color($theme-success, 500);
+    color: mat-contrast($theme-success, 900);
+    line-height: 3rem;
+}
+
+.edit-icon,
+.save-icon {
     font-size: 2.25rem;
     margin-right: $spacer-s;
+}
+
+.save-icon {
+    font-size: 3rem;
+    margin-right: 1.5rem;
 }
 
 .edit {
     font-size: 1.75rem;
 }
 
+
 .desc-wrap {
     margin-bottom: $spacer-s;
     border: $border;
     border-radius: 4px;
     padding: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+
 }
 
-
-.description {
-    margin-bottom: $spacer-xs;
+.description-title {
+    margin-bottom: $spacer-xs;   
 }
+
+.description {  
+    white-space: pre-wrap;
+}
+
 .issue-hours-wrap {
     margin-bottom: $spacer-s;
 }
 
 .issues-wrap {
     margin-right: $spacer-s;
-    min-width: 500px;
+    min-width: 540px;
 }
 
 .issues-inner-wrap {
     border: $border;
     border-radius: 4px;
     padding: 1rem;
+}
+
+.add-sub-issue {
+    margin-left: 8rem;
+    max-width: 50%;
+}
+
+
+.adding-sub-issue {
+    // min-height: 300px;
+
 }
 
 .parent-issue-wrap {
@@ -123,19 +172,28 @@ $border: 0.5px solid mat-color($theme-accent, 100);
 
 .sub-issue {
     margin-bottom: $spacer-xs;
+    align-items: center;
+    place-content: space-between;
 }
 
 .sub-issue-list-wrap {
-    
     max-height: 11rem;
-    overflow-y: auto;    
+    overflow-y: auto;
     overflow-x: auto;
     padding-right: $spacer-xs;
 }
 
+.no-scroll {    
+    // overflow-y: hidden;
+    // overflow-x: hidden;
+}
+
+.sub-issues-edit {    
+    padding: 0 $spacer-s 0 $spacer-s;
+}
+
 .hours-wrap {
     width: 40%;
-    
 }
 
 .metrics-wrap {
@@ -158,18 +216,33 @@ $border: 0.5px solid mat-color($theme-accent, 100);
 .hours-row {
     min-width: 15rem;
     margin-bottom: $spacer-s;
+    align-items: center;
 }
 
-.estimated {
-    margin-right: 2rem;
+.estimated, .spent, .remaining {
+    min-width: 10rem;
 }
 
-.spent {
-    margin-right: 4.1rem;
+.input-field {
+    border: none;
+    width: 3rem;
+    padding: 5px 0 5px 8px;
 }
 
-.remaining {
-    margin-right: 2rem;
+.input-field-git {
+    width: 15rem;
+}
+
+.input-field-description {
+    width: 90%;
+    min-height: 200px;
+    
+    overflow-y: hidden;
+    resize: none;
+}
+
+.input-field:focus-visible {
+    outline-color: mat-color($theme, 400);
 }
 
 .progress {
@@ -180,33 +253,34 @@ $border: 0.5px solid mat-color($theme-accent, 100);
     position: relative;
 }
 
-.git-assignee-wrap {  
+.git-assignee-wrap {
     width: 30%;
 }
 
-.git-assignee-inner-wrap{
+.git-assignee-inner-wrap {
     border: $border;
     border-radius: 4px;
     padding: 1rem;
-    margin-bottom: $spacer-s;  
+    margin-bottom: $spacer-s;
 }
 
-.git-wrap {    
-    width: 50%;
+.git-wrap {
+    // width: 50%;
+    align-items: center;
+    margin-bottom: $spacer-s;
 }
 
-.git-link {    
+.git-link {
     min-width: 4rem;
     margin-right: $spacer-m;
     margin-bottom: $spacer-xs;
-    
 }
 
-.assignee-wrap {    
+.assignee-wrap {
     width: 50%;
 }
 
-.assignee {    
+.assignee {
     min-width: 4rem;
     margin-right: $spacer-m;
     margin-bottom: $spacer-xs;
@@ -219,14 +293,51 @@ $border: 0.5px solid mat-color($theme-accent, 100);
     margin-bottom: $spacer-s;
 }
 
-.files {    
+.files {
     margin-bottom: $spacer-xs;
 }
 
-.log {    
+.log-wrap {    
+    border: $border;
+    border-radius: 4px;
+    padding: 1rem;
+}
+
+.log {
     margin-bottom: $spacer-xs;
 }
 
 .file {
     margin-right: $spacer-s;
+}
+
+
+@keyframes borderAnimationGrey {
+    from {
+        border: 2px solid mat-color($theme-accent, 50);
+    }
+
+    to {
+        border: 2px solid mat-color($theme-accent, 200);
+    }
+}
+
+.border {    
+    // border: 2px solid transparent;
+}
+
+.highlighted-border {
+    border: 1px solid mat-color($theme-accent, 200);
+
+}
+
+.animated-border {
+    animation-duration: 0.8s;
+    animation-name: borderAnimationGrey;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.highlighted-bg {
+    background-color: mat-color($theme-accent, 100);
 }

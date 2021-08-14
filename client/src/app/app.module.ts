@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 import { AppComponent } from './app.component';
@@ -29,6 +29,8 @@ import { KanbanIssueComponent } from './kanban-issue/kanban-issue.component';
 import { IssueHandleComponent } from './issue-handle/issue-handle.component';
 import { IssueDetailComponent } from './issue-detail/issue-detail.component';
 import { ChartModule } from 'angular2-chartjs';
+import { IssueFieldDropdownComponent } from './issue-field-dropdown/issue-field-dropdown.component';
+import { RequestInterceptor } from './request-interceptor';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { ChartModule } from 'angular2-chartjs';
     BoardKanbanComponent,
     KanbanIssueComponent,
     IssueHandleComponent,
-    IssueDetailComponent
+    IssueDetailComponent,
+    IssueFieldDropdownComponent
   ],
   imports: [
     AppRoutingModule,
@@ -66,7 +69,12 @@ import { ChartModule } from 'angular2-chartjs';
     AuthService,
     ProjectService,
     IssueService,
-    DataFormatter
+    DataFormatter,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

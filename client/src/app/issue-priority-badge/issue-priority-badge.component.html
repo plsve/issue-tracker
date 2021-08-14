@@ -1,4 +1,4 @@
 <div [ngClass]="getStyle()" fxLayout="row" fxLayoutAlign="start">
-    <mat-icon *ngIf="!hideTooltip" matTooltip="{{getTooltip()}}">{{getIcon()}}</mat-icon>
+    <mat-icon matTooltip="{{hideTooltip ? null : getTooltip()}}">{{getIcon()}}</mat-icon>
     <span *ngIf="!hideText" class="text">{{getTooltip()}}</span>
 </div>

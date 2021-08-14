@@ -20,6 +20,9 @@ export class IssueHandleComponent implements OnInit {
 
   @Input()
   hideType = false;
+  
+  @Input()
+  disableLink = false;
 
   constructor(private router: Router) { }
 

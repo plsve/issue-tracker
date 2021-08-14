@@ -3,5 +3,7 @@ export enum FILTER_DROPDOWN_TYPES {
     ASSIGNEE = 'Assignee',
     TYPE = 'Type',
     STATUS = 'Status',
-    PRIORITY = 'Priority'
+    PRIORITY = 'Priority',
+    ISSUE = 'Issue',
+    CHILD_ISSUE = 'Child Issue',
 }

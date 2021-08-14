@@ -13,15 +13,42 @@ export class IssueService {
   constructor(
     private authService: AuthService,
     private http: HttpClient
-    ) { }
+  ) { }
 
-  getIssues(queryParams?){
+  getIssues(queryParams?) {
     return this.http.get<any>(this.issuesUrl, {
       params: queryParams
     });
   }
 
-  getIssue(id){
+  getIssue(id) {
     return this.http.get<any>(this.issuesUrl + '/' + id);
+  }
+
+  updateIssue(issue) {
+    return this.http.put<any>(this.issuesUrl + '/' + issue.id,
+      this.getUpdateIssueDTO(issue));
+  }
+
+  getUpdateIssueDTO(issue) {
+
+    return {
+      verboseName: issue.verboseName,
+      type: issue.type,
+      description: issue.description,
+      status: issue.status,
+      priority: +issue.priority,
+      resolved: issue.resolved,
+      hoursEstimated: +issue.hoursEstimated,
+      hoursRemaining: +issue.hoursRemaining,
+      hoursSpent: +issue.hoursSpent,
+      gitLink: issue.gitLink,
+      projectId: issue.project.id,
+      userId: issue.user.id,
+      childIssueIds: issue.childIssues.map(e => e.id),
+      commentPostIds: issue.commentPosts.map(e => e.id),
+      parentIssueId: issue.parentIssue.id,
+      editedByUserId: issue.editedByUser.id,
+    }
   }
 }

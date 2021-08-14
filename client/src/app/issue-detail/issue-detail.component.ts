@@ -4,6 +4,7 @@ import { ElementRef } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ChartComponent } from 'angular2-chartjs';
+import { FILTER_DROPDOWN_TYPES } from '../constant/filter-dropdown-types.enum';
 import { ISSUE_TYPES } from '../constant/issue-types.enum';
 import { IssueService } from '../issue.service';
 
@@ -21,6 +22,12 @@ export class IssueDetailComponent implements OnInit {
   chartType;
   chartOptions;
 
+  editMode = false;
+  hoveringEdit = false;
+
+  newSubIssue;
+
+  FILTER_DROPDOWN_TYPES = FILTER_DROPDOWN_TYPES;
 
   files = ['report1.txt', 'report2.txt'];
 
@@ -44,17 +51,56 @@ export class IssueDetailComponent implements OnInit {
 
     })
   }
+  
+  editSaveClicked(){
+    this.editMode = !this.editMode;
+    if(!this.editMode){
+      this.hoveringEdit = false;
+      this.newSubIssue = null;
+
+      this.issueService.updateIssue(this.issue).subscribe(r => {
+        
+      })
+      
+    }
+  }
+
+  removeSubIssueClicked(subIssue){
+    this.issue.childIssues = this.issue.childIssues.filter(e => e.id != subIssue.id);
+  }
+
+  newSubIssueConfirmed(event){
+    console.log(event);
+    this.issue.childIssues.push(event);
+    this.newSubIssue = null;
+    
+  }
+
+  addSubIssueClicked(){
+    this.newSubIssue = {
+
+    };
+  }
+
+  getIssuesWrapClass(){
+    let result = '';
+    if(this.hoveringEdit == true){
+      result += 'highlighted-border';
+    }
+    if(this.newSubIssue != null){
+      
+      result += ' adding-sub-issue';
+    }
+
+    return result;
+  }
 
   isEstimationFilled() {
-    console.log(this.issue.hoursEstimated != null && +this.issue.hoursEstimated > 0);
-    console.log();
-
-
     return this.issue.hoursEstimated != null && +this.issue.hoursEstimated > 0;
   }
 
   getProgressPercent() {
-    if (this.issue != null) {
+    if (this.issue != null && +this.issue.hoursEstimated > 0) {
       return Math.floor((+this.issue.hoursSpent / +this.issue.hoursEstimated) * 100);
     }
     return 0;
@@ -102,8 +148,6 @@ export class IssueDetailComponent implements OnInit {
 
     } else {
       // hour estimation missing, draw empty chart
-
-
       this.chartData = {
         labels: ['Estimate hours to initiate chart'],
         datasets: [{
@@ -128,9 +172,6 @@ export class IssueDetailComponent implements OnInit {
 
     }
   }
-
-
-
 
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);

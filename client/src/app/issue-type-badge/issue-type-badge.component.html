@@ -1,4 +1,4 @@
-<div class="badge-wrap" [ngClass]="getStyle()" fxLayout="row" fxLayoutAlign="start">
+<div class="wrap" [ngClass]="getStyle()" fxLayout="row" fxLayoutAlign="start">
     <mat-icon matTooltip="{{hideTooltip ? null : getTooltip()}}">{{getIcon()}}</mat-icon>
     <span *ngIf="!hideText" class="text">{{getTooltip()}}</span>
 </div>

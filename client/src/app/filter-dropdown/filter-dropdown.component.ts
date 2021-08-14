@@ -161,9 +161,6 @@ export class FilterDropdownComponent implements OnInit {
         this.changed.emit();
       }
     }
-
-
-
   }
 
   getValueForType(obj) {

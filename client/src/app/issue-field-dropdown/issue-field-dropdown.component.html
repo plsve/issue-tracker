@@ -1,0 +1,32 @@
+<div *ngIf="allValues.length > 0" class="wrap animated-border" fxLayout="row" fxLayoutAlign="start stretch" (clickOutside)="closeDropdown()">
+
+    <div class="dropdown-wrap" fxLayout="row" fxLayoutAlign="space-between" (click)="openDropdown()" matRipple [matRippleUnbounded]="false" [ngClass]="getClassForType(type)">
+        <div [ngSwitch]="type" fxLayout="row">
+            <app-issue-type-badge *ngSwitchCase="FILTER_DROPDOWN_TYPES.TYPE" [type]="issue.type" [hideTooltip]="true"></app-issue-type-badge>
+            <app-issue-status-badge *ngSwitchCase="FILTER_DROPDOWN_TYPES.STATUS" [status]="issue.status" [hideBorder]="true"></app-issue-status-badge>
+            <app-issue-priority-badge *ngSwitchCase="FILTER_DROPDOWN_TYPES.PRIORITY" [priority]="issue.priority" [hideTooltip]="true"></app-issue-priority-badge>
+            <app-user-handle *ngSwitchCase="FILTER_DROPDOWN_TYPES.ASSIGNEE" [user]="issue.user" [disableLink]="true"></app-user-handle>
+            <app-issue-handle *ngSwitchCase="FILTER_DROPDOWN_TYPES.ISSUE"  [issue]="issue.parentIssue" [disableLink]="true"></app-issue-handle>
+            <div *ngSwitchCase="FILTER_DROPDOWN_TYPES.CHILD_ISSUE" fxLayout="row">
+                <app-issue-handle   [issue]="selectedSubIssue" [disableLink]="true"></app-issue-handle>
+            </div>
+            <mat-icon class="dropdown-icon" >arrow_drop_down</mat-icon>
+
+        </div>
+    </div>
+
+
+    <div *ngIf="isOpened"  class="dropdown-content-wrap"  > 
+        <div *ngFor="let val of allValues" (click)="itemClicked(val)" class="value-row-wrap" fxLayout="row" fxLayoutAlign="start stretch" [ngClass]="isRowDisabled(val) ? 'disabled-row' : ''">
+            <div [ngSwitch]="type" class="dropdown-item-wrap"  fxLayout="row" fxLayoutAlign="center stretch">
+                <app-issue-type-badge *ngSwitchCase="FILTER_DROPDOWN_TYPES.TYPE" [type]="val" [hideTooltip]="true"></app-issue-type-badge>    
+                <app-issue-status-badge *ngSwitchCase="FILTER_DROPDOWN_TYPES.STATUS" [status]="val" [hideBorder]="true"></app-issue-status-badge>
+                <app-issue-priority-badge *ngSwitchCase="FILTER_DROPDOWN_TYPES.PRIORITY" [priority]="val" [hideTooltip]="true"></app-issue-priority-badge>
+                <app-user-handle *ngSwitchCase="FILTER_DROPDOWN_TYPES.ASSIGNEE" [user]="val" [disableLink]="true"></app-user-handle>
+                <app-issue-handle *ngSwitchCase="FILTER_DROPDOWN_TYPES.ISSUE"  [issue]="val" [disableLink]="true"></app-issue-handle>
+                <app-issue-handle *ngSwitchCase="FILTER_DROPDOWN_TYPES.CHILD_ISSUE"  [issue]="val" [disableLink]="true"></app-issue-handle>
+            </div>
+        </div>
+    </div>    
+
+</div>

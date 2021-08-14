@@ -1,0 +1,94 @@
+@import "variables.scss";
+
+
+
+.wrap {
+    position:relative; 
+    cursor: pointer;
+}
+
+.dropdown-wrap {
+    align-items: center;
+    padding: 0 $spacer-s 0 $spacer-s;
+}
+
+.type-dropdown {
+    min-width: 6rem;
+}
+
+.status-dropdown {
+    min-width: 11rem;
+}
+
+.assignee-dropdown {
+    min-width: 13rem;
+}
+
+.confirm-icon{
+    color: mat-color($theme-success, 500);
+}
+
+.highlighted-row {
+    color: white;
+    background-color: mat-color($theme, 400);
+}
+
+.dropdown-icon {
+    margin-left: $spacer-xs;
+}
+
+.disabled-row {
+    filter: opacity(0.5);
+}
+
+.dropdown-content-wrap {
+    position: absolute;
+    top: $spacer-m;
+    left: 0;
+    z-index: 400;
+
+    min-height: 50px;
+    overflow-y: auto;
+
+    border: 0.5px mat-color($theme-accent, 100) solid;
+    border-radius: 0.2rem;
+    background-color: $whitecolor;
+    min-width: 9rem;
+}
+
+.dropdown-item-wrap:hover {
+    background-color: mat-color($theme-accent, 50);
+}
+
+.value-row-wrap{
+    padding: $spacer-xs $spacer-s $spacer-xs $spacer-s;    
+    justify-content: center;
+    white-space: nowrap;
+    
+}
+
+.value-row-wrap:hover{
+    background-color: mat-color($theme-accent, 50);    
+}
+
+
+
+@keyframes borderAnimationGrey {
+    from {
+        border: 2px solid mat-color($theme-accent, 50);
+        border-radius: 4px;
+    }
+
+    to {
+        border: 2px solid mat-color($theme-accent, 200);
+        border-radius: 4px;
+    }
+}
+
+.animated-border {
+    animation-duration: 0.8s;
+    animation-name: borderAnimationGrey;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+
+}

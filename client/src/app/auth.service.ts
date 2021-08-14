@@ -25,4 +25,10 @@ export class AuthService {
       }
     )
   }
+
+  getAuthorizationHeader() {
+    return {
+      Authorization: "Bearer " + this.accessToken
+    };
+  }
 }
