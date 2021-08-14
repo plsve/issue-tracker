@@ -53,6 +53,116 @@ export const UserSeed = [
                 id: PERMISSION_IDS.MANAGE_DOCS
             },
         ]
+    },
+    {
+        id: 3,
+        username: 'john.dean',
+        password: 'heslo',
+        name: 'John',
+        surname: 'Dean',
+        photo: null,
+        preference: 3,
+        projects: [{
+            id: 1
+        }],
+        issues: [],
+        commentPosts: [],
+        permissions: [
+            {
+                id: PERMISSION_IDS.MANAGE_ISSUES
+            },
+            {
+                id: PERMISSION_IDS.MANAGE_DOCS
+            },
+        ]
+    },
+    {
+        id: 4,
+        username: 'naomi.woods',
+        password: 'heslo',
+        name: 'Naomi',
+        surname: 'Woods',
+        photo: null,
+        preference: 4,
+        projects: [{
+            id: 1
+        }],
+        issues: [],
+        commentPosts: [],
+        permissions: [
+            {
+                id: PERMISSION_IDS.MANAGE_ISSUES
+            },
+            {
+                id: PERMISSION_IDS.MANAGE_DOCS
+            },
+        ]
+    },
+    {
+        id: 5,
+        username: 'frank.jason',
+        password: 'heslo',
+        name: 'Frank',
+        surname: 'Jason',
+        photo: null,
+        preference: 5,
+        projects: [{
+            id: 1
+        }],
+        issues: [],
+        commentPosts: [],
+        permissions: [
+            {
+                id: PERMISSION_IDS.MANAGE_ISSUES
+            },
+            {
+                id: PERMISSION_IDS.MANAGE_DOCS
+            },
+        ]
+    },
+    {
+        id: 6,
+        username: 'christopher.dines',
+        password: 'heslo',
+        name: 'Christopher',
+        surname: 'Dines',
+        photo: null,
+        preference: 6,
+        projects: [{
+            id: 2
+        }],
+        issues: [],
+        commentPosts: [],
+        permissions: [
+            {
+                id: PERMISSION_IDS.MANAGE_ISSUES
+            },
+            {
+                id: PERMISSION_IDS.MANAGE_DOCS
+            },
+        ]
+    },
+    {
+        id: 7,
+        username: 'voy.summers',
+        password: 'heslo',
+        name: 'Voy',
+        surname: 'Summers',
+        photo: null,
+        preference: 7,
+        projects: [{
+            id: 2
+        }],
+        issues: [],
+        commentPosts: [],
+        permissions: [
+            {
+                id: PERMISSION_IDS.MANAGE_ISSUES
+            },
+            {
+                id: PERMISSION_IDS.MANAGE_DOCS
+            },
+        ]
     }
 
 ]
