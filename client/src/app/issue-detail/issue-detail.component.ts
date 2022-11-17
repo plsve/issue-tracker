@@ -1,7 +1,6 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, ViewChild } from '@angular/core';
-import { ElementRef } from '@angular/core';
-import { Component, Input, OnInit } from '@angular/core';
+import { Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChartComponent } from 'angular2-chartjs';
 import { FILTER_DROPDOWN_TYPES } from '../constant/filter-dropdown-types.enum';
@@ -42,11 +41,7 @@ export class IssueDetailComponent implements OnInit {
   ngOnInit(): void {
     this.issueService.getIssue(this.route.snapshot.params['id']).subscribe(r => {
       this.issue = r;
-
       this.setupProgressChart();
-
-
-
     })
   }
 
