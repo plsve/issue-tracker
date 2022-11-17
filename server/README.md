@@ -41,10 +41,23 @@ $ npm run start
 ```
 
 ## Accessing the database
+
 ```bash
-http://localhost:8080/?pgsql=db&username=admin&db=postgres&ns=public
+localhost:8080/?pgsql=db&username=admin&db=postgres&ns=public
 ```
 Password: 
 ```
 qEgyRg123
+```
+
+## Testing the API
+
+Install [Insomnia](https://insomnia.rest/download) and import the attached `Insomnia-API-requests.json` file into the app to test the different endpoints.
+
+OR
+
+Access the endpoints at:
+
+```
+localhost:3000/projects
 ```
