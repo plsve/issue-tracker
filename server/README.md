@@ -39,3 +39,12 @@ $ npm install
 $ docker-compose up
 $ npm run start
 ```
+
+## Accessing the database
+```bash
+http://localhost:8080/?pgsql=db&username=admin&db=postgres&ns=public
+```
+Password: 
+```
+qEgyRg123
+```
