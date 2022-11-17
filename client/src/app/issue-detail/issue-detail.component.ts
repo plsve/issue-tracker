@@ -2,7 +2,7 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChartComponent } from 'angular2-chartjs';
 import { FILTER_DROPDOWN_TYPES } from '../constant/filter-dropdown-types.enum';
 import { ISSUE_TYPES } from '../constant/issue-types.enum';
@@ -35,14 +35,12 @@ export class IssueDetailComponent implements OnInit {
   constructor(
     public issueService: IssueService,
     public router: Router,
+    private route: ActivatedRoute,
     @Inject(DOCUMENT) document
   ) { }
 
   ngOnInit(): void {
-    // console.log(this.router.paramMap.get('id'));
-
-
-    this.issueService.getIssue(2).subscribe(r => {
+    this.issueService.getIssue(this.route.snapshot.params['id']).subscribe(r => {
       this.issue = r;
 
       this.setupProgressChart();
@@ -51,44 +49,44 @@ export class IssueDetailComponent implements OnInit {
 
     })
   }
-  
-  editSaveClicked(){
+
+  editSaveClicked() {
     this.editMode = !this.editMode;
-    if(!this.editMode){
+    if (!this.editMode) {
       this.hoveringEdit = false;
       this.newSubIssue = null;
 
       this.issueService.updateIssue(this.issue).subscribe(r => {
-        
+
       })
-      
+
     }
   }
 
-  removeSubIssueClicked(subIssue){
+  removeSubIssueClicked(subIssue) {
     this.issue.childIssues = this.issue.childIssues.filter(e => e.id != subIssue.id);
   }
 
-  newSubIssueConfirmed(event){
+  newSubIssueConfirmed(event) {
     console.log(event);
     this.issue.childIssues.push(event);
     this.newSubIssue = null;
-    
+
   }
 
-  addSubIssueClicked(){
+  addSubIssueClicked() {
     this.newSubIssue = {
 
     };
   }
 
-  getIssuesWrapClass(){
+  getIssuesWrapClass() {
     let result = '';
-    if(this.hoveringEdit == true){
+    if (this.hoveringEdit == true) {
       result += 'highlighted-border';
     }
-    if(this.newSubIssue != null){
-      
+    if (this.newSubIssue != null) {
+
       result += ' adding-sub-issue';
     }
 
