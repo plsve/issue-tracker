@@ -54,10 +54,13 @@ qEgyRg123
 
 Install [Insomnia](https://insomnia.rest/download) and import the attached `Insomnia-API-requests.json` file into the app to test the different endpoints.
 
-OR
+or
 
-Access the endpoints at:
+Access the endpoints manually:
 
 ```
 localhost:3000/projects
+localhost:3000/issues
+localhost:3000/users
+...
 ```
