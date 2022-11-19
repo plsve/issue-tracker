@@ -11,6 +11,8 @@ export const UserSeed = [
         preference: 1,
         projects: [{
             id: 1
+        },{
+            id: 2
         }],
         // issues: [1, 2],
         // commentPosts: [1],
@@ -63,7 +65,7 @@ export const UserSeed = [
         photo: null,
         preference: 3,
         projects: [{
-            id: 1
+            id: 2
         }],
         issues: [],
         commentPosts: [],
@@ -85,7 +87,7 @@ export const UserSeed = [
         photo: null,
         preference: 4,
         projects: [{
-            id: 1
+            id: 2
         }],
         issues: [],
         commentPosts: [],
@@ -107,7 +109,7 @@ export const UserSeed = [
         photo: null,
         preference: 5,
         projects: [{
-            id: 1
+            id: 2
         }],
         issues: [],
         commentPosts: [],
