@@ -79,7 +79,12 @@ export class IssueService {
     let results = await builder.getMany();
 
     if (queryParams.addEpics == "true") {
-      let epics = await builder.where('issue.type = :type', { type: ISSUE_TYPES.EPIC }).getMany();
+      if (queryParams.projects && queryParams.projects.length > 0){
+        builder.where("project.id IN (:...ids)", { ids: queryParams.projects.split(',') });
+      }
+      
+
+      let epics = await builder.andWhere('issue.type = :type', { type: ISSUE_TYPES.EPIC }).getMany();
 
      for(const epic of epics){
        if(results.find(e => e.id == epic.id) == null){
