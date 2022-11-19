@@ -19,15 +19,15 @@
                     <th *ngFor="let col of columnData" class="table-header">
                         <div fxLayout="row" fxLayoutAlign="start" fxFill >
                             {{col.text}}
-                            <mat-icon (click)="sortData(col.name, true)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-up"  svgIcon="sort-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">
+                            <mat-icon (click)="issueService.sortData(col.name, true)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-up"  svgIcon="sort-up" aria-hidden="false" aria-label="Example thumbs up SVG icon">
                             </mat-icon>
-                            <mat-icon (click)="sortData(col.name, false)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-down"  svgIcon="sort-down" aria-hidden="false" aria-label="Example thumbs up SVG icon">
+                            <mat-icon (click)="issueService.sortData(col.name, false)" [ngClass]="{'sort-header-hover' : hoveringOnHeader}" class="sort-icon-down"  svgIcon="sort-down" aria-hidden="false" aria-label="Example thumbs up SVG icon">
                             </mat-icon>
                         </div>
                     </th>
                 </tr>
 
-                <tr class="table-row" *ngFor="let issue of issueList; let i = index;" fxFill>
+                <tr class="table-row" *ngFor="let issue of issueService.issueList; let i = index;" fxFill>
                     <td>
                         <app-issue-handle class="cat-name" [issue]="issue" [hideVerboseName]="true" [hideType]="true"></app-issue-handle>
                     </td>

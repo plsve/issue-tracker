@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FILTER_DROPDOWN_TYPES } from '../constant/filter-dropdown-types.enum';
 import { FilterService } from '../filter.service';
+import { IssueService } from '../issue.service';
 import { ProjectService } from '../project.service';
 
 @Component({
@@ -15,52 +16,47 @@ export class ProjectsDropdownComponent implements OnInit {
 
   constructor(
     public projectService: ProjectService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private issueService: IssueService,
   ) { }
 
   ngOnInit(): void {
     this.projectService.getProjects().subscribe(r => {
       this.allProjects = r;
-      this.allProjects = this.allProjects.concat(this.allProjects);    
-      this.allProjects = this.allProjects.concat(this.allProjects);    
-      this.allProjects = this.allProjects.concat(this.allProjects);    
-      this.allProjects = this.allProjects.concat(this.allProjects);    
-      this.allProjects = this.allProjects.concat(this.allProjects);    
     })
   }
 
   openDropdown() {
-    console.log('openDropdown');
-    console.log(this.isOpened);
-    
-    
+
     this.isOpened = !this.isOpened;
 
   }
 
   closeDropdown(event) {
     if (this.isOpened) {
-      console.log('closeDropdown');
       this.isOpened = !this.isOpened;
     }
   }
 
-  isProjectSelected(project){
+  isProjectSelected(project) {
     return this.projectService.selectedProject != null && project.id == this.projectService.selectedProject.id;
   }
 
-  selectProject(project, selection){
+  selectProject(project, selection) {
     // let the click outside directive be first
     setTimeout(() => {
       this.projectService.selectedProject = selection ? project : null;
-      if(selection){
-        this.filterService.updateFilter(FILTER_DROPDOWN_TYPES.PROJECT, [project]);
-      } else {
-        this.filterService.updateFilter(FILTER_DROPDOWN_TYPES.PROJECT, null);
-      }
       
+      this.filterService.resetFilter(this.projectService.selectedProject != null ? [this.projectService.selectedProject] : []);
+      this.filterService.updateFilter(FILTER_DROPDOWN_TYPES.PROJECT, selection ? [project] : null);
+      this.issueService.getIssues(this.filterService.getQueryParams()).subscribe(r => {
+        this.issueService.initList(r);
+        this.issueService.initBoardList(r);
+        this.issueService.createBoardCategories();
+      })
+
     }, 10);
-    
+
   }
 
 }

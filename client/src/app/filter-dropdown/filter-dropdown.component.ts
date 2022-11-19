@@ -19,6 +19,9 @@ import { DataFormatter } from '../utils/data-formatter.utils';
 export class FilterDropdownComponent implements OnInit {
 
   @Input()
+  page;
+
+  @Input()
   type;
 
   @Output()
@@ -65,13 +68,11 @@ export class FilterDropdownComponent implements OnInit {
       }
       case FILTER_DROPDOWN_TYPES.ASSIGNEE: {
         let projects = this.filterService.filter['projects'];
-        if (projects == null || projects == []) {
-
-          projects = [];
-        } else {
+        if (projects != null && projects.length != 0) {
           projects = projects.map(e => e.id);
+        } else {
+          projects = [];
         }
-
         this.userService.getUsers({
           projects: projects
         }).subscribe(r => {
@@ -145,7 +146,7 @@ export class FilterDropdownComponent implements OnInit {
 
   openDropdown() {
     this.isOpened = !this.isOpened;
-    this.dropdownContentBuffer = JSON.stringify(this.selectedValues);
+    this.dropdownContentBuffer = JSON.stringify(this.selectedVals().values);
 
   }
 
@@ -156,7 +157,7 @@ export class FilterDropdownComponent implements OnInit {
       this.isOpened = !this.isOpened;
 
       // content changed, emit event to reload page
-      if (this.dropdownContentBuffer != JSON.stringify(this.selectedValues)) {
+      if (this.dropdownContentBuffer != JSON.stringify(this.selectedVals().values)) {
 
         this.changed.emit();
       }
@@ -184,14 +185,18 @@ export class FilterDropdownComponent implements OnInit {
     }
   }
 
+  selectedVals(){
+    return this.filterService.selectedValues[this.page][this.type];
+  }
+
   updateVals() {
-    this.selectedValues = this.allValues.filter(e => e.checked);
-    this.isHighlighted = this.selectedValues.length > 0;
+
+    this.filterService.selectedValues[this.page][this.type].values = this.allValues.filter(e => e.checked);
+    
+    this.filterService.selectedValues[this.page][this.type].isHighlighted = this.selectedVals().values.length > 0;
 
     // todo update filter vals
-    this.filterService.updateFilter(this.type, this.selectedValues);
-    console.log(this.filterService.filter);
-
+    this.filterService.updateFilter(this.type, this.selectedVals().values);
 
 
 

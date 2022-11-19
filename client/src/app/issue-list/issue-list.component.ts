@@ -18,7 +18,6 @@ export interface IssueHeader {
   styleUrls: ['./issue-list.component.scss']
 })
 export class IssueListComponent implements OnInit {
-  issueList = [];
   hoveringOnHeader = false;
   FILTER_PAGE_TYPES = FILTER_PAGE_TYPES;
 
@@ -57,7 +56,7 @@ export class IssueListComponent implements OnInit {
 
   constructor(
     public projectService: ProjectService,
-    private issueService: IssueService,
+    public issueService: IssueService,
     public filterService: FilterService,
     public format: DataFormatter,
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer
@@ -73,20 +72,7 @@ export class IssueListComponent implements OnInit {
 
   loadData(){    
     this.issueService.getIssues(this.filterService.getQueryParams()).subscribe(r => {
-      this.issueList = r;
-      this.sortData('name', false);
-    })
-  }
-
-  // TODO add sensible sorts specific for issue table - assignee, type, status, 
-  sortData(name, asc) {
-    this.issueList.sort((a, b) => {
-      if (asc) {
-        return a[name] < b[name] ? -1 : 0;
-      } else {
-        return a[name] > b[name] ? -1 : 1;
-      }
-
+      this.issueService.initList(r);
     })
   }
 

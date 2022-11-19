@@ -16,16 +16,14 @@ import { DataFormatter } from '../utils/data-formatter.utils';
 })
 export class BoardKanbanComponent implements OnInit {
 
-  allIssues;
-  allCategories;
 
-  otherCategoryName = 'OTHER';
+
 
   FILTER_PAGE_TYPES = FILTER_PAGE_TYPES;
   ISSUE_STATUSES = ISSUE_STATUSES;
 
   constructor(
-    private issueService: IssueService,
+    public issueService: IssueService,
     public filterService: FilterService,
     public format: DataFormatter,
     public kanbanDrag: KanbanDragService,
@@ -36,81 +34,27 @@ export class BoardKanbanComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterService.resetFilter(this.projectService.selectedProject != null ? [this.projectService.selectedProject] : []);
-    this.filterService.filter['types'] = this.filterService.getBoardInitTypes();
+    this.filterService.filter['types'] = this.filterService.boardInitFilters;
     this.loadData();
 
   }
 
   loadData() {
     let params = this.filterService.getQueryParams();
-    if(params['types'] == ISSUE_TYPES.EPIC){
+    if (params['types'] == ISSUE_TYPES.EPIC) {
       params['types'] = "";
     }
-    
+
     this.issueService.getIssues({
       ...params,
       addEpics: true
     }).subscribe(r => {
-      this.allIssues = r;
-
-      this.createCategories();
+      this.issueService.initBoardList(r);
+      this.issueService.createBoardCategories();
 
     })
   }
 
-  // restructure issues to type=EPIC be at the top and their childIssues under
-  createCategories() {
-    this.allCategories = [];
-
-    for (const issue of this.allIssues) {
-      if (issue.type == ISSUE_TYPES.EPIC) {
-        this.allCategories.push({
-          ...issue,
-          childIssues: [],
-          opened: true
-        });
-      }
-    }
-
-    this.allCategories.push({
-      id: this.otherCategoryName,
-      name: this.otherCategoryName,
-      verboseName: '',
-      childIssues: [],
-      opened: true
-    });
-
-    for (const issue of this.allIssues) {
-
-      if (issue.type != ISSUE_TYPES.EPIC) {
-        let category = this.allCategories.find(e => e.id == this.getCategoryIdForIssue(issue));
-        if (category == null) {
-
-          category = this.allCategories.find(e => e.id == this.otherCategoryName);
-        }
-
-        category.childIssues.push(issue);
-      }
-    }
-
-  }
-
-  // finds the root epic issue for a given issue. returns null if given issue has no root epic
-  getCategoryIdForIssue(issue) {
-
-    if (issue.parentIssue == null && issue.type == ISSUE_TYPES.EPIC) {
-      return issue.id;
-    } else if (issue.parentIssue == null && issue.type != ISSUE_TYPES.EPIC) {
-      return null;
-    } else {
-      let parentIssue = this.allIssues.find(e => e.id == issue.parentIssue.id);
-      if (parentIssue != null) {
-        return this.getCategoryIdForIssue(parentIssue);
-      } else return null;
-
-    }
-
-  }
 
   dropdownClicked(category) {
     category.opened = !category.opened;

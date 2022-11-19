@@ -63,7 +63,6 @@ export class IssueDetailComponent implements OnInit {
   }
 
   newSubIssueConfirmed(event) {
-    console.log(event);
     this.issue.childIssues.push(event);
     this.newSubIssue = null;
 
@@ -113,7 +112,6 @@ export class IssueDetailComponent implements OnInit {
     if (this.isEstimationFilled()) {
 
       let progress = this.getProgressPercent();
-      console.log(progress);
 
       if (progress <= 100) {
         this.chartData = {

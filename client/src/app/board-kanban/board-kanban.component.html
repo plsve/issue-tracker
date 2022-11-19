@@ -19,9 +19,9 @@
         </div>
     </div>
 
-    <div *ngFor="let cat of allCategories" fxLayout="column" class="cat-row" >
+    <div *ngFor="let cat of issueService.boardCategoryList" fxLayout="column" class="cat-row" >
 
-        <div *ngIf="cat.id != otherCategoryName" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
+        <div *ngIf="cat.id != issueService.boardOtherCategoryName" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
 
             <button mat-icon-button  class="dropdown-button" [disableRipple]="true">
                 <mat-icon>{{cat.opened ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>
@@ -42,7 +42,7 @@
             </span>
         </div>
 
-        <div *ngIf="cat.id == otherCategoryName && cat.childIssues.length > 0" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
+        <div *ngIf="cat.id == issueService.boardOtherCategoryName && cat.childIssues.length > 0" class="cat-header" [ngClass]="cat.opened ? '' : 'cat-header-collapsed'" fxLayout="row" (click)="dropdownClicked(cat)">
 
             <button mat-icon-button  [disableRipple]="true">
                 <mat-icon>{{cat.opened ? 'arrow_drop_down' : 'arrow_right'}}</mat-icon>

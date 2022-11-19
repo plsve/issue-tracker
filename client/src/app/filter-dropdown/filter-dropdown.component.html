@@ -1,10 +1,10 @@
 <div class="wrap" fxLayout="row" fxLayoutAlign="start stretch" (clickOutside)="closeDropdown($event)">
 
-    <div fxLayout="row" class="dropdown" (click)="openDropdown()" [ngClass]="isHighlighted ? 'highlighted-row' : null">
-        <mat-label [ngClass]="isHighlighted ? 'highlighted-type' : null">{{type}}</mat-label>
-        <mat-label *ngIf="selectedValues.length > 0" class="colon">: </mat-label>
-        <mat-label *ngIf="selectedValues.length == 1">{{getValueForType(selectedValues[0])}}</mat-label>
-        <mat-label *ngIf="selectedValues.length > 1">{{getValueForType(selectedValues[0])}} and {{selectedValues.length - 1}} more..</mat-label>
+    <div fxLayout="row" class="dropdown" (click)="openDropdown()" [ngClass]="selectedVals().isHighlighted ? 'highlighted-row' : null">
+        <mat-label [ngClass]="selectedVals().isHighlighted ? 'highlighted-type' : null">{{type}}</mat-label>
+        <mat-label *ngIf="selectedVals().values.length > 0" class="colon">: </mat-label>
+        <mat-label *ngIf="selectedVals().values.length == 1">{{getValueForType(selectedVals().values[0])}}</mat-label>
+        <mat-label *ngIf="selectedVals().values.length > 1">{{getValueForType(selectedVals().values[0])}} and {{selectedVals().values.length - 1}} more..</mat-label>
         <mat-icon class="dropdown-icon" >arrow_drop_down</mat-icon>
     </div>
 

@@ -39,7 +39,7 @@ export class FilterComponent implements OnInit {
         this.filterService.filter = {
           projects: isProjectSelected == true ? [this.projectService.selectedProject] : null,
           users: null,
-          types: this.filterService.getBoardInitTypes(),
+          types: this.filterService.boardInitFilters,
           statuses: null,
           priorities: null,
           searchString: null,

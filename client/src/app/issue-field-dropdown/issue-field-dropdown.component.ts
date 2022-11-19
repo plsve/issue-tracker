@@ -48,9 +48,6 @@ export class IssueFieldDropdownComponent implements OnInit {
   }
 
   itemClicked(item){
-    console.log('itemClicked');
-    
-    console.log(item);
 
     switch (this.type) {
       case FILTER_DROPDOWN_TYPES.PROJECT: {
@@ -139,12 +136,7 @@ export class IssueFieldDropdownComponent implements OnInit {
           types: [ISSUE_TYPES.BUG, ISSUE_TYPES.TASK].join(",")
         }).subscribe(r => {
           this.allValues = r.filter(e => e.id != this.issue.id);
-          // possible vals for dropdown minus parentIssue
-          console.log(this.allValues);
-
-          console.log('main issue');
-          console.log(this.issue);
-
+          
           //substract parent issue
           this.allValues = this.allValues.filter(e => e.id != this.issue.parentIssue.id);
 

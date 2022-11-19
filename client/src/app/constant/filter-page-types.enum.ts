@@ -1,5 +1,5 @@
 export enum FILTER_PAGE_TYPES {
-    ISSUE,
-    PERSON,
-    BOARD
+    ISSUE = 'Issue',
+    PERSON = 'Person',
+    BOARD = 'Board'
 }
