@@ -9,12 +9,10 @@ To run the project, follow the install instructions in `client` and `server` dir
 ## Features
 
 ### Kanban board
-<img src="https://imgur.com/qrNSho6"/>
-
-![Alt Text](https://imgur.com/qrNSho6)
+<img src="https://i.imgur.com/qrNSho6.png"/>
 
 ### Issue filtering
-<img src="https://imgur.com/ZEtQPS3"/>
+<img src="https://i.imgur.com/ZEtQPS3.png"/>
 
 ### Issue editing
-<img src="https://imgur.com/E4s6hER"/>
+<img src="https://i.imgur.com/E4s6hER.png"/>
