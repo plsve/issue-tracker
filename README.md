@@ -11,6 +11,8 @@ To run the project, follow the install instructions in `client` and `server` dir
 ### Kanban board
 <img src="https://imgur.com/qrNSho6"/>
 
+![Alt Text](https://imgur.com/qrNSho6)
+
 ### Issue filtering
 <img src="https://imgur.com/ZEtQPS3"/>
 
