@@ -86,15 +86,23 @@ export class IssueService {
 
   }
 
+  private getTaskNum(taskKey){
+    return +taskKey.split('-')[1];
+  }
   // TODO add sensible sorts specific for issue table - assignee, type, status, 
   sortData(name, asc) {
     this.issueList.sort((a, b) => {
       if (asc) {
+        if (name == 'name'){
+          return this.getTaskNum(a[name]) < this.getTaskNum(b[name]) ? -1 : 0;
+        }
         return a[name] < b[name] ? -1 : 0;
-      } else {
+      } else {        
+        if (name == 'name'){
+          return this.getTaskNum(a[name]) > this.getTaskNum(b[name]) ? -1 : 1;
+        }
         return a[name] > b[name] ? -1 : 1;
       }
-
     })
   }
 
