@@ -100,6 +100,11 @@ export class BoardKanbanComponent implements OnInit {
         event.currentIndex);
 
       this.kanbanDrag.issue.status = status;
+      console.log(this.kanbanDrag.issue);
+      this.issueService.updateIssue(this.kanbanDrag.issue).subscribe(r => {
+      }, error => {
+        
+      });
     }
 
     this.kanbanDrag.release();

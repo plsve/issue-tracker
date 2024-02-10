@@ -30,13 +30,13 @@ export class UpdateIssueDTO {
     @IsOptional()
     @IsDate()
     @Type(() => Date)
-    @MaxDate(new Date())
+    // @MaxDate(new Date())
     edited: Date;
 
     @IsOptional()
     @IsDate()
     @Type(() => Date)
-    @MaxDate(new Date())
+    // @MaxDate(new Date())
     resolved: Date;
 
     @IsOptional()

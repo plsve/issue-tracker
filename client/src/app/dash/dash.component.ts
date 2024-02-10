@@ -57,8 +57,7 @@ export class DashComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     public projectService: ProjectService,
-    public filterService: FilterService,
-    public kanbanDrag: KanbanDragService,
+    public filterService: FilterService
   ) { }
 
   ngOnInit(): void {
@@ -91,7 +90,7 @@ export class DashComponent implements OnInit {
   }
 
   isRouteActive(route) {
-    return this.router.isActive(route, false); // <-- boolean is for exactMatch
+    return this.router.isActive(route, false);
   }
 
   login() {

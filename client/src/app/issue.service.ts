@@ -138,8 +138,8 @@ export class IssueService {
       userId: issue.user.id,
       childIssueIds: issue.childIssues.map(e => e.id),
       commentPostIds: issue.commentPosts.map(e => e.id),
-      parentIssueId: issue.parentIssue.id,
-      editedByUserId: issue.editedByUser.id,
+      parentIssueId: issue.parentIssue != null ? issue.parentIssue.id: null,
+      editedByUserId: issue.editedByUser != null ? issue.editedByUser.id: null,
     }
   }
 }
